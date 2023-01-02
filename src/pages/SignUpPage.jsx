@@ -1,29 +1,29 @@
 import { Component } from 'react';
 
 class SignUpPage extends Component {
-  state = {
-    disabled: true
-    // password: '',
-    // passwordRepeat: ''
-  };
+  state = {};
 
   onChangePassword = event => {
     const currentValue = event.target.value;
     this.setState({
-      password: currentValue,
-      disabled: currentValue !== this.state.passwordRepeat
+      password: currentValue
     });
   };
 
   onChangePasswordRepeat = event => {
     const currentValue = event.target.value;
     this.setState({
-      passwordRepeat: currentValue,
-      disabled: currentValue !== this.state.password
+      passwordRepeat: currentValue
     });
   };
 
   render() {
+    let disabled = true;
+    const { password, passwordRepeat } = this.state;
+    if (password && passwordRepeat) {
+      disabled = password !== passwordRepeat;
+    }
+
     return (
       <div>
         <h1>Sign Up</h1>
@@ -39,7 +39,7 @@ class SignUpPage extends Component {
           type="password"
           onChange={this.onChangePasswordRepeat}
         />
-        <button disabled={this.state.disabled}>Sign Up</button>
+        <button disabled={disabled}>Sign Up</button>
       </div>
     );
   }
