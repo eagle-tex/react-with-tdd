@@ -9,6 +9,8 @@ class SignUpPage extends Component {
         <input id="username" />
         <label htmlFor="email">E-mail</label>
         <input id="email" />
+        <label htmlFor="password">Password</label>
+        <input id="password" />
       </div>
     );
   }
