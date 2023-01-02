@@ -30,5 +30,12 @@ describe('Sign Up Page', () => {
 
       expect(input).toBeInTheDocument();
     });
+
+    it('has password type for password input', () => {
+      render(<SignUpPage />);
+      const input = screen.getByLabelText('Password');
+
+      expect(input.type).toBe('password');
+    });
   });
 });
