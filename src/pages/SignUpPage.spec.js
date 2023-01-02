@@ -9,5 +9,12 @@ describe("Sign Up Page", () => {
 
       expect(header).toBeInTheDocument();
     });
+
+    it("has username input", () => {
+      const { container } = render(<SignUpPage />);
+      const input = container.querySelector("input");
+
+      expect(input).toBeInTheDocument();
+    });
   });
 });
