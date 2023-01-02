@@ -1,7 +1,10 @@
 import { Component } from 'react';
 
 class SignUpPage extends Component {
-  state = {};
+  state = {
+    password: '',
+    passwordRepeat: ''
+  };
 
   onChangePassword = event => {
     const currentValue = event.target.value;
