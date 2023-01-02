@@ -11,17 +11,17 @@ describe('Sign Up Page', () => {
     });
 
     it('has username input', () => {
-      const { container } = render(<SignUpPage />);
-      const input = container.querySelector('input');
+      render(<SignUpPage />);
+      const input = screen.getByPlaceholderText('username');
 
       expect(input).toBeInTheDocument();
     });
 
     it('has email input', () => {
-      const { container } = render(<SignUpPage />);
-      const inputs = container.querySelectorAll('input');
+      render(<SignUpPage />);
+      const input = screen.getByPlaceholderText('email');
 
-      expect(inputs.length).toBe(2);
+      expect(input).toBeInTheDocument();
     });
   });
 });
