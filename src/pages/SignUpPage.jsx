@@ -5,8 +5,8 @@ class SignUpPage extends Component {
     return (
       <div>
         <h1>Sign Up</h1>
-        <input />
-        <input />
+        <input placeholder="username" />
+        <input placeholder="email" />
       </div>
     );
   }
