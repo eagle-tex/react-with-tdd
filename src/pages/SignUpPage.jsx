@@ -5,8 +5,10 @@ class SignUpPage extends Component {
     return (
       <div>
         <h1>Sign Up</h1>
-        <input placeholder="username" />
-        <input placeholder="email" />
+        <label htmlFor="username">Username</label>
+        <input id="username" />
+        <label htmlFor="email">E-mail</label>
+        <input id="email" />
       </div>
     );
   }
