@@ -1,0 +1,80 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es2021": true,
+    "jest": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
+    // "prettier"
+  ],
+  "overrides": [],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "prettier"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+        "extensions": [".js", ".jsx"]
+      }
+    }
+  },
+  "rules": {
+    "eqeqeq": "warn",
+    // "quotes": ["error", "single", { "avoidEscape": true }],
+    // "jsx-quotes": ["warn", "prefer-double"],
+    "no-param-reassign": [
+      2,
+      {
+        "props": false
+      }
+    ],
+    "no-restricted-syntax": [
+      2,
+      "ForInStatement",
+      "LabeledStatement",
+      "WithStatement"
+    ],
+    "no-shadow": [
+      2,
+      {
+        "hoist": "all",
+        "allow": ["resolve", "reject", "done", "next", "err", "error"]
+      }
+    ],
+    "no-unused-vars": [
+      "warn",
+      {
+        "ignoreRestSiblings": true,
+        "argsIgnorePattern": "req|res|next|^err|^_"
+      }
+    ],
+    "prefer-const": ["error", { "destructuring": "all" }],
+    "react/jsx-filename-extension": [
+      "warn",
+      { "extensions": [".js", ".jsx", ".ts", ".tsx", ".mdx"] }
+    ],
+    "react/react-in-jsx-scope": "off",
+    "prettier/prettier": [
+      "warn",
+      {
+        "jsxSingleQuote": false
+      },
+      {
+        "usePrettierrc": true
+      }
+    ]
+  }
+}

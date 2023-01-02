@@ -1,0 +1,10 @@
+.cache/
+build/
+coverage/
+dist/
+dotenv/
+logs/
+node_modules/
+public/
+
+*.env
