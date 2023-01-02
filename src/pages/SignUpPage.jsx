@@ -6,6 +6,7 @@ class SignUpPage extends Component {
       <div>
         <h1>Sign Up</h1>
         <input />
+        <input />
       </div>
     );
   }
