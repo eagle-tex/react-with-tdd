@@ -13,6 +13,7 @@ class SignUpPage extends Component {
         <input id="password" type="password" />
         <label htmlFor="passwordRepeat">Password Repeat</label>
         <input id="passwordRepeat" type="password" />
+        <button>Sign Up</button>
       </div>
     );
   }
