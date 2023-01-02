@@ -16,5 +16,12 @@ describe('Sign Up Page', () => {
 
       expect(input).toBeInTheDocument();
     });
+
+    it('has email input', () => {
+      const { container } = render(<SignUpPage />);
+      const inputs = container.querySelectorAll('input');
+
+      expect(inputs.length).toBe(2);
+    });
   });
 });
