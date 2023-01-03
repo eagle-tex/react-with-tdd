@@ -1,0 +1,24 @@
+{
+  "watchPlugins": [
+    "jest-watch-typeahead/filename",
+    "jest-watch-typeahead/testname"
+  ],
+  // "verbose": true
+  "testPathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/config/"],
+  "testSequencer": "<rootDir>/test-sequencer.js",
+  "setupFilesAfterEnv": ["<rootDir>/test-setup.js"]
+  // "transform": {
+  //   "^.+\\.[jt]sx?$": ["babel-jest", { "presets": ["@nrwl/react/babel"] }],
+  //   "^.+\\.(css|scss|less)$": "jest-css-modules"
+  // },
+  // "transformIgnorePatterns": ["node_modules/(?!(axios))"],
+  // "globals": {
+  //   "NODE_ENV": "test"
+  // },
+  // "moduleFileExtensions": ["js", "jsx", "ts", "tsx"]
+  // "moduleDirectories": [
+  //   "node_modules",
+  //   "src/frontend",
+  //   "src/shared"
+  // ]
+}
