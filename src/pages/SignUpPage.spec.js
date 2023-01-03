@@ -97,12 +97,13 @@ describe('Sign Up Page', () => {
       userEvent.type(passwordRepeatInput, 'P4ssword');
 
       const mockFn = jest.fn();
-      axios.post = mockFn;
+      // axios.post = mockFn;
+      window.fetch = mockFn;
 
       userEvent.click(button);
 
       const firstCallOfMockFunction = mockFn.mock.calls[0];
-      const body = firstCallOfMockFunction[1];
+      const body = JSON.parse(firstCallOfMockFunction[1].body);
 
       expect(body).toEqual({
         username: 'user1',
