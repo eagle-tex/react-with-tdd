@@ -37,7 +37,8 @@ class SignUpPage extends Component {
     });
   };
 
-  submit = () => {
+  submit = event => {
+    event.preventDefault();
     const { username, email, password } = this.state;
     const body = { username, email, password };
     axios.post('/api/1.0/users', body);
@@ -52,22 +53,28 @@ class SignUpPage extends Component {
 
     return (
       <div>
-        <h1>Sign Up</h1>
-        <label htmlFor="username">Username</label>
-        <input id="username" onChange={this.onChangeUsername} />
-        <label htmlFor="email">E-mail</label>
-        <input id="email" onChange={this.onChangeEmail} />
-        <label htmlFor="password">Password</label>
-        <input id="password" type="password" onChange={this.onChangePassword} />
-        <label htmlFor="passwordRepeat">Password Repeat</label>
-        <input
-          id="passwordRepeat"
-          type="password"
-          onChange={this.onChangePasswordRepeat}
-        />
-        <button disabled={disabled} onClick={this.submit}>
-          Sign Up
-        </button>
+        <form>
+          <h1>Sign Up</h1>
+          <label htmlFor="username">Username</label>
+          <input id="username" onChange={this.onChangeUsername} />
+          <label htmlFor="email">E-mail</label>
+          <input id="email" onChange={this.onChangeEmail} />
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            onChange={this.onChangePassword}
+          />
+          <label htmlFor="passwordRepeat">Password Repeat</label>
+          <input
+            id="passwordRepeat"
+            type="password"
+            onChange={this.onChangePasswordRepeat}
+          />
+          <button disabled={disabled} onClick={this.submit}>
+            Sign Up
+          </button>
+        </form>
       </div>
     );
   }
