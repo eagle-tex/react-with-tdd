@@ -94,8 +94,8 @@ describe('Sign Up Page', () => {
         })
       );
       server.listen();
-      render(<SignUpPage />);
 
+      render(<SignUpPage />);
       const usernameInput = screen.getByLabelText('Username');
       const emailInput = screen.getByLabelText('E-mail');
       const passwordInput = screen.getByLabelText('Password');
@@ -115,6 +115,7 @@ describe('Sign Up Page', () => {
         email: 'user1@mail.com',
         password: 'P4ssword'
       });
+      server.close();
     });
   });
 });
