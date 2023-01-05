@@ -87,10 +87,12 @@ class SignUpPage extends Component {
                 disabled={disabled || apiProgress}
                 onClick={this.submit}
               >
-                <span
-                  className="spinner-border spinner-border-sm"
-                  role="status"
-                ></span>
+                {apiProgress && (
+                  <span
+                    className="spinner-border spinner-border-sm"
+                    role="status"
+                  ></span>
+                )}
                 Sign Up
               </button>
             </div>
