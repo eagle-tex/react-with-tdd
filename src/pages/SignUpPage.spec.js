@@ -139,5 +139,22 @@ describe('Sign Up Page', () => {
       expect(counter).toBe(1);
       server.close();
     });
+
+    it('displays spinner while the api request is in progress', async () => {
+      const server = setupServer(
+        rest.post('/api/1.0/users', (_req, res, ctx) => {
+          return res(ctx.status(200));
+        })
+      );
+      server.listen();
+
+      setup();
+
+      userEvent.click(button);
+      const spinner = screen.getByRole('status');
+
+      expect(spinner).toBeInTheDocument();
+      server.close();
+    });
   });
 });
