@@ -72,14 +72,24 @@ describe('Sign Up Page', () => {
   });
 
   describe('Interactions', () => {
-    it('enables the button when password and password repeat fields have the same value', () => {
+    let button; // undefined
+
+    const setup = () => {
       render(<SignUpPage />);
+      const usernameInput = screen.getByLabelText('Username');
+      const emailInput = screen.getByLabelText('E-mail');
       const passwordInput = screen.getByLabelText('Password');
       const passwordRepeatInput = screen.getByLabelText('Password Repeat');
-
+      userEvent.type(usernameInput, 'user1');
+      userEvent.type(emailInput, 'user1@mail.com');
       userEvent.type(passwordInput, 'P4ssword');
       userEvent.type(passwordRepeatInput, 'P4ssword');
-      const button = screen.queryByRole('button', { name: 'Sign Up' });
+
+      button = screen.queryByRole('button', { name: 'Sign Up' });
+    };
+
+    it('enables the button when password and password repeat fields have the same value', () => {
+      setup();
 
       expect(button).toBeEnabled();
       // ALTERNATIVE WAY: expect(button).not.toBeDisabled()
@@ -95,16 +105,7 @@ describe('Sign Up Page', () => {
       );
       server.listen();
 
-      render(<SignUpPage />);
-      const usernameInput = screen.getByLabelText('Username');
-      const emailInput = screen.getByLabelText('E-mail');
-      const passwordInput = screen.getByLabelText('Password');
-      const passwordRepeatInput = screen.getByLabelText('Password Repeat');
-      const button = screen.queryByRole('button', { name: 'Sign Up' });
-      userEvent.type(usernameInput, 'user1');
-      userEvent.type(emailInput, 'user1@mail.com');
-      userEvent.type(passwordInput, 'P4ssword');
-      userEvent.type(passwordRepeatInput, 'P4ssword');
+      setup();
 
       userEvent.click(button);
 
@@ -128,16 +129,7 @@ describe('Sign Up Page', () => {
       );
       server.listen();
 
-      render(<SignUpPage />);
-      const usernameInput = screen.getByLabelText('Username');
-      const emailInput = screen.getByLabelText('E-mail');
-      const passwordInput = screen.getByLabelText('Password');
-      const passwordRepeatInput = screen.getByLabelText('Password Repeat');
-      const button = screen.queryByRole('button', { name: 'Sign Up' });
-      userEvent.type(usernameInput, 'user1');
-      userEvent.type(emailInput, 'user1@mail.com');
-      userEvent.type(passwordInput, 'P4ssword');
-      userEvent.type(passwordRepeatInput, 'P4ssword');
+      setup();
 
       userEvent.click(button);
       userEvent.click(button);
