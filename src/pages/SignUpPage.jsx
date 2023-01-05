@@ -90,7 +90,6 @@ class SignUpPage extends Component {
                 <span
                   className="spinner-border spinner-border-sm"
                   role="status"
-                  aria-hidden="true"
                 ></span>
                 Sign Up
               </button>
