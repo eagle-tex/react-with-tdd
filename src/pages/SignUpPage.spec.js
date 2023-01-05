@@ -151,7 +151,7 @@ describe('Sign Up Page', () => {
       setup();
 
       userEvent.click(button);
-      const spinner = screen.getByRole('status');
+      const spinner = screen.getByRole('status', { hidden: true });
 
       expect(spinner).toBeInTheDocument();
       server.close();
