@@ -159,7 +159,7 @@ describe('Sign Up Page', () => {
 
     it('does not display spinner when there is no api request', () => {
       setup();
-      const spinner = screen.getByRole('status');
+      const spinner = screen.queryByRole('status');
 
       expect(spinner).not.toBeInTheDocument();
     });
