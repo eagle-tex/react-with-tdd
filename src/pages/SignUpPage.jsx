@@ -7,7 +7,8 @@ class SignUpPage extends Component {
     email: '',
     password: '',
     passwordRepeat: '',
-    apiProgress: false
+    apiProgress: false,
+    signUpSuccess: false
   };
 
   onChange = event => {
@@ -22,12 +23,14 @@ class SignUpPage extends Component {
     const { username, email, password } = this.state;
     const body = { username, email, password };
     this.setState({ apiProgress: true });
-    axios.post('/api/1.0/users', body);
+    axios.post('/api/1.0/users', body).then(() => {
+      this.setState({ signUpSuccess: true });
+    });
   };
 
   render() {
     let disabled = true;
-    const { password, passwordRepeat, apiProgress } = this.state;
+    const { password, passwordRepeat, apiProgress, signUpSuccess } = this.state;
     if (password && passwordRepeat) {
       disabled = password !== passwordRepeat;
     }
@@ -99,9 +102,11 @@ class SignUpPage extends Component {
           </div>
         </form>
 
-        <div className="alert alert-success mt-3">
-          Please check your e-mail to activate your account
-        </div>
+        {signUpSuccess && (
+          <div className="alert alert-success mt-3">
+            Please check your e-mail to activate your account
+          </div>
+        )}
       </div>
     );
   }
