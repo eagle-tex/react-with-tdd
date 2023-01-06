@@ -165,13 +165,14 @@ describe('Sign Up Page', () => {
         })
       );
       server.listen();
+
       setup();
+      const message = 'Please check your e-mail to activate your account';
+
+      expect(screen.queryByText(message)).not.toBeInTheDocument();
 
       userEvent.click(button);
-
-      const text = await screen.findByText(
-        'Please check your e-mail to activate your account'
-      );
+      const text = await screen.findByText(message);
 
       expect(text).toBeInTheDocument();
     });
