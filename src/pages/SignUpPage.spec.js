@@ -140,14 +140,13 @@ describe('Sign Up Page', () => {
       server.close();
     });
 
-    it('displays spinner after clicking the submit button', async () => {
+    it('displays spinner after clicking the submit button', () => {
       const server = setupServer(
         rest.post('/api/1.0/users', (_req, res, ctx) => {
           return res(ctx.status(200));
         })
       );
       server.listen();
-
       setup();
 
       expect(screen.queryByRole('status')).not.toBeInTheDocument();
@@ -157,6 +156,24 @@ describe('Sign Up Page', () => {
 
       expect(spinner).toBeInTheDocument();
       server.close();
+    });
+
+    it('displays account activation notification after successful signup request', async () => {
+      const server = setupServer(
+        rest.post('/api/1.0/users', (_req, res, ctx) => {
+          return res(ctx.status(200));
+        })
+      );
+      server.listen();
+      setup();
+
+      userEvent.click(button);
+
+      const text = await screen.findByText(
+        'Please check your e-mail to activate your account'
+      );
+
+      expect(text).toBeInTheDocument();
     });
   });
 });
