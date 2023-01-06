@@ -109,7 +109,9 @@ describe('Sign Up Page', () => {
 
       userEvent.click(button);
 
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await screen.findByText(
+        'Please check your e-mail to activate your account'
+      );
 
       expect(requestBody).toEqual({
         username: 'user1',
@@ -134,13 +136,15 @@ describe('Sign Up Page', () => {
       userEvent.click(button);
       userEvent.click(button);
 
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await screen.findByText(
+        'Please check your e-mail to activate your account'
+      );
 
       expect(counter).toBe(1);
       server.close();
     });
 
-    it('displays spinner after clicking the submit button', () => {
+    it('displays spinner after clicking the submit button', async () => {
       const server = setupServer(
         rest.post('/api/1.0/users', (_req, res, ctx) => {
           return res(ctx.status(200));
@@ -155,6 +159,9 @@ describe('Sign Up Page', () => {
       const spinner = screen.getByRole('status');
 
       expect(spinner).toBeInTheDocument();
+      await screen.findByText(
+        'Please check your e-mail to activate your account'
+      );
       server.close();
     });
 
