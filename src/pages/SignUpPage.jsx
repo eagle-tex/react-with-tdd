@@ -98,6 +98,10 @@ class SignUpPage extends Component {
             </div>
           </div>
         </form>
+
+        <div className="alert alert-success mt-3">
+          Please check your e-mail to activate your account
+        </div>
       </div>
     );
   }
