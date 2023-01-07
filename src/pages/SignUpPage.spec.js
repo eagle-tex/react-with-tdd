@@ -242,12 +242,12 @@ describe('Sign Up Page', () => {
       setup();
 
       userEvent.click(button);
-      await screen.findByText('Username cannot be null');
+      const validationError = await screen.findByText(
+        'Username cannot be null'
+      );
       userEvent.type(usernameInput, 'user1-updated');
 
-      expect(
-        screen.queryByText('Username cannot be null')
-      ).not.toBeInTheDocument();
+      expect(validationError).not.toBeInTheDocument();
     });
   });
 });
