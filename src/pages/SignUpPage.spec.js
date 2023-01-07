@@ -173,18 +173,6 @@ describe('Sign Up Page', () => {
       expect(text).toBeInTheDocument();
     });
 
-    it('hides sign up form after successful sign up request', async () => {
-      setup();
-      const form = screen.getByTestId('form-sign-up');
-      userEvent.click(button);
-
-      await waitFor(() => {
-        expect(form).not.toBeInTheDocument();
-      });
-      // NOTE: alternative way
-      // await waitForElementToBeRemoved(form);
-    });
-
     it('displays validation message for username', async () => {
       server.use(
         rest.post('/api/1.0/users', (_req, res, ctx) => {
@@ -204,6 +192,18 @@ describe('Sign Up Page', () => {
       );
 
       expect(validationError).toBeInTheDocument();
+    });
+
+    it('hides sign up form after successful sign up request', async () => {
+      setup();
+      const form = screen.getByTestId('form-sign-up');
+      userEvent.click(button);
+
+      await waitFor(() => {
+        expect(form).not.toBeInTheDocument();
+      });
+      // NOTE: alternative way
+      // await waitForElementToBeRemoved(form);
     });
 
     it('hides spinner and enables button after receiving response', async () => {
