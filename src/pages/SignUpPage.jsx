@@ -72,6 +72,7 @@ class SignUpPage extends Component {
                 label="Password"
                 onChange={this.onChange}
                 help={errors.password}
+                type="password"
               />
               <div className="mb-3">
                 <label htmlFor="passwordRepeat" className="form-label">
