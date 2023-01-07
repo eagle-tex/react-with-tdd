@@ -176,7 +176,7 @@ describe('Sign Up Page', () => {
     it('displays validation message for username', async () => {
       server.use(
         rest.post('/api/1.0/users', (_req, res, ctx) => {
-          return res(
+          return res.once(
             ctx.status(400),
             ctx.json({
               validationErrors: { username: 'Username cannot be null' }
