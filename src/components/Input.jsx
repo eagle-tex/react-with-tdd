@@ -13,7 +13,7 @@ const Input = props => {
         className="form-control is-invalid"
         onChange={onChange}
       />
-      <span>{help}</span>
+      <span className="invalid-feedback">{help}</span>
     </div>
   );
 };
