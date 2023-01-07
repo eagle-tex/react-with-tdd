@@ -8,4 +8,11 @@ describe('Input Component', () => {
 
     expect(input.classList).toContain('is-invalid');
   });
+
+  it('has "invalid-feedback" class for span when help is set', () => {
+    const { container } = render(<Input help="Error message" />);
+    const span = container.querySelector('span');
+
+    expect(span.classList).toContain('invalid-feedback');
+  });
 });
