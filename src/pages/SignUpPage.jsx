@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import axios from 'axios';
+import Input from '../components/Input.jsx';
 
 class SignUpPage extends Component {
   state = {
@@ -51,17 +52,23 @@ class SignUpPage extends Component {
               <h1 className="text-center">Sign Up</h1>
             </div>
             <div className="card-body">
-              <div className="mb-3">
-                <label htmlFor="username" className="form-label">
-                  Username
-                </label>
-                <input
-                  id="username"
-                  className="form-control"
-                  onChange={this.onChange}
-                />
-                <span>{errors.username}</span>
-              </div>
+              <Input
+                id="username"
+                label="Username"
+                onChange={this.onChange}
+                help={errors.username}
+              />
+              {/* <div className="mb-3"> */}
+              {/*   <label htmlFor="username" className="form-label"> */}
+              {/*     Username */}
+              {/*   </label> */}
+              {/*   <input */}
+              {/*     id="username" */}
+              {/*     className="form-control" */}
+              {/*     onChange={this.onChange} */}
+              {/*   /> */}
+              {/*   <span>{errors.username}</span> */}
+              {/* </div> */}
               <div className="mb-3">
                 <label htmlFor="email" className="form-label">
                   E-mail
