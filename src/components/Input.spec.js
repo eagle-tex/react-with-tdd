@@ -15,4 +15,11 @@ describe('Input Component', () => {
 
     expect(span.classList).toContain('invalid-feedback');
   });
+
+  it('does not have "is-invalid" class for input when help is not set', () => {
+    const { container } = render(<Input />);
+    const input = container.querySelector('input');
+
+    expect(input.classList).not.toContain('is-invalid');
+  });
 });
