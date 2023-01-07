@@ -3,16 +3,17 @@ import PropTypes from 'prop-types';
 
 const Input = props => {
   const { id, label, onChange, help } = props;
+
+  let inputClass = 'form-control';
+  if (help) {
+    inputClass += ' is-invalid';
+  }
   return (
     <div className="mb-3">
       <label htmlFor={id} className="form-label">
         {label}
       </label>
-      <input
-        id="username"
-        className="form-control is-invalid"
-        onChange={onChange}
-      />
+      <input id="username" className={inputClass} onChange={onChange} />
       <span className="invalid-feedback">{help}</span>
     </div>
   );
