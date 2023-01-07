@@ -201,6 +201,7 @@ describe('Sign Up Page', () => {
       field         | message
       ${'username'} | ${'Username cannot be null'}
       ${'email'}    | ${'E-mail cannot be null'}
+      ${'password'} | ${'Password cannot be null'}
     `(`displays "$message" for $field`, async ({ field, message }) => {
       server.use(generateValidationError(field, message));
       setup();
