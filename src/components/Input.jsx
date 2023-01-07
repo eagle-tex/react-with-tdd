@@ -13,7 +13,7 @@ const Input = props => {
       <label htmlFor={id} className="form-label">
         {label}
       </label>
-      <input id="username" className={inputClass} onChange={onChange} />
+      <input id={id} className={inputClass} onChange={onChange} />
       <span className="invalid-feedback">{help}</span>
     </div>
   );
