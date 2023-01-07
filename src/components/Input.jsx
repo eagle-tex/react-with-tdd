@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Input = props => {
-  const { id, label, onChange, help } = props;
+  const { id, label, onChange, help, type } = props;
 
   let inputClass = 'form-control';
   if (help) {
@@ -13,7 +13,12 @@ const Input = props => {
       <label htmlFor={id} className="form-label">
         {label}
       </label>
-      <input id={id} className={inputClass} onChange={onChange} />
+      <input
+        id={id}
+        className={inputClass}
+        onChange={onChange}
+        type={type || 'text'}
+      />
       <span className="invalid-feedback">{help}</span>
     </div>
   );
@@ -23,7 +28,8 @@ Input.propTypes = {
   id: PropTypes.string,
   label: PropTypes.string,
   onChange: PropTypes.func,
-  help: PropTypes.string
+  help: PropTypes.string,
+  type: PropTypes.string
 };
 
 export default Input;
