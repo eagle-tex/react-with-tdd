@@ -52,22 +52,20 @@ class SignUpPage extends Component {
               <h1 className="text-center">Sign Up</h1>
             </div>
             <div className="card-body">
+              {/* username input */}
               <Input
                 id="username"
                 label="Username"
                 onChange={this.onChange}
                 help={errors.username}
               />
-              <div className="mb-3">
-                <label htmlFor="email" className="form-label">
-                  E-mail
-                </label>
-                <input
-                  id="email"
-                  className="form-control"
-                  onChange={this.onChange}
-                />
-              </div>
+              {/* email input */}
+              <Input
+                id="email"
+                label="E-mail"
+                onChange={this.onChange}
+                help={errors.email}
+              />
               <div className="mb-3">
                 <label htmlFor="password" className="form-label">
                   Password
