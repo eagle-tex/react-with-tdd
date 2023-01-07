@@ -58,17 +58,6 @@ class SignUpPage extends Component {
                 onChange={this.onChange}
                 help={errors.username}
               />
-              {/* <div className="mb-3"> */}
-              {/*   <label htmlFor="username" className="form-label"> */}
-              {/*     Username */}
-              {/*   </label> */}
-              {/*   <input */}
-              {/*     id="username" */}
-              {/*     className="form-control" */}
-              {/*     onChange={this.onChange} */}
-              {/*   /> */}
-              {/*   <span>{errors.username}</span> */}
-              {/* </div> */}
               <div className="mb-3">
                 <label htmlFor="email" className="form-label">
                   E-mail
