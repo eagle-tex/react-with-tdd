@@ -44,6 +44,9 @@ class SignUpPage extends Component {
       disabled = password !== passwordRepeat;
     }
 
+    const passwordMismatch =
+      password !== passwordRepeat ? 'Password mismatch' : '';
+
     return (
       <div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
         {!signUpSuccess && (
@@ -74,17 +77,14 @@ class SignUpPage extends Component {
                 help={errors.password}
                 type="password"
               />
-              <div className="mb-3">
-                <label htmlFor="passwordRepeat" className="form-label">
-                  Password Repeat
-                </label>
-                <input
-                  id="passwordRepeat"
-                  className="form-control"
-                  type="password"
-                  onChange={this.onChange}
-                />
-              </div>
+              {/* passwordRepeat input */}
+              <Input
+                id="passwordRepeat"
+                label="Password Repeat"
+                onChange={this.onChange}
+                help={passwordMismatch}
+                type="password"
+              />
               <div className="text-center">
                 <button
                   className="btn btn-primary"
