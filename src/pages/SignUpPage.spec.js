@@ -96,12 +96,12 @@ describe('Sign Up Page', () => {
 
     afterAll(() => server.close());
 
-    let button, passwordInput, passwordRepeatInput; // all undefined
+    let button, usernameInput, emailInput, passwordInput, passwordRepeatInput; // all undefined
 
     const setup = () => {
       render(<SignUpPage />);
-      const usernameInput = screen.getByLabelText('Username');
-      const emailInput = screen.getByLabelText('E-mail');
+      usernameInput = screen.getByLabelText('Username');
+      emailInput = screen.getByLabelText('E-mail');
       passwordInput = screen.getByLabelText('Password');
       passwordRepeatInput = screen.getByLabelText('Password Repeat');
       userEvent.type(usernameInput, 'user1');
@@ -233,6 +233,21 @@ describe('Sign Up Page', () => {
       const validationError = screen.queryByText('Password mismatch');
 
       expect(validationError).toBeInTheDocument();
+    });
+
+    it('clears validation error after username field is updated', async () => {
+      server.use(
+        generateValidationError('username', 'Username cannot be null')
+      );
+      setup();
+
+      userEvent.click(button);
+      const validationError = await screen.findByText(
+        'Username cannot be null'
+      );
+      userEvent.type(usernameInput, 'user1-updated');
+
+      expect(validationError).not.toBeInTheDocument();
     });
   });
 });
