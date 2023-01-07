@@ -8,7 +8,8 @@ class SignUpPage extends Component {
     password: '',
     passwordRepeat: '',
     apiProgress: false,
-    signUpSuccess: false
+    signUpSuccess: false,
+    errors: {}
   };
 
   onChange = event => {
@@ -27,13 +28,16 @@ class SignUpPage extends Component {
       await axios.post('/api/1.0/users', body);
       this.setState({ signUpSuccess: true });
     } catch (error) {
-      //
+      if (error.response.status === 400) {
+        this.setState({ errors: error.response.data.validationErrors });
+      }
     }
   };
 
   render() {
     let disabled = true;
-    const { password, passwordRepeat, apiProgress, signUpSuccess } = this.state;
+    const { password, passwordRepeat, apiProgress, signUpSuccess, errors } =
+      this.state;
     if (password && passwordRepeat) {
       disabled = password !== passwordRepeat;
     }
@@ -55,6 +59,7 @@ class SignUpPage extends Component {
                   className="form-control"
                   onChange={this.onChange}
                 />
+                <span>{errors.username}</span>
               </div>
               <div className="mb-3">
                 <label htmlFor="email" className="form-label">
