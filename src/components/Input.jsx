@@ -8,7 +8,11 @@ const Input = props => {
       <label htmlFor={id} className="form-label">
         {label}
       </label>
-      <input id="username" className="form-control" onChange={onChange} />
+      <input
+        id="username"
+        className="form-control is-invalid"
+        onChange={onChange}
+      />
       <span>{help}</span>
     </div>
   );
