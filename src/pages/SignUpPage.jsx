@@ -66,17 +66,13 @@ class SignUpPage extends Component {
                 onChange={this.onChange}
                 help={errors.email}
               />
-              <div className="mb-3">
-                <label htmlFor="password" className="form-label">
-                  Password
-                </label>
-                <input
-                  id="password"
-                  className="form-control"
-                  type="password"
-                  onChange={this.onChange}
-                />
-              </div>
+              {/* password input */}
+              <Input
+                id="password"
+                label="Password"
+                onChange={this.onChange}
+                help={errors.password}
+              />
               <div className="mb-3">
                 <label htmlFor="passwordRepeat" className="form-label">
                   Password Repeat
