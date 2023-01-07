@@ -226,5 +226,24 @@ describe('Sign Up Page', () => {
       expect(screen.queryByRole('status')).not.toBeInTheDocument();
       expect(button).toBeEnabled();
     });
+
+    it('displays validation message for email', async () => {
+      server.use(
+        rest.post('/api/1.0/users', (_req, res, ctx) => {
+          return res(
+            ctx.status(400),
+            ctx.json({
+              validationErrors: { email: 'E-mail cannot be null' }
+            })
+          );
+        })
+      );
+
+      setup();
+      userEvent.click(button);
+      const validationError = await screen.findByText('E-mail cannot be null');
+
+      expect(validationError).toBeInTheDocument();
+    });
   });
 });
