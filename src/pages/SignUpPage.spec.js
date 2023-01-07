@@ -201,13 +201,10 @@ describe('Sign Up Page', () => {
       field         | message
       ${'username'} | ${'Username cannot be null'}
       ${'email'}    | ${'E-mail cannot be null'}
-    `(`displays "$message" for $field`, async testFields => {
-      const field = testFields.field;
-      const message = testFields.message;
-
+    `(`displays "$message" for $field`, async ({ field, message }) => {
       server.use(generateValidationError(field, message));
-
       setup();
+
       userEvent.click(button);
       const validationError = await screen.findByText(message);
 
@@ -218,8 +215,8 @@ describe('Sign Up Page', () => {
       server.use(
         generateValidationError('username', 'Username cannot be null')
       );
-
       setup();
+
       userEvent.click(button);
       await screen.findByText('Username cannot be null');
 
