@@ -91,6 +91,7 @@ describe('Sign Up Page', () => {
 
     beforeEach(() => {
       counter = 0;
+      server.resetHandlers();
     });
 
     afterAll(() => server.close());
@@ -176,7 +177,7 @@ describe('Sign Up Page', () => {
     it('displays validation message for username', async () => {
       server.use(
         rest.post('/api/1.0/users', (_req, res, ctx) => {
-          return res.once(
+          return res(
             ctx.status(400),
             ctx.json({
               validationErrors: { username: 'Username cannot be null' }
