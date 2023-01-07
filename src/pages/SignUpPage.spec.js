@@ -235,19 +235,23 @@ describe('Sign Up Page', () => {
       expect(validationError).toBeInTheDocument();
     });
 
-    it('clears validation error after username field is updated', async () => {
-      server.use(
-        generateValidationError('username', 'Username cannot be null')
-      );
-      setup();
+    it.each`
+      field         | message                      | label
+      ${'username'} | ${'Username cannot be null'} | ${'Username'}
+      ${'email'}    | ${'E-mail cannot be null'}   | ${'E-mail'}
+      ${'password'} | ${'Password cannot be null'} | ${'Password'}
+    `(
+      'clears validation error after "$field" is updated',
+      async ({ field, message, label }) => {
+        server.use(generateValidationError(field, message));
+        setup();
 
-      userEvent.click(button);
-      const validationError = await screen.findByText(
-        'Username cannot be null'
-      );
-      userEvent.type(usernameInput, 'user1-updated');
+        userEvent.click(button);
+        const validationError = await screen.findByText(message);
+        userEvent.type(screen.getByLabelText(label), 'updated');
 
-      expect(validationError).not.toBeInTheDocument();
-    });
+        expect(validationError).not.toBeInTheDocument();
+      }
+    );
   });
 });
