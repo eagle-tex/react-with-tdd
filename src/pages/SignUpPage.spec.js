@@ -186,37 +186,37 @@ describe('Sign Up Page', () => {
       // await waitForElementToBeRemoved(form);
     });
 
-    it('displays validation message for username', async () => {
-      server.use(
-        rest.post('/api/1.0/users', (_req, res, ctx) => {
-          return res(
-            ctx.status(400),
-            ctx.json({
-              validationErrors: { username: 'Username cannot be null' }
-            })
-          );
-        })
-      );
+    const generateValidationError = (field, message) => {
+      return rest.post('/api/1.0/users', (_req, res, ctx) => {
+        return res(
+          ctx.status(400),
+          ctx.json({
+            validationErrors: { [field]: message }
+          })
+        );
+      });
+    };
+
+    it.each`
+      field         | message
+      ${'username'} | ${'Username cannot be null'}
+      ${'email'}    | ${'E-mail cannot be null'}
+    `(`displays "$message" for $field`, async testFields => {
+      const field = testFields.field;
+      const message = testFields.message;
+
+      server.use(generateValidationError(field, message));
 
       setup();
       userEvent.click(button);
-      const validationError = await screen.findByText(
-        'Username cannot be null'
-      );
+      const validationError = await screen.findByText(message);
 
       expect(validationError).toBeInTheDocument();
     });
 
     it('hides spinner and enables button after receiving response', async () => {
       server.use(
-        rest.post('/api/1.0/users', (_req, res, ctx) => {
-          return res(
-            ctx.status(400),
-            ctx.json({
-              validationErrors: { username: 'Username cannot be null' }
-            })
-          );
-        })
+        generateValidationError('username', 'Username cannot be null')
       );
 
       setup();
@@ -225,25 +225,6 @@ describe('Sign Up Page', () => {
 
       expect(screen.queryByRole('status')).not.toBeInTheDocument();
       expect(button).toBeEnabled();
-    });
-
-    it('displays validation message for email', async () => {
-      server.use(
-        rest.post('/api/1.0/users', (_req, res, ctx) => {
-          return res(
-            ctx.status(400),
-            ctx.json({
-              validationErrors: { email: 'E-mail cannot be null' }
-            })
-          );
-        })
-      );
-
-      setup();
-      userEvent.click(button);
-      const validationError = await screen.findByText('E-mail cannot be null');
-
-      expect(validationError).toBeInTheDocument();
     });
   });
 });
