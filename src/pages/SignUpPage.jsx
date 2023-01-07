@@ -15,8 +15,18 @@ class SignUpPage extends Component {
 
   onChange = event => {
     const { id, value } = event.target;
+
+    // WARN: if you need to update an object in state, it is
+    //   VERY IMPORTANT to make copy of that object first
+    //   This is not necessary in our case because we have no nested object
+    // NOTE: Use the version below if the errors state has a nested object inside
+    //   const errorsCopy = JSON.parse(JSON.stringify(this.state.errors));
+    const errorsCopy = { ...this.state.errors };
+    delete errorsCopy[id];
+
     this.setState({
-      [id]: value
+      [id]: value,
+      errors: errorsCopy
     });
   };
 
