@@ -19,7 +19,7 @@ const Input = props => {
         onChange={onChange}
         type={type || 'text'}
       />
-      {help && <span className="invalid-feedback">{help}</span>}
+      <span className="invalid-feedback">{help}</span>
     </div>
   );
 };
