@@ -9,7 +9,7 @@ import userEvent from '@testing-library/user-event';
 // import axios from 'axios';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
-import '../locale/i18n';
+import i18n from '../locale/i18n';
 import en from '../locale/en.json';
 import fr from '../locale/fr.json';
 import LanguageSelector from '../components/LanguageSelector.jsx';
@@ -268,6 +268,10 @@ describe('Sign Up Page', () => {
         </>
       );
     };
+
+    afterEach(() => {
+      i18n.changeLanguage('en');
+    });
 
     it('displays all text in French after changing the language', () => {
       setup();
