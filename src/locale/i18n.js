@@ -1,25 +1,15 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import en from './en.json';
+import fr from './fr.json';
 
 i18n.use(initReactI18next).init({
   resources: {
     en: {
-      translation: {
-        signUp: 'Sign Up',
-        username: 'Username',
-        email: 'E-mail',
-        password: 'Password',
-        passwordRepeat: 'Password Repeat'
-      }
+      translation: en
     },
     fr: {
-      translation: {
-        signUp: 'Créer un compte',
-        username: 'Nom utilisateur',
-        email: 'E-mail',
-        password: 'Mot de passe',
-        passwordRepeat: 'Répéter mot de passe'
-      }
+      translation: fr
     }
   },
   lng: 'en',
