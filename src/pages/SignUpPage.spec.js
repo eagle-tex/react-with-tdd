@@ -261,6 +261,7 @@ describe('Sign Up Page', () => {
   });
 
   describe('Internationalization', () => {
+    let frenchToggle, englishToggle; // all undefined
     const setup = () => {
       render(
         <>
@@ -268,6 +269,8 @@ describe('Sign Up Page', () => {
           <LanguageSelector />
         </>
       );
+      frenchToggle = screen.getByTitle('French');
+      englishToggle = screen.getByTitle('English');
     };
 
     afterEach(() => {
@@ -294,7 +297,6 @@ describe('Sign Up Page', () => {
     it('displays all text in French after changing the language', () => {
       setup();
 
-      const frenchToggle = screen.getByTitle('French');
       userEvent.click(frenchToggle);
 
       expect(
@@ -312,9 +314,7 @@ describe('Sign Up Page', () => {
     it('displays all text in English after changing back from French', () => {
       setup();
 
-      const frenchToggle = screen.getByTitle('French');
       userEvent.click(frenchToggle);
-      const englishToggle = screen.getByTitle('English');
       userEvent.click(englishToggle);
 
       expect(
@@ -332,7 +332,6 @@ describe('Sign Up Page', () => {
     it('displays password mismatch validation in French', () => {
       setup();
 
-      const frenchToggle = screen.getByTitle('French');
       userEvent.click(frenchToggle);
       const passwordInput = screen.getByLabelText(fr.password);
       userEvent.type(passwordInput, 'P4ss');
