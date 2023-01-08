@@ -48,6 +48,10 @@ class SignUpPage extends Component {
     }
   };
 
+  onClickFrench = () => {
+    this.props.i18n.changeLanguage('fr');
+  };
+
   render() {
     const { t } = this.props;
     let disabled = true;
@@ -122,13 +126,17 @@ class SignUpPage extends Component {
             Please check your e-mail to activate your account
           </div>
         )}
+        <span title="French" onClick={this.onClickFrench}>
+          FR
+        </span>
       </div>
     );
   }
 }
 
 SignUpPage.propTypes = {
-  t: PropTypes.func
+  t: PropTypes.func,
+  i18n: PropTypes.object
 };
 
 const SignUpPageWithTranslation = withTranslation()(SignUpPage);
