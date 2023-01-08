@@ -10,6 +10,7 @@ import userEvent from '@testing-library/user-event';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 import '../locale/i18n';
+import en from '../locale/en.json';
 
 describe('Sign Up Page', () => {
   describe('Layout', () => {
@@ -261,15 +262,15 @@ describe('Sign Up Page', () => {
       render(<SignUpPage />);
 
       expect(
-        screen.getByRole('heading', { name: 'Sign Up' })
+        screen.getByRole('heading', { name: en.signUp })
       ).toBeInTheDocument();
       expect(
-        screen.getByRole('button', { name: 'Sign Up' })
+        screen.getByRole('button', { name: en.signUp })
       ).toBeInTheDocument();
-      expect(screen.getByLabelText('Username')).toBeInTheDocument();
-      expect(screen.getByLabelText('E-mail')).toBeInTheDocument();
-      expect(screen.getByLabelText('Password')).toBeInTheDocument();
-      expect(screen.getByLabelText('Password Repeat')).toBeInTheDocument();
+      expect(screen.getByLabelText(en.username)).toBeInTheDocument();
+      expect(screen.getByLabelText(en.email)).toBeInTheDocument();
+      expect(screen.getByLabelText(en.password)).toBeInTheDocument();
+      expect(screen.getByLabelText(en.passwordRepeat)).toBeInTheDocument();
     });
   });
 });
