@@ -3,6 +3,7 @@ import axios from 'axios';
 import Input from '../components/Input.jsx';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
+import LanguageSelector from '../components/LanguageSelector.jsx';
 
 class SignUpPage extends Component {
   state = {
@@ -122,30 +123,15 @@ class SignUpPage extends Component {
             Please check your e-mail to activate your account
           </div>
         )}
-        <a href="#" className="link-light">
-          <img
-            src="https://www.countryflagicons.com/FLAT/24/FR.png"
-            title="French"
-            onClick={() => this.props.i18n.changeLanguage('fr')}
-            alt="French Flag"
-          />
-        </a>
-        <a href="#" className="link-light">
-          <img
-            src="https://www.countryflagicons.com/FLAT/24/GB.png"
-            title="English"
-            onClick={() => this.props.i18n.changeLanguage('en')}
-            alt="Great Britain Flag"
-          />
-        </a>
+
+        <LanguageSelector />
       </div>
     );
   }
 }
 
 SignUpPage.propTypes = {
-  t: PropTypes.func,
-  i18n: PropTypes.object
+  t: PropTypes.func
 };
 
 const SignUpPageWithTranslation = withTranslation()(SignUpPage);
