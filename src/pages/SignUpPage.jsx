@@ -3,7 +3,6 @@ import axios from 'axios';
 import Input from '../components/Input.jsx';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import LanguageSelector from '../components/LanguageSelector.jsx';
 
 class SignUpPage extends Component {
   state = {
@@ -123,8 +122,6 @@ class SignUpPage extends Component {
             Please check your e-mail to activate your account
           </div>
         )}
-
-        <LanguageSelector />
       </div>
     );
   }
