@@ -260,8 +260,17 @@ describe('Sign Up Page', () => {
   });
 
   describe('Internationalization', () => {
+    const setup = () => {
+      render(
+        <>
+          <SignUpPage />
+          <LanguageSelector />
+        </>
+      );
+    };
+
     it('initially displays all text in English', () => {
-      render(<SignUpPage />);
+      setup();
 
       expect(
         screen.getByRole('heading', { name: en.signUp })
@@ -276,12 +285,7 @@ describe('Sign Up Page', () => {
     });
 
     it('displays all text in French after changing the language', () => {
-      render(
-        <>
-          <SignUpPage />
-          <LanguageSelector />
-        </>
-      );
+      setup();
 
       const frenchToggle = screen.getByTitle('French');
       userEvent.click(frenchToggle);
@@ -299,12 +303,7 @@ describe('Sign Up Page', () => {
     });
 
     it('displays all text in English after changing back from French', () => {
-      render(
-        <>
-          <SignUpPage />
-          <LanguageSelector />
-        </>
-      );
+      setup();
 
       const frenchToggle = screen.getByTitle('French');
       userEvent.click(frenchToggle);
