@@ -128,6 +128,12 @@ class SignUpPage extends Component {
         >
           FR
         </span>
+        <span
+          title="English"
+          onClick={() => this.props.i18n.changeLanguage('en')}
+        >
+          EN
+        </span>
       </div>
     );
   }
