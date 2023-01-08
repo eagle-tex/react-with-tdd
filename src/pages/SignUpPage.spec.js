@@ -9,6 +9,7 @@ import userEvent from '@testing-library/user-event';
 // import axios from 'axios';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
+import '../locale/i18n';
 
 describe('Sign Up Page', () => {
   describe('Layout', () => {
