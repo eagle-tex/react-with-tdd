@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import axios from 'axios';
 import Input from '../components/Input.jsx';
+import { withTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 
 class SignUpPage extends Component {
   state = {
@@ -47,6 +49,7 @@ class SignUpPage extends Component {
   };
 
   render() {
+    const { t } = this.props;
     let disabled = true;
     const { password, passwordRepeat, apiProgress, signUpSuccess, errors } =
       this.state;
@@ -62,27 +65,27 @@ class SignUpPage extends Component {
         {!signUpSuccess && (
           <form className="card mt-5" data-testid="form-sign-up">
             <div className="card-header">
-              <h1 className="text-center">Sign Up</h1>
+              <h1 className="text-center">{t('signUp')}</h1>
             </div>
             <div className="card-body">
               {/* username input */}
               <Input
                 id="username"
-                label="Username"
+                label={t('username')}
                 onChange={this.onChange}
                 help={errors.username}
               />
               {/* email input */}
               <Input
                 id="email"
-                label="E-mail"
+                label={t('email')}
                 onChange={this.onChange}
                 help={errors.email}
               />
               {/* password input */}
               <Input
                 id="password"
-                label="Password"
+                label={t('password')}
                 onChange={this.onChange}
                 help={errors.password}
                 type="password"
@@ -90,7 +93,7 @@ class SignUpPage extends Component {
               {/* passwordRepeat input */}
               <Input
                 id="passwordRepeat"
-                label="Password Repeat"
+                label={t('passwordRepeat')}
                 onChange={this.onChange}
                 help={passwordMismatch}
                 type="password"
@@ -107,7 +110,7 @@ class SignUpPage extends Component {
                       role="status"
                     ></span>
                   )}
-                  Sign Up
+                  {t('signUp')}
                 </button>
               </div>
             </div>
@@ -124,4 +127,10 @@ class SignUpPage extends Component {
   }
 }
 
-export default SignUpPage;
+SignUpPage.propTypes = {
+  t: PropTypes.func
+};
+
+const SignUpPageWithTranslation = withTranslation()(SignUpPage);
+
+export default SignUpPageWithTranslation;
