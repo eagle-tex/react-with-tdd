@@ -328,5 +328,19 @@ describe('Sign Up Page', () => {
       expect(screen.getByLabelText(en.password)).toBeInTheDocument();
       expect(screen.getByLabelText(en.passwordRepeat)).toBeInTheDocument();
     });
+
+    it('displays password mismatch validation in French', () => {
+      setup();
+
+      const frenchToggle = screen.getByTitle('French');
+      userEvent.click(frenchToggle);
+      const passwordInput = screen.getByLabelText(fr.password);
+      userEvent.type(passwordInput, 'P4ss');
+      const validationMessageInFrench = screen.queryByText(
+        fr.passwordMismatchValidation
+      );
+
+      expect(validationMessageInFrench).toBeInTheDocument();
+    });
   });
 });
