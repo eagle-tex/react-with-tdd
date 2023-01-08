@@ -255,4 +255,21 @@ describe('Sign Up Page', () => {
       }
     );
   });
+
+  describe('Internationalization', () => {
+    it('initially displays all text in English', () => {
+      render(<SignUpPage />);
+
+      expect(
+        screen.getByRole('heading', { name: 'Sign Up' })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: 'Sign Up' })
+      ).toBeInTheDocument();
+      expect(screen.getByLabelText('Username')).toBeInTheDocument();
+      expect(screen.getByLabelText('E-mail')).toBeInTheDocument();
+      expect(screen.getByLabelText('Password')).toBeInTheDocument();
+      expect(screen.getByLabelText('Password Repeat')).toBeInTheDocument();
+    });
+  });
 });
