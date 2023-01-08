@@ -276,6 +276,21 @@ describe('Sign Up Page', () => {
       });
     });
 
+    it('initially displays all text in English', () => {
+      setup();
+
+      expect(
+        screen.getByRole('heading', { name: en.signUp })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: en.signUp })
+      ).toBeInTheDocument();
+      expect(screen.getByLabelText(en.username)).toBeInTheDocument();
+      expect(screen.getByLabelText(en.email)).toBeInTheDocument();
+      expect(screen.getByLabelText(en.password)).toBeInTheDocument();
+      expect(screen.getByLabelText(en.passwordRepeat)).toBeInTheDocument();
+    });
+
     it('displays all text in French after changing the language', () => {
       setup();
 
@@ -292,21 +307,6 @@ describe('Sign Up Page', () => {
       expect(screen.getByLabelText(fr.email)).toBeInTheDocument();
       expect(screen.getByLabelText(fr.password)).toBeInTheDocument();
       expect(screen.getByLabelText(fr.passwordRepeat)).toBeInTheDocument();
-    });
-
-    it('initially displays all text in English', () => {
-      setup();
-
-      expect(
-        screen.getByRole('heading', { name: en.signUp })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole('button', { name: en.signUp })
-      ).toBeInTheDocument();
-      expect(screen.getByLabelText(en.username)).toBeInTheDocument();
-      expect(screen.getByLabelText(en.email)).toBeInTheDocument();
-      expect(screen.getByLabelText(en.password)).toBeInTheDocument();
-      expect(screen.getByLabelText(en.passwordRepeat)).toBeInTheDocument();
     });
 
     it('displays all text in English after changing back from French', () => {
