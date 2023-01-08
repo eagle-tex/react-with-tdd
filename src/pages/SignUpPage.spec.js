@@ -11,6 +11,7 @@ import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 import '../locale/i18n';
 import en from '../locale/en.json';
+import fr from '../locale/fr.json';
 
 describe('Sign Up Page', () => {
   describe('Layout', () => {
@@ -271,6 +272,24 @@ describe('Sign Up Page', () => {
       expect(screen.getByLabelText(en.email)).toBeInTheDocument();
       expect(screen.getByLabelText(en.password)).toBeInTheDocument();
       expect(screen.getByLabelText(en.passwordRepeat)).toBeInTheDocument();
+    });
+
+    it('displays all text in French after changing the language', () => {
+      render(<SignUpPage />);
+
+      const frenchToggle = screen.getByTitle('French');
+      userEvent.click(frenchToggle);
+
+      expect(
+        screen.getByRole('heading', { name: fr.signUp })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: fr.signUp })
+      ).toBeInTheDocument();
+      expect(screen.getByLabelText(fr.username)).toBeInTheDocument();
+      expect(screen.getByLabelText(fr.email)).toBeInTheDocument();
+      expect(screen.getByLabelText(fr.password)).toBeInTheDocument();
+      expect(screen.getByLabelText(fr.passwordRepeat)).toBeInTheDocument();
     });
   });
 });
