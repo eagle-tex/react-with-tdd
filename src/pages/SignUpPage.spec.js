@@ -2,7 +2,8 @@ import SignUpPage from './SignUpPage.jsx';
 import {
   render,
   screen,
-  waitFor
+  waitFor,
+  act
   // waitForElementToBeRemoved
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -270,7 +271,9 @@ describe('Sign Up Page', () => {
     };
 
     afterEach(() => {
-      i18n.changeLanguage('en');
+      act(() => {
+        i18n.changeLanguage('en');
+      });
     });
 
     it('displays all text in French after changing the language', () => {
