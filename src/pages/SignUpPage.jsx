@@ -122,18 +122,22 @@ class SignUpPage extends Component {
             Please check your e-mail to activate your account
           </div>
         )}
-        <span
-          title="French"
-          onClick={() => this.props.i18n.changeLanguage('fr')}
-        >
-          FR
-        </span>
-        <span
-          title="English"
-          onClick={() => this.props.i18n.changeLanguage('en')}
-        >
-          EN
-        </span>
+        <a href="#" className="link-light">
+          <img
+            src="https://www.countryflagicons.com/FLAT/24/FR.png"
+            title="French"
+            onClick={() => this.props.i18n.changeLanguage('fr')}
+            alt="French Flag"
+          />
+        </a>
+        <a href="#" className="link-light">
+          <img
+            src="https://www.countryflagicons.com/FLAT/24/GB.png"
+            title="English"
+            onClick={() => this.props.i18n.changeLanguage('en')}
+            alt="Great Britain Flag"
+          />
+        </a>
       </div>
     );
   }
