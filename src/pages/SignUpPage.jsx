@@ -38,7 +38,11 @@ class SignUpPage extends Component {
     const body = { username, email, password };
     this.setState({ apiProgress: true });
     try {
-      await axios.post('/api/1.0/users', body);
+      await axios.post('/api/1.0/users', body, {
+        headers: {
+          'Accept-Language': this.props.i18n.language
+        }
+      });
       this.setState({ signUpSuccess: true });
     } catch (error) {
       if (error.response.status === 400) {
@@ -128,7 +132,8 @@ class SignUpPage extends Component {
 }
 
 SignUpPage.propTypes = {
-  t: PropTypes.func
+  t: PropTypes.func,
+  i18n: PropTypes.object
 };
 
 const SignUpPageWithTranslation = withTranslation()(SignUpPage);
