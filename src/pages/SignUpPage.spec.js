@@ -12,6 +12,7 @@ import { rest } from 'msw';
 import '../locale/i18n';
 import en from '../locale/en.json';
 import fr from '../locale/fr.json';
+import LanguageSelector from '../components/LanguageSelector.jsx';
 
 describe('Sign Up Page', () => {
   describe('Layout', () => {
@@ -275,7 +276,12 @@ describe('Sign Up Page', () => {
     });
 
     it('displays all text in French after changing the language', () => {
-      render(<SignUpPage />);
+      render(
+        <>
+          <SignUpPage />
+          <LanguageSelector />
+        </>
+      );
 
       const frenchToggle = screen.getByTitle('French');
       userEvent.click(frenchToggle);
@@ -293,7 +299,12 @@ describe('Sign Up Page', () => {
     });
 
     it('displays all text in English after changing back from French', () => {
-      render(<SignUpPage />);
+      render(
+        <>
+          <SignUpPage />
+          <LanguageSelector />
+        </>
+      );
 
       const frenchToggle = screen.getByTitle('French');
       userEvent.click(frenchToggle);
