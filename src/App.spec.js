@@ -2,11 +2,16 @@ import { render, screen } from '@testing-library/react';
 import App from './App';
 
 describe('Routing', () => {
-  it('displays homepage at /', () => {
+  it.each`
+    path         | pageTestId
+    ${'/'}       | ${'home-page'}
+    ${'/signup'} | ${'signup-page'}
+  `('displays $pageTestId when path is $path', ({ path, pageTestId }) => {
+    window.history.pushState({}, '', path);
     render(<App />);
-    const homePage = screen.getByTestId('home-page');
+    const page = screen.queryByTestId(pageTestId);
 
-    expect(homePage).toBeInTheDocument();
+    expect(page).toBeInTheDocument();
   });
 
   it('does not display SignUpPage when at /', () => {
@@ -14,14 +19,6 @@ describe('Routing', () => {
     const page = screen.queryByTestId('signup-page');
 
     expect(page).not.toBeInTheDocument();
-  });
-
-  it('displays signup page at /signup', () => {
-    window.history.pushState({}, '', '/signup');
-    render(<App />);
-    const page = screen.queryByTestId('signup-page');
-
-    expect(page).toBeInTheDocument();
   });
 
   it('does not display HomePage when at /signup', () => {
