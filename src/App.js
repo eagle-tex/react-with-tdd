@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="container">
       <HomePage />
-      {/* <SignUpPage /> */}
+      {window.location.pathname === '/signup' && <SignUpPage />}
       <LanguageSelector />
     </div>
   );
