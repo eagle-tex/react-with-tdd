@@ -3,10 +3,10 @@ import App from './App';
 
 describe('Routing', () => {
   it.each`
-    path         | pageTestId
-    ${'/'}       | ${'home-page'}
-    ${'/signup'} | ${'signup-page'}
-  `('displays $pageTestId when path is $path', ({ path, pageTestId }) => {
+    path         | pageTestId       | page
+    ${'/'}       | ${'home-page'}   | ${'HomePage'}
+    ${'/signup'} | ${'signup-page'} | ${'SignUpPage'}
+  `('displays $page when path is $path', ({ path, pageTestId }) => {
     window.history.pushState({}, '', path);
     render(<App />);
     const page = screen.queryByTestId(pageTestId);
