@@ -356,5 +356,18 @@ describe('Sign Up Page', () => {
 
       expect(acceptLanguageHeader).toBe('en');
     });
+
+    it('sends accept language header as fr for outgoing request after selecting that language', async () => {
+      setup();
+      userEvent.type(passwordInput, 'P4ssword');
+      userEvent.type(passwordRepeatInput, 'P4ssword');
+      const button = screen.getByRole('button', { name: en.signUp });
+      userEvent.click(frenchToggle);
+      const form = screen.queryByTestId('form-sign-up');
+      userEvent.click(button);
+      await waitForElementToBeRemoved(form);
+
+      expect(acceptLanguageHeader).toBe('fr');
+    });
   });
 });
