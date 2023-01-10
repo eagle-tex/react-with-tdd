@@ -8,4 +8,11 @@ describe('Routing', () => {
 
     expect(homePage).toBeInTheDocument();
   });
+
+  it('does not display SignUpPage when at /', () => {
+    render(<App />);
+    const page = screen.queryByTestId('signup-page');
+
+    expect(page).not.toBeInTheDocument();
+  });
 });
