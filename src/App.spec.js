@@ -14,18 +14,14 @@ describe('Routing', () => {
     expect(page).toBeInTheDocument();
   });
 
-  it('does not display SignUpPage when at /', () => {
-    window.history.pushState({}, '', '/');
+  it.each`
+    path         | pageTestId       | page
+    ${'/'}       | ${'signup-page'} | ${'HomePage'}
+    ${'/signup'} | ${'home-page'}   | ${'SignUpPage'}
+  `('does not display $page when path is $path', ({ path, pageTestId }) => {
+    window.history.pushState({}, '', path);
     render(<App />);
-    const page = screen.queryByTestId('signup-page');
-
-    expect(page).not.toBeInTheDocument();
-  });
-
-  it('does not display HomePage when at /signup', () => {
-    window.history.pushState({}, '', '/signup');
-    render(<App />);
-    const page = screen.queryByTestId('home-page');
+    const page = screen.queryByTestId(pageTestId);
 
     expect(page).not.toBeInTheDocument();
   });
