@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="container">
       <HomePage />
-      <SignUpPage />
+      {/* <SignUpPage /> */}
       <LanguageSelector />
     </div>
   );
