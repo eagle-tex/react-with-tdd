@@ -17,8 +17,12 @@ describe('Routing', () => {
 
   it.each`
     path         | pageTestId       | page
-    ${'/'}       | ${'signup-page'} | ${'HomePage'}
-    ${'/signup'} | ${'home-page'}   | ${'SignUpPage'}
+    ${'/'}       | ${'signup-page'} | ${'SignUpPage'}
+    ${'/'}       | ${'login-page'}  | ${'LoginPage'}
+    ${'/signup'} | ${'home-page'}   | ${'HomePage'}
+    ${'/signup'} | ${'login-page'}  | ${'LoginPage'}
+    ${'/login'}  | ${'home-page'}   | ${'HomePage'}
+    ${'/login'}  | ${'signup-page'} | ${'SignUpPage'}
   `('does not display $page when path is $path', ({ path, pageTestId }) => {
     window.history.pushState({}, '', path);
     render(<App />);
