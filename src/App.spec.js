@@ -15,6 +15,7 @@ describe('Routing', () => {
   });
 
   it('does not display SignUpPage when at /', () => {
+    window.history.pushState({}, '', '/');
     render(<App />);
     const page = screen.queryByTestId('signup-page');
 
