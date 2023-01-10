@@ -15,4 +15,12 @@ describe('Routing', () => {
 
     expect(page).not.toBeInTheDocument();
   });
+
+  it('displays signup page at /signup', () => {
+    window.history.pushState({}, '', '/signup');
+    render(<App />);
+    const page = screen.queryByTestId('signup-page');
+
+    expect(page).toBeInTheDocument();
+  });
 });
