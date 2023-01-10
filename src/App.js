@@ -5,7 +5,7 @@ import LanguageSelector from './components/LanguageSelector.jsx';
 function App() {
   return (
     <div className="container">
-      <HomePage />
+      {window.location.pathname === '/' && <HomePage />}
       {window.location.pathname === '/signup' && <SignUpPage />}
       <LanguageSelector />
     </div>
