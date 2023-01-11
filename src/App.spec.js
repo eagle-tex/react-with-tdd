@@ -2,6 +2,11 @@ import { render, screen } from '@testing-library/react';
 import App from './App';
 
 describe('Routing', () => {
+  const setup = path => {
+    window.history.pushState({}, '', path);
+    render(<App />);
+  };
+
   it.each`
     path         | pageTestId       | page
     ${'/'}       | ${'home-page'}   | ${'HomePage'}
@@ -10,8 +15,7 @@ describe('Routing', () => {
     ${'/user/1'} | ${'user-page'}   | ${'UserPage'}
     ${'/user/2'} | ${'user-page'}   | ${'UserPage'}
   `('displays $page when path is $path', ({ path, pageTestId }) => {
-    window.history.pushState({}, '', path);
-    render(<App />);
+    setup(path);
     const page = screen.queryByTestId(pageTestId);
 
     expect(page).toBeInTheDocument();
@@ -32,8 +36,7 @@ describe('Routing', () => {
     ${'/user/1'} | ${'signup-page'} | ${'SignUpPage'}
     ${'/user/1'} | ${'login-page'}  | ${'LoginPage'}
   `('does not display $page when path is $path', ({ path, pageTestId }) => {
-    window.history.pushState({}, '', path);
-    render(<App />);
+    setup(path);
     const page = screen.queryByTestId(pageTestId);
 
     expect(page).not.toBeInTheDocument();
