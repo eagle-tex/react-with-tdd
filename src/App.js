@@ -10,7 +10,7 @@ function App() {
       {window.location.pathname === '/' && <HomePage />}
       {window.location.pathname === '/signup' && <SignUpPage />}
       {window.location.pathname === '/login' && <LoginPage />}
-      {window.location.pathname === '/user/1' && <UserPage />}
+      {window.location.pathname.startsWith('/user') && <UserPage />}
       <LanguageSelector />
     </div>
   );
