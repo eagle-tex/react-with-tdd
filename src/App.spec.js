@@ -7,6 +7,7 @@ describe('Routing', () => {
     ${'/'}       | ${'home-page'}   | ${'HomePage'}
     ${'/signup'} | ${'signup-page'} | ${'SignUpPage'}
     ${'/login'}  | ${'login-page'}  | ${'LoginPage'}
+    ${'/user/1'} | ${'user-page'}   | ${'UserPage'}
   `('displays $page when path is $path', ({ path, pageTestId }) => {
     window.history.pushState({}, '', path);
     render(<App />);
