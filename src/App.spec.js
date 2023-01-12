@@ -47,6 +47,7 @@ describe('Routing', () => {
     targetPage
     ${'Home'}
     ${'Sign Up'}
+    ${'Login'}
   `('has link to $targetPage page on NavBar', ({ targetPage }) => {
     setup('/'); // any path would do ('/signup' or '/login', ...)
     const link = screen.getByRole('link', { description: targetPage });
