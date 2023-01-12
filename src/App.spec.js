@@ -56,12 +56,19 @@ describe('Routing', () => {
     expect(link).toBeInTheDocument();
   });
 
-  it('displays sign up page after clicking sign up link', () => {
-    setup('/');
-    const link = screen.getByRole('link', { description: 'Sign Up' });
+  it.each`
+    initialPath  | clickingTo   | visiblePageId    | visiblePage
+    ${'/'}       | ${'Sign Up'} | ${'signup-page'} | ${'Sign Up Page'}
+    ${'/signup'} | ${'Home'}    | ${'home-page'}   | ${'Home Page'}
+  `(
+    'displays $visiblePage after clicking $clickingTo link',
+    ({ initialPath, clickingTo, visiblePageId }) => {
+      setup(initialPath);
+      const link = screen.getByRole('link', { description: clickingTo });
 
-    userEvent.click(link);
+      userEvent.click(link);
 
-    expect(screen.getByTestId('signup-page')).toBeInTheDocument();
-  });
+      expect(screen.getByTestId(visiblePageId)).toBeInTheDocument();
+    }
+  );
 });
