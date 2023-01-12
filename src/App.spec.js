@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
+import userEvent from '@testing-library/user-event';
 
 describe('Routing', () => {
   const setup = path => {
@@ -53,5 +54,14 @@ describe('Routing', () => {
     // const link = screen.getByTitle('Home');
 
     expect(link).toBeInTheDocument();
+  });
+
+  it('displays sign up page after clicking sign up link', () => {
+    setup('/');
+    const link = screen.getByRole('link', { description: 'Sign Up' });
+
+    userEvent.click(link);
+
+    expect(screen.getByTestId('signup-page')).toBeInTheDocument();
   });
 });
