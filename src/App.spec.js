@@ -61,6 +61,7 @@ describe('Routing', () => {
     initialPath  | clickingTo   | visiblePageId    | visiblePage
     ${'/'}       | ${'Sign Up'} | ${'signup-page'} | ${'Sign Up Page'}
     ${'/signup'} | ${'Home'}    | ${'home-page'}   | ${'Home Page'}
+    ${'/signup'} | ${'Login'}   | ${'login-page'}  | ${'Login Page'}
   `(
     'displays $visiblePage after clicking $clickingTo link',
     ({ initialPath, clickingTo, visiblePageId }) => {
