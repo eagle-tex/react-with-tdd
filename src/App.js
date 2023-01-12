@@ -21,7 +21,7 @@ function App() {
   return (
     <div className="container">
       <div>
-        <a href="/" title="Home">
+        <a href="/" onClick={onClickLink} title="Home">
           Hoaxify
         </a>
         <a href="/signup" onClick={onClickLink} title={t('signUp')}>
