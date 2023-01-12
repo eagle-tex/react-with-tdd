@@ -27,6 +27,9 @@ function App() {
         <a href="/signup" onClick={onClickLink} title={t('signUp')}>
           {t('signUp')}
         </a>
+        <a href="/" title="Login">
+          Login
+        </a>
       </div>
       {path === '/' && <HomePage />}
       {path === '/signup' && <SignUpPage />}
