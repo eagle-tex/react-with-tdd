@@ -5,6 +5,7 @@ import UserPage from './pages/UserPage.jsx';
 import LanguageSelector from './components/LanguageSelector.jsx';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
+import logo from './assets/hoaxify.png';
 
 function App() {
   const { t } = useTranslation();
@@ -28,6 +29,7 @@ function App() {
             onClick={onClickLink}
             title="Home"
           >
+            <img src={logo} alt="Hoaxify" width="60" />
             Hoaxify
           </a>
           <ul className="navbar-nav">
