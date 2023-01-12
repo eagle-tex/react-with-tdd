@@ -8,7 +8,9 @@ function App() {
   return (
     <div className="container">
       <div>
-        <a href="/">Home</a>
+        <a href="/" title="Home">
+          Hoaxify
+        </a>
       </div>
       {window.location.pathname === '/' && <HomePage />}
       {window.location.pathname === '/signup' && <SignUpPage />}
