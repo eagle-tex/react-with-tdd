@@ -19,24 +19,45 @@ function App() {
   };
 
   return (
-    <div className="container">
-      <div>
-        <a href="/" onClick={onClickLink} title="Home">
-          Hoaxify
-        </a>
-        <a href="/signup" onClick={onClickLink} title={t('signUp')}>
-          {t('signUp')}
-        </a>
-        <a href="/login" onClick={onClickLink} title="Login">
-          Login
-        </a>
+    <>
+      <nav className="navbar navbar-expand navbar-light bg-light shadow">
+        <div className="container">
+          <a
+            className="navbar-brand"
+            href="/"
+            onClick={onClickLink}
+            title="Home"
+          >
+            Hoaxify
+          </a>
+          <ul className="navbar-nav">
+            <a
+              className="nav-link"
+              href="/signup"
+              onClick={onClickLink}
+              title={t('signUp')}
+            >
+              {t('signUp')}
+            </a>
+            <a
+              className="nav-link"
+              href="/login"
+              onClick={onClickLink}
+              title="Login"
+            >
+              Login
+            </a>
+          </ul>
+        </div>
+      </nav>
+      <div className="container">
+        {path === '/' && <HomePage />}
+        {path === '/signup' && <SignUpPage />}
+        {path === '/login' && <LoginPage />}
+        {path.startsWith('/user') && <UserPage />}
+        <LanguageSelector />
       </div>
-      {path === '/' && <HomePage />}
-      {path === '/signup' && <SignUpPage />}
-      {path === '/login' && <LoginPage />}
-      {path.startsWith('/user') && <UserPage />}
-      <LanguageSelector />
-    </div>
+    </>
   );
 }
 
