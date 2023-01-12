@@ -7,6 +7,9 @@ import LanguageSelector from './components/LanguageSelector.jsx';
 function App() {
   return (
     <div className="container">
+      <div>
+        <a href="/">Home</a>
+      </div>
       {window.location.pathname === '/' && <HomePage />}
       {window.location.pathname === '/signup' && <SignUpPage />}
       {window.location.pathname === '/login' && <LoginPage />}
