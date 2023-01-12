@@ -42,9 +42,14 @@ describe('Routing', () => {
     expect(page).not.toBeInTheDocument();
   });
 
-  it('has link to home page on NavBar', () => {
+  it.each`
+    targetPage
+    ${'Home'}
+    ${'Sign Up'}
+  `('has link to $targetPage page on NavBar', ({ targetPage }) => {
     setup('/'); // any path would do ('/signup' or '/login', ...)
-    const link = screen.getByRole('link', { name: 'Hoaxify' });
+    const link = screen.getByRole('link', { description: targetPage });
+    // const link = screen.getByRole('link', { name: 'Hoaxify' });
     // const link = screen.getByTitle('Home');
 
     expect(link).toBeInTheDocument();
