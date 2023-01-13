@@ -16,28 +16,28 @@ class SignUpPage extends Component {
     counter: 0
   };
 
-  interval; // is this line necessary? maybe not
+  // interval; // is this line necessary? maybe not
 
-  componentDidMount() {
-    console.log('mounted');
-    this.interval = setInterval(() => {
-      console.log('increasing counter');
-      this.setState(previousState => {
-        return {
-          counter: previousState + 1
-        };
-      });
-    });
-  }
+  // componentDidMount() {
+  //   console.log('mounted');
+  //   this.interval = setInterval(() => {
+  //     console.log('increasing counter');
+  //     this.setState(previousState => {
+  //       return {
+  //         counter: previousState + 1
+  //       };
+  //     });
+  //   });
+  // }
 
   componentDidUpdate(previousProps, previousState) {
-    console.log('update');
+    console.log('update', previousProps, this.props);
   }
 
-  componentWillUnmount() {
-    console.log('unmount');
-    clearInterval(this.interval);
-  }
+  // componentWillUnmount() {
+  //   console.log('unmount');
+  //   clearInterval(this.interval);
+  // }
 
   onChange = event => {
     const { id, value } = event.target;
