@@ -15,6 +15,18 @@ class SignUpPage extends Component {
     errors: {}
   };
 
+  componentDidMount() {
+    console.log('mounted');
+  }
+
+  componentDidUpdate(previousProps, previousState) {
+    console.log('update');
+  }
+
+  componentWillUnmount() {
+    console.log('unmount');
+  }
+
   onChange = event => {
     const { id, value } = event.target;
 
