@@ -16,9 +16,11 @@ class SignUpPage extends Component {
     counter: 0
   };
 
+  interval; // is this line necessary? maybe not
+
   componentDidMount() {
     console.log('mounted');
-    setInterval(() => {
+    this.interval = setInterval(() => {
       console.log('increasing counter');
       this.setState(previousState => {
         return {
@@ -34,6 +36,7 @@ class SignUpPage extends Component {
 
   componentWillUnmount() {
     console.log('unmount');
+    clearInterval(this.interval);
   }
 
   onChange = event => {
