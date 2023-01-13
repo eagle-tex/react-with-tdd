@@ -14,7 +14,7 @@ function App() {
 
   const onClickLink = event => {
     event.preventDefault();
-    const linkPath = event.target.attributes.href.value;
+    const linkPath = event.currentTarget.attributes.href.value;
     window.history.pushState({}, '', linkPath);
     setPath(linkPath);
   };
