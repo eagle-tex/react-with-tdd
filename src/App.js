@@ -29,7 +29,7 @@ function App() {
         </div>
       </nav>
       <div className="container">
-        <Route path="/" component={HomePage} />
+        <Route exact path="/" component={HomePage} />
         <Route path="/signup" component={SignUpPage} />
         <Route path="/login" component={LoginPage} />
         <Route path="/user/:id" component={UserPage} />
