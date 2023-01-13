@@ -6,6 +6,7 @@ import LanguageSelector from './components/LanguageSelector.jsx';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import logo from './assets/hoaxify.png';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 function App() {
   const { t } = useTranslation();
@@ -20,7 +21,7 @@ function App() {
   };
 
   return (
-    <>
+    <BrowserRouter>
       <nav className="navbar navbar-expand navbar-light bg-light shadow">
         <div className="container">
           <a
@@ -53,13 +54,13 @@ function App() {
         </div>
       </nav>
       <div className="container">
-        {path === '/' && <HomePage />}
-        {path === '/signup' && <SignUpPage />}
-        {path === '/login' && <LoginPage />}
-        {path.startsWith('/user') && <UserPage />}
+        <Route path="/" component={HomePage} />
+        <Route path="/signup" component={SignUpPage} />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/user/:id" component={UserPage} />
         <LanguageSelector />
       </div>
-    </>
+    </BrowserRouter>
   );
 }
 
