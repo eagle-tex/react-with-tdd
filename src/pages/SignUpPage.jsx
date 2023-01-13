@@ -12,11 +12,20 @@ class SignUpPage extends Component {
     passwordRepeat: '',
     apiProgress: false,
     signUpSuccess: false,
-    errors: {}
+    errors: {},
+    counter: 0
   };
 
   componentDidMount() {
     console.log('mounted');
+    setInterval(() => {
+      console.log('increasing counter');
+      this.setState(previousState => {
+        return {
+          counter: previousState + 1
+        };
+      });
+    });
   }
 
   componentDidUpdate(previousProps, previousState) {
