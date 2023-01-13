@@ -40,7 +40,9 @@ function App() {
         <Route path="/signup">
           <SignUpPage random={random} />
         </Route>
-        <Route path="/login" component={LoginPage} />
+        <Route path="/login">
+          <LoginPage random={random} />
+        </Route>
         <Route path="/user/:id" component={UserPage} />
         <LanguageSelector />
       </div>

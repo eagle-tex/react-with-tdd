@@ -16,6 +16,12 @@ const LoginPage = () => {
     };
   }, []);
 
+  useEffect(() => {
+    console.log(
+      'this is like component did update, but it is for specified dependency'
+    );
+  }, [counter]);
+
   return (
     <div data-testid="login-page">
       <h1>Login Page</h1>
