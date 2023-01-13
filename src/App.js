@@ -4,52 +4,27 @@ import LoginPage from './pages/LoginPage.jsx';
 import UserPage from './pages/UserPage.jsx';
 import LanguageSelector from './components/LanguageSelector.jsx';
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
 import logo from './assets/hoaxify.png';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 function App() {
   const { t } = useTranslation();
-
-  const [path, setPath] = useState(window.location.pathname);
-
-  const onClickLink = event => {
-    event.preventDefault();
-    const linkPath = event.currentTarget.attributes.href.value;
-    window.history.pushState({}, '', linkPath);
-    setPath(linkPath);
-  };
 
   return (
     <BrowserRouter>
       <nav className="navbar navbar-expand navbar-light bg-light shadow">
         <div className="container">
-          <a
-            className="navbar-brand"
-            href="/"
-            onClick={onClickLink}
-            title="Home"
-          >
+          <Link className="navbar-brand" to="/" title="Home">
             <img src={logo} alt="Hoaxify" width="60" />
             Hoaxify
-          </a>
+          </Link>
           <ul className="navbar-nav">
-            <a
-              className="nav-link"
-              href="/signup"
-              onClick={onClickLink}
-              title={t('signUp')}
-            >
+            <Link className="nav-link" to="/signup" title={t('signUp')}>
               {t('signUp')}
-            </a>
-            <a
-              className="nav-link"
-              href="/login"
-              onClick={onClickLink}
-              title="Login"
-            >
+            </Link>
+            <Link className="nav-link" to="/login" title="Login">
               Login
-            </a>
+            </Link>
           </ul>
         </div>
       </nav>
