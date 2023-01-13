@@ -5,13 +5,13 @@ import UserPage from './pages/UserPage.jsx';
 import LanguageSelector from './components/LanguageSelector.jsx';
 import { useTranslation } from 'react-i18next';
 import logo from './assets/hoaxify.png';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { HashRouter, Route, Link } from 'react-router-dom';
 
 function App() {
   const { t } = useTranslation();
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <nav className="navbar navbar-expand navbar-light bg-light shadow">
         <div className="container">
           <Link className="navbar-brand" to="/" title="Home">
@@ -35,7 +35,7 @@ function App() {
         <Route path="/user/:id" component={UserPage} />
         <LanguageSelector />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
