@@ -1,11 +1,15 @@
 {
   "compilerOptions": {
     "baseUrl": "src",
+    "checkJs": false,
+    "target": "es6",
     "paths": {
       "@/components/*": ["./components/*"],
       "@/services/*": ["./services/*"],
       "@/context/*": ["./context/*"],
       "@/utils/*": ["./utils/*"]
     }
-  }
+  },
+  "exclude": ["node_modules"],
+  "filetypes": ["typescript", "typescriptreact", "typescript.tsx"]
 }
