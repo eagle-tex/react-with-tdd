@@ -6,6 +6,7 @@ const AccountActivationPage = props => {
   const [result, setResult] = useState(); // result === undefined
 
   useEffect(() => {
+    setResult(); // set result to undefined
     activate(props.match.params.token)
       .then(() => {
         setResult('success');
