@@ -5,8 +5,36 @@ const withHover = WrappedComponent => {
     static displayName = `withHover(${
       WrappedComponent.displayName || WrappedComponent.name || Component
     })`;
+
+    state = {
+      on: false
+    };
+
+    onMouseOver = () => {
+      this.setState({ on: true });
+    };
+
+    onMouseOut = () => {
+      this.setState({ on: false });
+    };
+
     render() {
-      return <WrappedComponent />;
+      let style = {};
+      if (this.state.on) {
+        style = {
+          border: '1px solid red'
+        };
+      }
+
+      return (
+        <div
+          style={style}
+          onMouseOver={this.onMouseOver}
+          onMouseOut={this.onMouseOut}
+        >
+          <WrappedComponent />
+        </div>
+      );
     }
   };
 };
