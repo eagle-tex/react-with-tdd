@@ -4,6 +4,7 @@ import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { signUp } from '../api/apiCalls';
 import Alert from '../components/Alert.jsx';
+import Spinner from '../components/Spinner.jsx';
 
 class SignUpPage extends Component {
   state = {
@@ -108,12 +109,7 @@ class SignUpPage extends Component {
                   disabled={disabled || apiProgress}
                   onClick={this.submit}
                 >
-                  {apiProgress && (
-                    <span
-                      className="spinner-border spinner-border-sm"
-                      role="status"
-                    ></span>
-                  )}
+                  {apiProgress && <Spinner />}
                   {t('signUp')}
                 </button>
               </div>
