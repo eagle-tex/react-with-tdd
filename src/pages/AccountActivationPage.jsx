@@ -24,9 +24,9 @@ const AccountActivationPage = props => {
     </Alert>
   );
   if (result === 'success') {
-    content = <Alert text="Account is activated" />;
+    content = <Alert>Account is activated</Alert>;
   } else if (result === 'fail') {
-    content = <Alert type="danger" text="Activation failure" />;
+    content = <Alert type="danger">Activation failure</Alert>;
   }
 
   return <div data-testid="activation-page">{content}</div>;
