@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { activate } from '../api/apiCalls';
 import Alert from '../components/Alert.jsx';
+import Spinner from '../components/Spinner.jsx';
 
 const AccountActivationPage = props => {
   const [result, setResult] = useState(); // result === undefined
@@ -17,7 +18,11 @@ const AccountActivationPage = props => {
       });
   }, [props.match.params.token]);
 
-  let content = <span className="spinner-border" role="status"></span>;
+  let content = (
+    <Alert type="secondary" center>
+      <Spinner size="big" />
+    </Alert>
+  );
   if (result === 'success') {
     content = <Alert text="Account is activated" />;
   } else if (result === 'fail') {
