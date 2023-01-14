@@ -1,17 +1,20 @@
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import withHover from '../withHover.jsx';
+import useHover from '../useHover.jsx';
+import { useRef } from 'react';
 
 const LanguageSelector = props => {
   const { i18n } = useTranslation();
+  const ref = useRef();
+  const on = useHover(ref.current);
 
   let size = 24;
-  if (props.on) {
+  if (on) {
     size = 48;
   }
 
   return (
-    <>
+    <div ref={ref}>
       {props.text}
       <a href="#" className="link-light">
         <img
@@ -29,7 +32,7 @@ const LanguageSelector = props => {
           alt="Great Britain Flag"
         />
       </a>
-    </>
+    </div>
   );
 };
 
@@ -38,5 +41,4 @@ LanguageSelector.propTypes = {
   on: PropTypes.bool
 };
 
-export default withHover(LanguageSelector);
-// export default LanguageSelector;
+export default LanguageSelector;
