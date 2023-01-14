@@ -131,6 +131,6 @@ SignUpPage.propTypes = {
   i18n: PropTypes.object
 };
 
-const SignUpPageWithTranslation = withTranslation()(SignUpPage);
+const SignUpPageWithTranslation = withTranslation()(withHover(SignUpPage));
 
 export default withHover(SignUpPageWithTranslation);
