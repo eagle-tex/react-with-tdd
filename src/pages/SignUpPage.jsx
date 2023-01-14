@@ -122,10 +122,7 @@ class SignUpPage extends Component {
         )}
 
         {signUpSuccess && (
-          <Alert
-            type="success"
-            text="Please check your e-mail to activate your account"
-          />
+          <Alert text="Please check your e-mail to activate your account" />
         )}
       </div>
     );

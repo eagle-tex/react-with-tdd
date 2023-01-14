@@ -19,7 +19,7 @@ const AccountActivationPage = props => {
 
   let content = <span className="spinner-border" role="status"></span>;
   if (result === 'success') {
-    content = <Alert type="success" text="Account is activated" />;
+    content = <Alert text="Account is activated" />;
   } else if (result === 'fail') {
     content = <Alert type="danger" text="Activation failure" />;
   }
