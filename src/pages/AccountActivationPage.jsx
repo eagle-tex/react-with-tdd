@@ -25,7 +25,7 @@ const AccountActivationPage = props => {
       )}
       {/* display spinner if result is falsy (ie undefined in this case) */}
       {!result && (
-        <span className="spinner-border spinner-border-sm" role="status"></span>
+        <span className="spinner-border spinner-border" role="status"></span>
       )}
     </div>
   );
