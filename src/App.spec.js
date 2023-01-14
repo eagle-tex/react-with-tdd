@@ -25,19 +25,27 @@ describe('Routing', () => {
   });
 
   it.each`
-    path         | pageTestId       | page
-    ${'/'}       | ${'signup-page'} | ${'SignUpPage'}
-    ${'/'}       | ${'login-page'}  | ${'LoginPage'}
-    ${'/'}       | ${'user-page'}   | ${'UserPage'}
-    ${'/signup'} | ${'home-page'}   | ${'HomePage'}
-    ${'/signup'} | ${'login-page'}  | ${'LoginPage'}
-    ${'/signup'} | ${'user-page'}   | ${'UserPage'}
-    ${'/login'}  | ${'home-page'}   | ${'HomePage'}
-    ${'/login'}  | ${'signup-page'} | ${'SignUpPage'}
-    ${'/login'}  | ${'user-page'}   | ${'UserPage'}
-    ${'/user/1'} | ${'home-page'}   | ${'HomePage'}
-    ${'/user/1'} | ${'signup-page'} | ${'SignUpPage'}
-    ${'/user/1'} | ${'login-page'}  | ${'LoginPage'}
+    path                 | pageTestId           | page
+    ${'/'}               | ${'signup-page'}     | ${'SignUpPage'}
+    ${'/'}               | ${'login-page'}      | ${'LoginPage'}
+    ${'/'}               | ${'user-page'}       | ${'UserPage'}
+    ${'/'}               | ${'activation-page'} | ${'AccountActivationPage'}
+    ${'/signup'}         | ${'home-page'}       | ${'HomePage'}
+    ${'/signup'}         | ${'login-page'}      | ${'LoginPage'}
+    ${'/signup'}         | ${'user-page'}       | ${'UserPage'}
+    ${'/signup'}         | ${'activation-page'} | ${'AccountActivationPage'}
+    ${'/login'}          | ${'home-page'}       | ${'HomePage'}
+    ${'/login'}          | ${'signup-page'}     | ${'SignUpPage'}
+    ${'/login'}          | ${'user-page'}       | ${'UserPage'}
+    ${'/login'}          | ${'activation-page'} | ${'AccountActivationPage'}
+    ${'/user/1'}         | ${'home-page'}       | ${'HomePage'}
+    ${'/user/1'}         | ${'signup-page'}     | ${'SignUpPage'}
+    ${'/user/1'}         | ${'login-page'}      | ${'LoginPage'}
+    ${'/user/1'}         | ${'activation-page'} | ${'AccountActivationPage'}
+    ${'/activation/123'} | ${'home-page'}       | ${'AccountActivationPage'}
+    ${'/activation/123'} | ${'signup-page'}     | ${'SignUpPage'}
+    ${'/activation/123'} | ${'login-page'}      | ${'LoginPage'}
+    ${'/activation/123'} | ${'user-page'}       | ${'UserPage'}
   `('does not display $page when path is $path', ({ path, pageTestId }) => {
     setup(path);
     const page = screen.queryByTestId(pageTestId);
