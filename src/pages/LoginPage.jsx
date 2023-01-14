@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
-const LoginPage = () => {
+const LoginPage = props => {
   const [counter, setCounter] = useState(0);
 
   useEffect(() => {
@@ -22,12 +23,20 @@ const LoginPage = () => {
     );
   }, [counter]);
 
+  useEffect(() => {
+    console.log(`new random: ${props.random}`);
+  }, [props.random]);
+
   return (
     <div data-testid="login-page">
       <h1>Login Page</h1>
       {counter}
     </div>
   );
+};
+
+LoginPage.propTypes = {
+  random: PropTypes.number
 };
 
 export default LoginPage;
