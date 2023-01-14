@@ -39,4 +39,11 @@ describe('Account Activation Page', () => {
 
     expect(counter).toBe(1);
   });
+
+  it('displays activation failure message when token is invalid', async () => {
+    setup('5678');
+    const message = await screen.findByText('Activation failure');
+
+    expect(message).toBeInTheDocument();
+  });
 });
