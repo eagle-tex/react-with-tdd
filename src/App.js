@@ -35,7 +35,7 @@ function App() {
         <Route path="/login" component={LoginPage} />
         <Route path="/user/:id" component={UserPage} />
         <Route path="/activate/:token" component={AccountActivationPage} />
-        <LanguageSelector />
+        <LanguageSelector text="text prop is set" />
       </div>
     </Router>
   );
