@@ -1,8 +1,16 @@
 import PropTypes from 'prop-types';
 
 const Alert = props => {
-  const classForAlert = `alert alert-${props.type}`;
-  return <div className={classForAlert}>{props.text}</div>;
+  let classForAlert = `alert alert-${props.type}`;
+  if (props.center) {
+    classForAlert += ' text-center';
+  }
+  return (
+    <div className={classForAlert}>
+      {props.text}
+      {props.children}
+    </div>
+  );
 };
 
 Alert.defaultProps = {
@@ -11,7 +19,9 @@ Alert.defaultProps = {
 
 Alert.propTypes = {
   type: PropTypes.string,
-  text: PropTypes.string
+  text: PropTypes.string,
+  children: PropTypes.element,
+  center: PropTypes.bool
 };
 
 export default Alert;
