@@ -1,9 +1,5 @@
 const AccountActivationPage = () => {
-  return (
-    <div data-testid="activation-page">
-      <h1>Account Activation Page</h1>
-    </div>
-  );
+  return <div data-testid="activation-page">Account is activated</div>;
 };
 
 export default AccountActivationPage;
