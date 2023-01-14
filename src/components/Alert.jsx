@@ -5,6 +5,10 @@ const Alert = props => {
   return <div className={classForAlert}>{props.text}</div>;
 };
 
+Alert.defaultProps = {
+  type: 'success'
+};
+
 Alert.propTypes = {
   type: PropTypes.string,
   text: PropTypes.string
