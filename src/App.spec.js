@@ -108,3 +108,5 @@ describe('Routing', () => {
     expect(screen.getByTestId('home-page')).toBeInTheDocument();
   });
 });
+
+console.error = () => {};
