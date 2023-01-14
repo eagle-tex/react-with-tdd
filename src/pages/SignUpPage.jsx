@@ -3,6 +3,7 @@ import Input from '../components/Input.jsx';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { signUp } from '../api/apiCalls';
+import Alert from '../components/Alert.jsx';
 
 class SignUpPage extends Component {
   state = {
@@ -121,9 +122,10 @@ class SignUpPage extends Component {
         )}
 
         {signUpSuccess && (
-          <div className="alert alert-success mt-3">
-            Please check your e-mail to activate your account
-          </div>
+          <Alert
+            type="success"
+            text="Please check your e-mail to activate your account"
+          />
         )}
       </div>
     );
