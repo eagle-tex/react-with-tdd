@@ -13,7 +13,7 @@ const AccountActivationPage = props => {
       .catch(() => {
         setResult('fail');
       });
-  }, []);
+  }, [props.match.params.token]);
 
   return (
     <div data-testid="activation-page">
