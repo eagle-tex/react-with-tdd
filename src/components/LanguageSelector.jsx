@@ -5,12 +5,17 @@ import withHover from '../withHover.jsx';
 const LanguageSelector = props => {
   const { i18n } = useTranslation();
 
+  let size = 24;
+  if (props.on) {
+    size = 48;
+  }
+
   return (
     <>
       {props.text}
       <a href="#" className="link-light">
         <img
-          src="https://www.countryflagicons.com/FLAT/24/FR.png"
+          src={`https://www.countryflagicons.com/FLAT/${size}/FR.png`}
           title="French"
           onClick={() => i18n.changeLanguage('fr')}
           alt="French Flag"
@@ -18,7 +23,7 @@ const LanguageSelector = props => {
       </a>
       <a href="#" className="link-light">
         <img
-          src="https://www.countryflagicons.com/FLAT/24/GB.png"
+          src={`https://www.countryflagicons.com/FLAT/${size}/GB.png`}
           title="English"
           onClick={() => i18n.changeLanguage('en')}
           alt="Great Britain Flag"
@@ -29,7 +34,8 @@ const LanguageSelector = props => {
 };
 
 LanguageSelector.propTypes = {
-  text: PropTypes.string
+  text: PropTypes.string,
+  on: PropTypes.bool
 };
 
 export default withHover(LanguageSelector);
