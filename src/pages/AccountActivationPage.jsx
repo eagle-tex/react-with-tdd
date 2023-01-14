@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { activate } from '../api/apiCalls';
+import Alert from '../components/Alert.jsx';
 
 const AccountActivationPage = props => {
   const [result, setResult] = useState(); // result === undefined
@@ -18,11 +19,9 @@ const AccountActivationPage = props => {
 
   let content = <span className="spinner-border" role="status"></span>;
   if (result === 'success') {
-    content = (
-      <div className="alert alert-success mt-3">Account is activated</div>
-    );
+    content = <Alert type="success" text="Account is activated" />;
   } else if (result === 'fail') {
-    content = <div className="alert alert-danger mt-3">Activation failure</div>;
+    content = <Alert type="danger" text="Activation failure" />;
   }
 
   return <div data-testid="activation-page">{content}</div>;
