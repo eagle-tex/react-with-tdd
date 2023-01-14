@@ -66,7 +66,7 @@ class SignUpPage extends Component {
         data-testid="signup-page"
       >
         {!signUpSuccess && (
-          <form className="card mt-5" data-testid="form-sign-up">
+          <form className="card" data-testid="form-sign-up">
             <div className="card-header">
               <h1 className="text-center">{t('signUp')}</h1>
             </div>
