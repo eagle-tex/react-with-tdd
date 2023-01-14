@@ -16,9 +16,7 @@ const AccountActivationPage = props => {
       });
   }, [props.match.params.token]);
 
-  let content = (
-    <span className="spinner-border spinner-border" role="status"></span>
-  );
+  let content = <span className="spinner-border" role="status"></span>;
   if (result === 'success') {
     content = (
       <div className="alert alert-success mt-3">Account is activated</div>
