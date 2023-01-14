@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { signUp } from '../api/apiCalls';
 import Alert from '../components/Alert.jsx';
 import Spinner from '../components/Spinner.jsx';
+import withHover from '../withHover.jsx';
 
 class SignUpPage extends Component {
   state = {
@@ -132,4 +133,4 @@ SignUpPage.propTypes = {
 
 const SignUpPageWithTranslation = withTranslation()(SignUpPage);
 
-export default SignUpPageWithTranslation;
+export default withHover(SignUpPageWithTranslation);
