@@ -9,12 +9,14 @@ describe('Routing', () => {
   };
 
   it.each`
-    path         | pageTestId       | page
-    ${'/'}       | ${'home-page'}   | ${'HomePage'}
-    ${'/signup'} | ${'signup-page'} | ${'SignUpPage'}
-    ${'/login'}  | ${'login-page'}  | ${'LoginPage'}
-    ${'/user/1'} | ${'user-page'}   | ${'UserPage'}
-    ${'/user/2'} | ${'user-page'}   | ${'UserPage'}
+    path               | pageTestId           | page
+    ${'/'}             | ${'home-page'}       | ${'HomePage'}
+    ${'/signup'}       | ${'signup-page'}     | ${'SignUpPage'}
+    ${'/login'}        | ${'login-page'}      | ${'LoginPage'}
+    ${'/user/1'}       | ${'user-page'}       | ${'UserPage'}
+    ${'/user/2'}       | ${'user-page'}       | ${'UserPage'}
+    ${'/activate/123'} | ${'activation-page'} | ${'AccountActivationPage'}
+    ${'/activate/456'} | ${'activation-page'} | ${'AccountActivationPage'}
   `('displays $page when path is $path', ({ path, pageTestId }) => {
     setup(path);
     const page = screen.queryByTestId(pageTestId);
