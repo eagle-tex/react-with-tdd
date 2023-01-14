@@ -6,6 +6,9 @@ import { rest } from 'msw';
 let counter = 0;
 const server = setupServer(
   rest.post('/api/1.0/users/token/:token', (req, res, ctx) => {
+    if (req.params.token === '5678') {
+      return res(ctx.status(400));
+    }
     counter += 1;
     return res(ctx.status(200));
   })
