@@ -1,11 +1,13 @@
 import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 import withHover from '../withHover.jsx';
 
-const LanguageSelector = () => {
+const LanguageSelector = props => {
   const { i18n } = useTranslation();
 
   return (
     <>
+      {props.text}
       <a href="#" className="link-light">
         <img
           src="https://www.countryflagicons.com/FLAT/24/FR.png"
@@ -26,4 +28,9 @@ const LanguageSelector = () => {
   );
 };
 
+LanguageSelector.propTypes = {
+  text: PropTypes.string
+};
+
 export default withHover(LanguageSelector);
+// export default LanguageSelector;
