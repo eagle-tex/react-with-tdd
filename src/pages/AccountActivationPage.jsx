@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { activate } from '../api/apiCalls';
 
 const AccountActivationPage = props => {
-  const [result, setResult] = useState();
+  const [result, setResult] = useState(); // result === undefined
 
   useEffect(() => {
     activate(props.match.params.token)
@@ -22,6 +22,10 @@ const AccountActivationPage = props => {
       )}
       {result === 'fail' && (
         <div className="alert alert-danger mt-3">Activation failure</div>
+      )}
+      {/* display spinner if result is falsy (ie undefined in this case) */}
+      {!result && (
+        <span className="spinner-border spinner-border-sm" role="status"></span>
       )}
     </div>
   );
