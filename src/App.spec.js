@@ -109,4 +109,4 @@ describe('Routing', () => {
   });
 });
 
-console.error = () => {};
+// console.error = () => {};
