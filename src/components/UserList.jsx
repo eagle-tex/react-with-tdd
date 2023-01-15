@@ -15,10 +15,13 @@ class UserList extends Component {
     this.loadData();
   }
 
-  loadData = pageIndex => {
-    loadUsers(pageIndex).then(response => {
+  loadData = async pageIndex => {
+    try {
+      const response = await loadUsers(pageIndex);
       this.setState({ page: response.data });
-    });
+    } catch (error) {
+      // empty for now
+    }
   };
 
   render() {
