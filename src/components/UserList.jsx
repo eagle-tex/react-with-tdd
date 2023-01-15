@@ -39,7 +39,7 @@ class UserList extends Component {
                 key={user.id}
                 className="list-group-item list-group-item-action"
               >
-                {user.username}
+                <a href={`/user/${user.id}`}>{user.username}</a>
               </li>
             );
           })}
