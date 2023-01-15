@@ -76,4 +76,16 @@ describe('User List', () => {
 
     expect(firstUserOnPage2).toBeInTheDocument();
   });
+
+  it('hides next page link at last page', async () => {
+    render(<UserList />);
+    await screen.findByText('user1');
+
+    userEvent.click(screen.queryByText('next >'));
+    await screen.findByText('user4');
+    userEvent.click(screen.queryByText('next >'));
+    await screen.findByText('user7');
+
+    expect(screen.queryByText('next >')).not.toBeInTheDocument();
+  });
 });
