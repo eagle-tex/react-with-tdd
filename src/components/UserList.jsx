@@ -41,6 +41,7 @@ class UserList extends Component {
                 key={user.id}
                 className="list-group-item list-group-item-action"
                 onClick={() => this.props.history.push(`/user/${user.id}`)}
+                style={{ cursor: 'pointer' }}
               >
                 {user.username}
               </li>
