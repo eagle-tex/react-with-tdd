@@ -38,7 +38,9 @@ class UserList extends Component {
             );
           })}
         </ul>
-        <button onClick={this.loadNext}>next &gt;</button>
+        {this.state.page.totalPages > this.state.page.page + 1 && (
+          <button onClick={this.loadNext}>next &gt;</button>
+        )}
       </div>
     );
   }
