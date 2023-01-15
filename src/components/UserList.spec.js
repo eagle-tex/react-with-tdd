@@ -2,6 +2,8 @@ import { render, screen } from '@testing-library/react';
 import UserList from './UserList.jsx';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
+import userEvent from '@testing-library/user-event';
+import expect from '../../../../../../.cache/typescript/4.9/node_modules/expect/build/index.js';
 
 const users = [
   { id: 1, username: 'user1', email: 'user1@mail.com', image: null },
@@ -62,5 +64,16 @@ describe('User List', () => {
     await screen.findByText('user1');
 
     expect(screen.queryByText('next >')).toBeInTheDocument();
+  });
+
+  it('displays next page afer clicking next', async () => {
+    render(<UserList />);
+    await screen.findByText('user1');
+    const nextPageLink = screen.queryByText('next >');
+
+    userEvent.click(nextPageLink);
+    const firstUserOnPage2 = await screen.findByText('user4');
+
+    expect(firstUserOnPage2).toBeInTheDocument();
   });
 });
