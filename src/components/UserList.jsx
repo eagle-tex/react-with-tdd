@@ -40,6 +40,7 @@ class UserList extends Component {
             );
           })}
         </ul>
+        {page !== 0 && <button>&lt; previous</button>}
         {totalPages > page + 1 && (
           <button onClick={this.loadNext}>next &gt;</button>
         )}
