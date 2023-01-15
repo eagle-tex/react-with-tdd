@@ -12,7 +12,14 @@ const server = setupServer(
     return res(
       ctx.status(200),
       ctx.json({
-        content: [],
+        content: [
+          {
+            id: 1,
+            username: 'user-in-list',
+            email: 'user-in-list@mail.com',
+            image: null
+          }
+        ],
         page: 0,
         size: 0,
         totalPages: 0
@@ -117,6 +124,17 @@ describe('Routing', () => {
     userEvent.click(logo);
 
     expect(screen.getByTestId('home-page')).toBeInTheDocument();
+  });
+
+  it('navigates to user page when clicking on the username in user list', async () => {
+    setup('/');
+    const user = await screen.findByText('user-in-list');
+
+    userEvent.click(user);
+    // any type of query would be OK/possible here: queryByTestId or getByTestId
+    const page = await screen.findByTextId('user-page');
+
+    expect(page).toBeInTheDocument();
   });
 });
 
