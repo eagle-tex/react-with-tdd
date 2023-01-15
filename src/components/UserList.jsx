@@ -17,6 +17,12 @@ class UserList extends Component {
     });
   }
 
+  loadNext = () => {
+    loadUsers(this.state.page.page + 1).then(response => {
+      this.setState({ page: response.data });
+    });
+  };
+
   render() {
     return (
       <div className="card">
@@ -32,7 +38,7 @@ class UserList extends Component {
             );
           })}
         </ul>
-        next &gt;
+        <button onClick={this.loadNext}>next &gt;</button>
       </div>
     );
   }
