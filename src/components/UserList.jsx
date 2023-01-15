@@ -23,6 +23,12 @@ class UserList extends Component {
     });
   };
 
+  loadPrevious = () => {
+    loadUsers(this.state.page.page - 1).then(response => {
+      this.setState({ page: response.data });
+    });
+  };
+
   render() {
     const { totalPages, page, content } = this.state.page;
 
@@ -40,7 +46,9 @@ class UserList extends Component {
             );
           })}
         </ul>
-        {page !== 0 && <button>&lt; previous</button>}
+        {page !== 0 && (
+          <button onClick={this.loadPrevious}>&lt; previous</button>
+        )}
         {totalPages > page + 1 && (
           <button onClick={this.loadNext}>next &gt;</button>
         )}
