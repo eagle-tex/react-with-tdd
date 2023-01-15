@@ -1,6 +1,7 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import { loadUsers } from '../api/apiCalls';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class UserList extends Component {
   state = {
@@ -39,8 +40,9 @@ class UserList extends Component {
               <li
                 key={user.id}
                 className="list-group-item list-group-item-action"
+                onClick={() => this.props.history.push(`/user/${user.id}`)}
               >
-                <Link to={`/user/${user.id}`}>{user.username}</Link>
+                {user.username}
               </li>
             );
           })}
@@ -68,4 +70,8 @@ class UserList extends Component {
   }
 }
 
-export default UserList;
+UserList.propTypes = {
+  history: PropTypes.object
+};
+
+export default withRouter(UserList);
