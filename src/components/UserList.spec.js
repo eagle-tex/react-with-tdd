@@ -56,4 +56,11 @@ describe('User List', () => {
 
     expect(usersList.length).toBe(3);
   });
+
+  it('displays next page link', async () => {
+    render(<UserList />);
+    await screen.findByText('user1');
+
+    expect(screen.queryByText('next >')).toBeInTheDocument();
+  });
 });
