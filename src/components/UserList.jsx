@@ -41,12 +41,24 @@ class UserList extends Component {
             );
           })}
         </ul>
-        {page !== 0 && (
-          <button onClick={() => this.loadData(page - 1)}>&lt; previous</button>
-        )}
-        {totalPages > page + 1 && (
-          <button onClick={() => this.loadData(page + 1)}>next &gt;</button>
-        )}
+        <div className="card-footer">
+          {page !== 0 && (
+            <button
+              className="btn btn-outline-secondary btn-sm"
+              onClick={() => this.loadData(page - 1)}
+            >
+              &lt; previous
+            </button>
+          )}
+          {totalPages > page + 1 && (
+            <button
+              className="btn btn-outline-secondary btn-sm"
+              onClick={() => this.loadData(page + 1)}
+            >
+              next &gt;
+            </button>
+          )}
+        </div>
       </div>
     );
   }
