@@ -88,4 +88,12 @@ describe('User List', () => {
 
     expect(screen.queryByText('next >')).not.toBeInTheDocument();
   });
+
+  it('does not display the previous page link in first page', async () => {
+    render(<UserList />);
+    await screen.findByText('user1');
+    const previousPageLink = screen.queryByText('< previous');
+
+    expect(previousPageLink).not.toBeInTheDocument();
+  });
 });
