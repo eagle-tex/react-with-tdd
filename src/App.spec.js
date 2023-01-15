@@ -132,7 +132,7 @@ describe('Routing', () => {
 
     userEvent.click(user);
     // any type of query would be OK/possible here: queryByTestId or getByTestId
-    const page = await screen.findByTextId('user-page');
+    const page = await screen.findByTestId('user-page');
 
     expect(page).toBeInTheDocument();
   });
