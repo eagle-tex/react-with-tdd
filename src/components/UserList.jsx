@@ -24,13 +24,15 @@ class UserList extends Component {
   };
 
   render() {
+    const { totalPages, page, content } = this.state.page;
+
     return (
       <div className="card">
         <div className="card-header text-center">
           <h3>Users</h3>
         </div>
         <ul className="list-group list-group-flush">
-          {this.state.page.content.map(user => {
+          {content.map(user => {
             return (
               <li className="list-group-item list-group-item-action">
                 {user.username}
@@ -38,7 +40,7 @@ class UserList extends Component {
             );
           })}
         </ul>
-        {this.state.page.totalPages > this.state.page.page + 1 && (
+        {totalPages > page + 1 && (
           <button onClick={this.loadNext}>next &gt;</button>
         )}
       </div>
