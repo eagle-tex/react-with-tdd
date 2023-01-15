@@ -96,4 +96,15 @@ describe('User List', () => {
 
     expect(previousPageLink).not.toBeInTheDocument();
   });
+
+  it('displays the previous page link in second page', async () => {
+    render(<UserList />);
+    await screen.findByText('user1');
+
+    userEvent.click(screen.queryByText('next >'));
+    await screen.findByText('user4');
+
+    const previousPageLink = screen.queryByText('< previous');
+    expect(previousPageLink).toBeInTheDocument();
+  });
 });
