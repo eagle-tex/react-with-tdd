@@ -32,6 +32,7 @@ class UserList extends Component {
             );
           })}
         </ul>
+        next &gt;
       </div>
     );
   }
