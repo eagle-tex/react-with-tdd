@@ -12,7 +12,12 @@ const UserListItem = props => {
       onClick={() => history.push(`/user/${user.id}`)}
       style={{ cursor: 'pointer' }}
     >
-      <img src={defaultProfileImage} alt="profile image" />
+      <img
+        src={defaultProfileImage}
+        alt="profile image"
+        width="30"
+        className="rounded-circle shadow-sm"
+      />{' '}
       {user.username}
     </li>
   );
