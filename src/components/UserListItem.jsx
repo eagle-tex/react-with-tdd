@@ -18,7 +18,6 @@ const UserListItem = props => {
 
   return (
     <li
-      key={user.id}
       className="list-group-item list-group-item-action"
       onClick={() => history.push(`/user/${user.id}`)}
       style={{ cursor: 'pointer' }}
