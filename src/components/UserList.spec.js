@@ -4,6 +4,7 @@ import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter as Router } from 'react-router-dom';
+import en from '../locale/en.json';
 
 const users = [
   { id: 1, username: 'user1', email: 'user1@mail.com', image: null },
@@ -127,6 +128,25 @@ describe('User List', () => {
       const firstUserOnFirstPage = await screen.findByText('user1');
 
       expect(firstUserOnFirstPage).toBeInTheDocument();
+    });
+  });
+
+  describe('Internationalization', () => {
+    beforeEach(() => {
+      server.use(
+        rest.get('/api/1.0/users', (req, res, ctx) => {
+          return res(ctx.status(200), ctx.json(getPage(1, 3)));
+        })
+      );
+    });
+
+    it('initially displays header and navigation links in English', async () => {
+      setup();
+      await screen.findByText('user4');
+
+      expect(screen.getByText(en.users)).toBeInTheDocument();
+      expect(screen.getByText(en.nextPage)).toBeInTheDocument();
+      expect(screen.getByText(en.previousPage)).toBeInTheDocument();
     });
   });
 });
