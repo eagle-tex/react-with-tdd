@@ -13,7 +13,7 @@ const UserListItem = props => {
       style={{ cursor: 'pointer' }}
     >
       <img
-        src={defaultProfileImage}
+        src={`/image/${user.image || 'profile.png'}`}
         alt="profile image"
         width="30"
         className="rounded-circle shadow-sm"
