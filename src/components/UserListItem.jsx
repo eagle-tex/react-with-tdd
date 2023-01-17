@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { useState } from 'react';
 import defaultProfileImage from '../assets/profile.png';
 
 const UserListItem = props => {
   const { user, history } = props;
+
+  const [image, setImage] = useState(user.image || 'profile.png');
 
   return (
     <li
@@ -13,7 +16,7 @@ const UserListItem = props => {
       style={{ cursor: 'pointer' }}
     >
       <img
-        src={`/image/${user.image || 'profile.png'}`}
+        src={`/image/${image}`}
         alt="profile image"
         width="30"
         className="rounded-circle shadow-sm"
