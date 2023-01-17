@@ -20,7 +20,12 @@ class UserList extends Component {
   loadData = async pageIndex => {
     try {
       const response = await loadUsers(pageIndex);
-      this.setState({ page: response.data });
+      const page = response.data;
+      if (!pageIndex) {
+        page.content[1].image = 'dog.jpg';
+      }
+
+      this.setState({ page: page });
     } catch (error) {
       // empty for now
     }
