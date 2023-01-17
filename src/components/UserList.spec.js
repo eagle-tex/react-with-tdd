@@ -60,71 +60,73 @@ const setup = () => {
 };
 
 describe('User List', () => {
-  it('displays three users in list', async () => {
-    setup();
-    const usersList = await screen.findAllByText(/user/);
+  describe('Interactions', () => {
+    it('displays three users in list', async () => {
+      setup();
+      const usersList = await screen.findAllByText(/user/);
 
-    expect(usersList.length).toBe(3);
-  });
+      expect(usersList.length).toBe(3);
+    });
 
-  it('displays next page link', async () => {
-    setup();
-    await screen.findByText('user1');
+    it('displays next page link', async () => {
+      setup();
+      await screen.findByText('user1');
 
-    expect(screen.queryByText('next >')).toBeInTheDocument();
-  });
+      expect(screen.queryByText('next >')).toBeInTheDocument();
+    });
 
-  it('displays next page afer clicking next', async () => {
-    setup();
-    await screen.findByText('user1');
-    const nextPageLink = screen.queryByText('next >');
+    it('displays next page afer clicking next', async () => {
+      setup();
+      await screen.findByText('user1');
+      const nextPageLink = screen.queryByText('next >');
 
-    userEvent.click(nextPageLink);
-    const firstUserOnPage2 = await screen.findByText('user4');
+      userEvent.click(nextPageLink);
+      const firstUserOnPage2 = await screen.findByText('user4');
 
-    expect(firstUserOnPage2).toBeInTheDocument();
-  });
+      expect(firstUserOnPage2).toBeInTheDocument();
+    });
 
-  it('hides next page link at last page', async () => {
-    setup();
-    await screen.findByText('user1');
+    it('hides next page link at last page', async () => {
+      setup();
+      await screen.findByText('user1');
 
-    userEvent.click(screen.queryByText('next >'));
-    await screen.findByText('user4');
-    userEvent.click(screen.queryByText('next >'));
-    await screen.findByText('user7');
+      userEvent.click(screen.queryByText('next >'));
+      await screen.findByText('user4');
+      userEvent.click(screen.queryByText('next >'));
+      await screen.findByText('user7');
 
-    expect(screen.queryByText('next >')).not.toBeInTheDocument();
-  });
+      expect(screen.queryByText('next >')).not.toBeInTheDocument();
+    });
 
-  it('does not display the previous page link in first page', async () => {
-    setup();
-    await screen.findByText('user1');
-    const previousPageLink = screen.queryByText('< previous');
+    it('does not display the previous page link in first page', async () => {
+      setup();
+      await screen.findByText('user1');
+      const previousPageLink = screen.queryByText('< previous');
 
-    expect(previousPageLink).not.toBeInTheDocument();
-  });
+      expect(previousPageLink).not.toBeInTheDocument();
+    });
 
-  it('displays the previous page link in second page', async () => {
-    setup();
-    await screen.findByText('user1');
+    it('displays the previous page link in second page', async () => {
+      setup();
+      await screen.findByText('user1');
 
-    userEvent.click(screen.queryByText('next >'));
-    await screen.findByText('user4');
+      userEvent.click(screen.queryByText('next >'));
+      await screen.findByText('user4');
 
-    const previousPageLink = screen.queryByText('< previous');
-    expect(previousPageLink).toBeInTheDocument();
-  });
+      const previousPageLink = screen.queryByText('< previous');
+      expect(previousPageLink).toBeInTheDocument();
+    });
 
-  it('displays the previous page link on second page', async () => {
-    setup();
-    await screen.findByText('user1');
+    it('displays the previous page link on second page', async () => {
+      setup();
+      await screen.findByText('user1');
 
-    userEvent.click(screen.queryByText('next >'));
-    await screen.findByText('user4');
-    userEvent.click(screen.queryByText('< previous'));
-    const firstUserOnFirstPage = await screen.findByText('user1');
+      userEvent.click(screen.queryByText('next >'));
+      await screen.findByText('user4');
+      userEvent.click(screen.queryByText('< previous'));
+      const firstUserOnFirstPage = await screen.findByText('user1');
 
-    expect(firstUserOnFirstPage).toBeInTheDocument();
+      expect(firstUserOnFirstPage).toBeInTheDocument();
+    });
   });
 });
