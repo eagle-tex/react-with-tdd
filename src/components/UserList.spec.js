@@ -5,6 +5,8 @@ import { rest } from 'msw';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter as Router } from 'react-router-dom';
 import en from '../locale/en.json';
+import fr from '../locale/fr.json';
+import LanguageSelector from './LanguageSelector.jsx';
 
 const users = [
   { id: 1, username: 'user1', email: 'user1@mail.com', image: null },
@@ -56,6 +58,7 @@ const setup = () => {
   render(
     <Router>
       <UserList />
+      <LanguageSelector />
     </Router>
   );
 };
@@ -134,7 +137,7 @@ describe('User List', () => {
   describe('Internationalization', () => {
     beforeEach(() => {
       server.use(
-        rest.get('/api/1.0/users', (req, res, ctx) => {
+        rest.get('/api/1.0/users', (_req, res, ctx) => {
           return res(ctx.status(200), ctx.json(getPage(1, 3)));
         })
       );
@@ -147,6 +150,17 @@ describe('User List', () => {
       expect(screen.getByText(en.users)).toBeInTheDocument();
       expect(screen.getByText(en.nextPage)).toBeInTheDocument();
       expect(screen.getByText(en.previousPage)).toBeInTheDocument();
+    });
+
+    it('initially displays header and navigation links in French after selecting the language', async () => {
+      setup();
+      await screen.findByText('user4');
+
+      userEvent.click(screen.getByTitle('French'));
+
+      expect(screen.getByText(fr.users)).toBeInTheDocument();
+      expect(screen.getByText(fr.nextPage)).toBeInTheDocument();
+      expect(screen.getByText(fr.previousPage)).toBeInTheDocument();
     });
   });
 });
