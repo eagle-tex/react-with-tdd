@@ -2,6 +2,7 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { loadUsers } from '../api/apiCalls';
 import UserListItem from './UserListItem.jsx';
+import { withTranslation } from 'react-i18next';
 
 class UserList extends Component {
   state = {
@@ -28,11 +29,12 @@ class UserList extends Component {
 
   render() {
     const { totalPages, page, content } = this.state.page;
+    const { t } = this.props;
 
     return (
       <div className="card">
         <div className="card-header text-center">
-          <h3>Users</h3>
+          <h3>{t('users')}</h3>
         </div>
         <ul className="list-group list-group-flush">
           {content.map(user => {
@@ -45,7 +47,7 @@ class UserList extends Component {
               className="btn btn-outline-secondary btn-sm"
               onClick={() => this.loadData(page - 1)}
             >
-              &lt; previous
+              {t('previousPage')}
             </button>
           )}
           {totalPages > page + 1 && (
@@ -53,7 +55,7 @@ class UserList extends Component {
               className="btn btn-outline-secondary btn-sm"
               onClick={() => this.loadData(page + 1)}
             >
-              next &gt;
+              {t('nextPage')}
             </button>
           )}
         </div>
@@ -64,7 +66,8 @@ class UserList extends Component {
 
 UserList.propTypes = {
   key: PropTypes.number,
-  user: PropTypes.object
+  user: PropTypes.object,
+  t: PropTypes.func
 };
 
-export default UserList;
+export default withTranslation()(UserList);
