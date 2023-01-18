@@ -143,15 +143,6 @@ describe('User List', () => {
       );
     });
 
-    it('initially displays header and navigation links in English', async () => {
-      setup();
-      await screen.findByText('user4');
-
-      expect(screen.getByText(en.users)).toBeInTheDocument();
-      expect(screen.getByText(en.nextPage)).toBeInTheDocument();
-      expect(screen.getByText(en.previousPage)).toBeInTheDocument();
-    });
-
     it('initially displays header and navigation links in French after selecting the language', async () => {
       setup();
       await screen.findByText('user4');
@@ -161,6 +152,15 @@ describe('User List', () => {
       expect(screen.getByText(fr.users)).toBeInTheDocument();
       expect(screen.getByText(fr.nextPage)).toBeInTheDocument();
       expect(screen.getByText(fr.previousPage)).toBeInTheDocument();
+    });
+
+    it('initially displays header and navigation links in English', async () => {
+      setup();
+      await screen.findByText('user4');
+
+      expect(screen.getByText(en.users)).toBeInTheDocument();
+      expect(screen.getByText(en.nextPage)).toBeInTheDocument();
+      expect(screen.getByText(en.previousPage)).toBeInTheDocument();
     });
   });
 });
