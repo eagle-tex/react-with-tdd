@@ -132,6 +132,14 @@ describe('User List', () => {
 
       expect(firstUserOnFirstPage).toBeInTheDocument();
     });
+
+    it('displays spinner while the API call is in progress', async () => {
+      setup();
+      const spinner = screen.getByRole('status'); // throws error if not found
+      await screen.findByText('user1');
+
+      expect(spinner).not.toBeInTheDocument();
+    });
   });
 
   describe('Internationalization', () => {
