@@ -5,9 +5,11 @@ import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 
 const server = setupServer(
+  // endpoint for user activation with token
   rest.post('/api/1.0/users/token/:token', (_req, res, ctx) => {
     return res(ctx.status(200));
   }),
+  // endpoint for getting users list
   rest.get('/api/1.0/users', (_req, res, ctx) => {
     return res(
       ctx.status(200),
@@ -23,6 +25,18 @@ const server = setupServer(
         page: 0,
         size: 0,
         totalPages: 0
+      })
+    );
+  }),
+  // add endpoint for getting user by id
+  rest.get('/api/1.0/users/:id', (req, res, ctx) => {
+    const id = Number.parseInt(req.params.id);
+    return res(
+      ctx.json({
+        id: id,
+        username: `user${id}`,
+        email: `user${id}@mail.com`,
+        image: null
       })
     );
   })
