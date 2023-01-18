@@ -47,7 +47,7 @@ class UserList extends Component {
           })}
         </ul>
         <div className="card-footer">
-          {page !== 0 && (
+          {page !== 0 && !pendingApiCall && (
             <button
               className="btn btn-outline-secondary btn-sm"
               onClick={() => this.loadData(page - 1)}
@@ -55,7 +55,7 @@ class UserList extends Component {
               {t('previousPage')}
             </button>
           )}
-          {totalPages > page + 1 && (
+          {totalPages > page + 1 && !pendingApiCall && (
             <button
               className="btn btn-outline-secondary btn-sm"
               onClick={() => this.loadData(page + 1)}
