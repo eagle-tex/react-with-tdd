@@ -5,7 +5,7 @@ const ProfileCard = props => {
   const { user } = props;
 
   return (
-    <div className="card">
+    <div className="card text-center">
       <div className="card-header">
         <img
           src={defaultProfileImage}
