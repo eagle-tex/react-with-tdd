@@ -64,10 +64,10 @@ describe('Account Activation Page', () => {
 
   it('displays spinner during activation API call', async () => {
     setup('5678');
-    const spinner = screen.queryByRole('status');
-
-    expect(spinner).toBeInTheDocument();
-
+    // NOTE: replace queryByRole by getByRole
+    //   getByRole throws an error if element not found, which spares us
+    //   from expecting the element (spinner) to be in the document
+    const spinner = screen.getByRole('status');
     await screen.findByText('Activation failure');
 
     expect(spinner).not.toBeInTheDocument();
@@ -80,10 +80,10 @@ describe('Account Activation Page', () => {
 
     match.params.token = '5678';
     rerender(<AccountActivationPage match={match} />);
-    const spinner = screen.queryByRole('status');
-
-    expect(spinner).toBeInTheDocument();
-
+    // NOTE: replace queryByRole by getByRole
+    //   getByRole throws an error if element not found, which spares us
+    //   from expecting the element (spinner) to be in the document
+    const spinner = screen.getByRole('status');
     await screen.findByText('Activation failure');
 
     expect(spinner).not.toBeInTheDocument();
