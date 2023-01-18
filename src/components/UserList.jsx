@@ -46,10 +46,10 @@ class UserList extends Component {
             return <UserListItem key={user.id} user={user} />;
           })}
         </ul>
-        <div className="card-footer">
+        <div className="card-footer text-center">
           {page !== 0 && !pendingApiCall && (
             <button
-              className="btn btn-outline-secondary btn-sm"
+              className="btn btn-outline-secondary btn-sm float-start"
               onClick={() => this.loadData(page - 1)}
             >
               {t('previousPage')}
@@ -57,7 +57,7 @@ class UserList extends Component {
           )}
           {totalPages > page + 1 && !pendingApiCall && (
             <button
-              className="btn btn-outline-secondary btn-sm"
+              className="btn btn-outline-secondary btn-sm float-end"
               onClick={() => this.loadData(page + 1)}
             >
               {t('nextPage')}
