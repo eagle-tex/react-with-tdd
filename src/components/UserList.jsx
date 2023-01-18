@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { loadUsers } from '../api/apiCalls';
 import UserListItem from './UserListItem.jsx';
 import { withTranslation } from 'react-i18next';
+import Spinner from './Spinner.jsx';
 
 class UserList extends Component {
   state = {
@@ -11,7 +12,8 @@ class UserList extends Component {
       page: 0,
       size: 0,
       totalPages: 0
-    }
+    },
+    pendingApiCall: false
   };
 
   componentDidMount() {
@@ -19,15 +21,18 @@ class UserList extends Component {
   }
 
   loadData = async pageIndex => {
+    this.setState({ pendingApiCall: true });
     try {
       const response = await loadUsers(pageIndex);
       this.setState({ page: response.data });
     } catch (error) {
       // empty for now
     }
+    this.setState({ pendingApiCall: false });
   };
 
   render() {
+    const { pendingApiCall } = this.state;
     const { totalPages, page, content } = this.state.page;
     const { t } = this.props;
 
@@ -58,6 +63,7 @@ class UserList extends Component {
               {t('nextPage')}
             </button>
           )}
+          {pendingApiCall && <Spinner />}
         </div>
       </div>
     );
