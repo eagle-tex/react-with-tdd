@@ -8,7 +8,8 @@ import Alert from '../components/Alert.jsx';
 class UserPage extends Component {
   state = {
     user: {},
-    pendingApiCall: false
+    pendingApiCall: false,
+    failResponse: undefined
   };
 
   async componentDidMount() {
@@ -18,25 +19,34 @@ class UserPage extends Component {
       const response = await getUserById(this.props.match.params.id);
       this.setState({ user: response.data });
     } catch (error) {
-      // empty
+      this.setState({ failResponse: error.response.data.message });
     }
 
     this.setState({ pendingApiCall: false });
   }
 
   render() {
-    const { user, pendingApiCall } = this.state;
+    const { user, pendingApiCall, failResponse } = this.state;
 
-    return (
-      <div data-testid="user-page">
-        {!pendingApiCall && <ProfileCard user={user} />}
-        {pendingApiCall && (
-          <Alert type="secondary" center>
-            <Spinner size="big" />
-          </Alert>
-        )}
-      </div>
+    let content = (
+      <Alert type="secondary" center>
+        <Spinner size="big" />
+      </Alert>
     );
+
+    if (!pendingApiCall) {
+      if (failResponse) {
+        content = (
+          <Alert type="danger" center>
+            {failResponse}
+          </Alert>
+        );
+      } else {
+        content = <ProfileCard user={user} />;
+      }
+    }
+
+    return <div data-testid="user-page">{content}</div>;
   }
 }
 
