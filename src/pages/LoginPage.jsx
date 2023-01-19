@@ -1,5 +1,5 @@
 import Input from '../components/Input';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { login } from '../api/apiCalls';
 import Spinner from '../components/Spinner';
 import Alert from '../components/Alert';
@@ -9,6 +9,10 @@ const LoginPage = () => {
   const [password, setPassword] = useState();
   const [apiProgress, setApiProgress] = useState(false);
   const [failMessage, setFailMessage] = useState();
+
+  useEffect(() => {
+    setFailMessage();
+  }, [email]);
 
   const submit = async event => {
     event.preventDefault();
@@ -38,10 +42,7 @@ const LoginPage = () => {
           <Input
             id="email"
             label="E-mail"
-            onChange={event => {
-              setEmail(event.target.value);
-              setFailMessage();
-            }}
+            onChange={event => setEmail(event.target.value)}
           />
           {/* password input */}
           <Input
