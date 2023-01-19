@@ -7,5 +7,6 @@
   "passwordMismatchValidation": "Les mots de passe ne correspondent pas",
   "users": "Utilisateurs",
   "nextPage": "suivant >",
-  "previousPage": "< précédent"
+  "previousPage": "< précédent",
+  "login": "Connexion"
 }
