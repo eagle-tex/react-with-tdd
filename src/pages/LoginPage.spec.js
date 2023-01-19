@@ -143,5 +143,15 @@ describe('Login Page', () => {
 
       expect(errorMessage).not.toBeInTheDocument();
     });
+
+    it('clears authentication fail message when password field is changed', async () => {
+      setup();
+
+      userEvent.click(button);
+      const errorMessage = await screen.findByText('Incorrect credentials');
+      userEvent.type(passwordInput, 'newP4ss');
+
+      expect(errorMessage).not.toBeInTheDocument();
+    });
   });
 });
