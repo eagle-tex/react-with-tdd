@@ -198,5 +198,21 @@ describe('Login Page', () => {
       expect(screen.getByLabelText(fr.email)).toBeInTheDocument();
       expect(screen.getByLabelText(fr.password)).toBeInTheDocument();
     });
+
+    it('displays all text in English after changing back from French', () => {
+      setup();
+
+      userEvent.click(frenchToggle);
+      userEvent.click(englishToggle);
+
+      expect(
+        screen.getByRole('heading', { name: en.login })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: en.login })
+      ).toBeInTheDocument();
+      expect(screen.getByLabelText(en.email)).toBeInTheDocument();
+      expect(screen.getByLabelText(en.password)).toBeInTheDocument();
+    });
   });
 });
