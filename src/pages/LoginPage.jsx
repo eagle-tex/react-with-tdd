@@ -12,7 +12,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     setFailMessage();
-  }, [email]);
+  }, [email, password]);
 
   const submit = async event => {
     event.preventDefault();
