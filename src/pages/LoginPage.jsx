@@ -38,7 +38,10 @@ const LoginPage = () => {
           <Input
             id="email"
             label="E-mail"
-            onChange={event => setEmail(event.target.value)}
+            onChange={event => {
+              setEmail(event.target.value);
+              setFailMessage();
+            }}
           />
           {/* password input */}
           <Input
