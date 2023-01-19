@@ -8,8 +8,10 @@ import userEvent from '@testing-library/user-event';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 
+let requestBody; // undefined
 const server = setupServer(
   rest.post('/api/1.0/auth', (req, res, ctx) => {
+    requestBody = req.body;
     return res(ctx.status(401));
   })
 );
@@ -94,6 +96,19 @@ describe('Login Page', () => {
       const spinner = screen.getByRole('status');
 
       await waitForElementToBeRemoved(spinner);
+    });
+
+    it('sends email and password to backend after clicking the button', async () => {
+      setup();
+
+      userEvent.click(button);
+      const spinner = screen.getByRole('status');
+      await waitForElementToBeRemoved(spinner);
+
+      expect(requestBody).toEqual({
+        email: 'user100@mail.com',
+        password: 'P4ssword'
+      });
     });
   });
 });
