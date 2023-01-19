@@ -48,7 +48,7 @@ const LoginPage = () => {
           <div className="text-center">
             <button
               className="btn btn-primary"
-              disabled={disabled}
+              disabled={disabled || apiProgress}
               onClick={submit}
             >
               {apiProgress && <Spinner />}
