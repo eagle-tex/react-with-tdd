@@ -12,7 +12,7 @@ const LoginPage = () => {
     event.preventDefault();
     setApiProgress(true);
     try {
-      await login();
+      await login({ email, password });
     } catch (error) {
       //
     }
