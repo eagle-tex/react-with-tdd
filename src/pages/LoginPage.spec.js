@@ -1,6 +1,26 @@
-import { render, screen } from '@testing-library/react';
+import {
+  render,
+  screen,
+  waitForElementToBeRemoved
+} from '@testing-library/react';
 import LoginPage from './LoginPage';
 import userEvent from '@testing-library/user-event';
+import { setupServer } from 'msw/node';
+import { rest } from 'msw';
+
+const server = setupServer(
+  rest.post('/api/1.0/auth', (req, res, ctx) => {
+    return res(ctx.status(401));
+  })
+);
+
+beforeAll(() => server.listen());
+
+beforeEach(() => {
+  server.resetHandlers();
+});
+
+afterAll(() => server.close());
 
 describe('Login Page', () => {
   describe('Layout', () => {
@@ -48,17 +68,32 @@ describe('Login Page', () => {
   });
 
   describe('Interactions', () => {
-    it('enables the button when email and password inputs are filled', () => {
+    let button; // undefined
+
+    const setup = () => {
       render(<LoginPage />);
       const emailInput = screen.getByLabelText('E-mail');
       const passwordInput = screen.getByLabelText('Password');
+      button = screen.queryByRole('button', { name: 'Login' });
 
       userEvent.type(emailInput, 'user100@mail.com');
       userEvent.type(passwordInput, 'P4ssword');
+    };
 
-      const button = screen.queryByRole('button', { name: 'Login' });
+    it('enables the button when email and password inputs are filled', () => {
+      setup();
 
       expect(button).toBeEnabled();
+    });
+
+    it('displays spinner during API call', async () => {
+      setup();
+      expect(screen.queryByRole('status')).not.toBeInTheDocument();
+
+      userEvent.click(button);
+      const spinner = screen.getByRole('status');
+
+      await waitForElementToBeRemoved(spinner);
     });
   });
 });
