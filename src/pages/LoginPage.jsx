@@ -1,6 +1,12 @@
 import Input from '../components/Input';
+import { useState } from 'react';
 
 const LoginPage = () => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  const disabled = !(email && password);
+
   return (
     <div
       className="col-lg-6 offset-lg-3 col-md-8 offset-md-2"
@@ -12,11 +18,20 @@ const LoginPage = () => {
         </div>
         <div className="card-body">
           {/* email input */}
-          <Input id="email" label="E-mail" />
+          <Input
+            id="email"
+            label="E-mail"
+            onChange={event => setEmail(event.target.value)}
+          />
           {/* password input */}
-          <Input id="password" label="Password" type="password" />
+          <Input
+            id="password"
+            label="Password"
+            type="password"
+            onChange={event => setPassword(event.target.value)}
+          />
           <div className="text-center">
-            <button className="btn btn-primary" disabled>
+            <button className="btn btn-primary" disabled={disabled}>
               Login
             </button>
           </div>
