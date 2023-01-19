@@ -17,14 +17,23 @@ describe('User Page', () => {
   beforeEach(() => {
     server.use(
       rest.get('/api/1.0/users/:id', (req, res, ctx) => {
-        return res(
-          ctx.json({
-            id: 1,
-            username: 'user1',
-            email: 'user1@mail.com',
-            image: null
-          })
-        );
+        if (req.params.id === '1') {
+          return res(
+            ctx.json({
+              id: 1,
+              username: 'user1',
+              email: 'user1@mail.com',
+              image: null
+            })
+          );
+        } else {
+          return res(
+            ctx.status(404),
+            ctx.json({
+              message: 'User not found'
+            })
+          );
+        }
       })
     );
   });
@@ -46,5 +55,14 @@ describe('User Page', () => {
     await screen.findByText('user1');
 
     expect(spinner).not.toBeInTheDocument();
+  });
+
+  it('displays error message received from backend when the user is not found', async () => {
+    const match = { params: { id: 100 } };
+    render(<UserPage match={match} />);
+
+    await waitFor(() => {
+      expect(screen.queryByText('User not found')).toBeInTheDocument();
+    });
   });
 });
