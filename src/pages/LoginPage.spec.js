@@ -7,6 +7,9 @@ import LoginPage from './LoginPage';
 import userEvent from '@testing-library/user-event';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
+import LanguageSelector from '../components/LanguageSelector';
+import en from '../locale/en.json';
+import fr from '../locale/fr.json';
 
 let requestBody; // undefined
 let count = 0;
@@ -152,6 +155,33 @@ describe('Login Page', () => {
       userEvent.type(passwordInput, 'newP4ss');
 
       expect(errorMessage).not.toBeInTheDocument();
+    });
+  });
+
+  describe('Internationalization', () => {
+    let frenchToggle, englishToggle; // all undefined
+    const setup = () => {
+      render(
+        <>
+          <LoginPage />
+          <LanguageSelector />
+        </>
+      );
+      frenchToggle = screen.getByTitle('French');
+      englishToggle = screen.getByTitle('English');
+    };
+
+    it('initially displays all text in English', () => {
+      setup();
+
+      expect(
+        screen.getByRole('heading', { name: en.login })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: en.login })
+      ).toBeInTheDocument();
+      expect(screen.getByLabelText(en.email)).toBeInTheDocument();
+      expect(screen.getByLabelText(en.password)).toBeInTheDocument();
     });
   });
 });
