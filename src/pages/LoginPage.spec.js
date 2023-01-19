@@ -73,12 +73,12 @@ describe('Login Page', () => {
   });
 
   describe('Interactions', () => {
-    let button; // undefined
+    let button, emailInput, passwordInput; // undefined
 
     const setup = () => {
       render(<LoginPage />);
-      const emailInput = screen.getByLabelText('E-mail');
-      const passwordInput = screen.getByLabelText('Password');
+      emailInput = screen.getByLabelText('E-mail');
+      passwordInput = screen.getByLabelText('Password');
       button = screen.queryByRole('button', { name: 'Login' });
 
       userEvent.type(emailInput, 'user100@mail.com');
@@ -132,6 +132,16 @@ describe('Login Page', () => {
       const errorMessage = await screen.findByText('Incorrect credentials');
 
       expect(errorMessage).toBeInTheDocument();
+    });
+
+    it('clears authentication fail message when email field is changed', async () => {
+      setup();
+
+      userEvent.click(button);
+      const errorMessage = await screen.findByText('Incorrect credentials');
+      userEvent.type(emailInput, 'new@mail.com');
+
+      expect(errorMessage).not.toBeInTheDocument();
     });
   });
 });
