@@ -9,9 +9,11 @@ import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 
 let requestBody; // undefined
+let count = 0;
 const server = setupServer(
   rest.post('/api/1.0/auth', (req, res, ctx) => {
     requestBody = req.body;
+    count += 1;
     return res(ctx.status(401));
   })
 );
@@ -19,6 +21,7 @@ const server = setupServer(
 beforeAll(() => server.listen());
 
 beforeEach(() => {
+  count = 0;
   server.resetHandlers();
 });
 
@@ -109,6 +112,17 @@ describe('Login Page', () => {
         email: 'user100@mail.com',
         password: 'P4ssword'
       });
+    });
+
+    it('disables the button when there is an API call', async () => {
+      setup();
+
+      userEvent.click(button);
+      userEvent.click(button);
+      const spinner = screen.getByRole('status');
+      await waitForElementToBeRemoved(spinner);
+
+      expect(count).toBe(1);
     });
   });
 });
