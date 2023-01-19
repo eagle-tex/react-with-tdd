@@ -183,5 +183,20 @@ describe('Login Page', () => {
       expect(screen.getByLabelText(en.email)).toBeInTheDocument();
       expect(screen.getByLabelText(en.password)).toBeInTheDocument();
     });
+
+    it('displays all text in French after changing the language', () => {
+      setup();
+
+      userEvent.click(frenchToggle);
+
+      expect(
+        screen.getByRole('heading', { name: fr.login })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: fr.login })
+      ).toBeInTheDocument();
+      expect(screen.getByLabelText(fr.email)).toBeInTheDocument();
+      expect(screen.getByLabelText(fr.password)).toBeInTheDocument();
+    });
   });
 });
