@@ -14,7 +14,7 @@ const server = setupServer(
   rest.post('/api/1.0/auth', (req, res, ctx) => {
     requestBody = req.body;
     count += 1;
-    return res(ctx.status(401));
+    return res(ctx.status(401), ctx.json({ message: 'Incorrect credentials' }));
   })
 );
 
@@ -123,6 +123,15 @@ describe('Login Page', () => {
       await waitForElementToBeRemoved(spinner);
 
       expect(count).toBe(1);
+    });
+
+    it('displays authentication failure message', async () => {
+      setup();
+
+      userEvent.click(button);
+      const errorMessage = await screen.findByText('Incorrect credentials');
+
+      expect(errorMessage).toBeInTheDocument();
     });
   });
 });
