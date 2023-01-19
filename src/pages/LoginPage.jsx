@@ -1,9 +1,24 @@
 import Input from '../components/Input';
 import { useState } from 'react';
+import { login } from '../api/apiCalls';
+import Spinner from '../components/Spinner';
 
 const LoginPage = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [apiProgress, setApiProgress] = useState(false);
+
+  const submit = async event => {
+    event.preventDefault();
+    setApiProgress(true);
+    try {
+      await login();
+    } catch (error) {
+      //
+    }
+
+    setApiProgress(false);
+  };
 
   const disabled = !(email && password);
 
@@ -31,7 +46,12 @@ const LoginPage = () => {
             onChange={event => setPassword(event.target.value)}
           />
           <div className="text-center">
-            <button className="btn btn-primary" disabled={disabled}>
+            <button
+              className="btn btn-primary"
+              disabled={disabled}
+              onClick={submit}
+            >
+              {apiProgress && <Spinner />}
               Login
             </button>
           </div>
