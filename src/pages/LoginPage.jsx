@@ -24,6 +24,7 @@ const LoginPage = props => {
     try {
       await login({ email, password });
       props.history.push('/');
+      props.onLoginSuccess();
     } catch (error) {
       setFailMessage(error.response.data.message);
     }
@@ -73,7 +74,8 @@ const LoginPage = props => {
 };
 
 LoginPage.propTypes = {
-  history: PropTypes.object
+  history: PropTypes.object,
+  onLoginSuccess: PropTypes.func
 };
 
 export default LoginPage;
