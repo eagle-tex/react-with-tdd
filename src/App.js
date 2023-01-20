@@ -32,6 +32,9 @@ function App() {
                 </Link>
               </>
             )}
+            <Link className="nav-link" to="/login" title="Login">
+              My Profile
+            </Link>
           </ul>
         </div>
       </nav>
