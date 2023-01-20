@@ -169,6 +169,17 @@ describe('Login', () => {
 
     expect(page).toBeInTheDocument();
   });
+
+  it('hides Login and Sign Up from navbar after successful login', async () => {
+    setupLoggedIn();
+
+    await screen.fingByTestId('home-page');
+    const loginLink = screen.queryByRole('link', { name: 'Login' });
+    const signUpLink = screen.queryByRole('link', { name: 'Sign Up' });
+
+    expect(loginLink).not.toBeInTheDocument();
+    expect(signUpLink).not.toBeInTheDocument();
+  });
 });
 
 // console.error = () => {};
