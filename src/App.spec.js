@@ -39,6 +39,9 @@ const server = setupServer(
         image: null
       })
     );
+  }),
+  rest.post('/api/1.0/auth', (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json({ username: 'user5' }));
   })
 );
 
@@ -50,12 +53,12 @@ beforeEach(() => {
 
 afterAll(() => server.close());
 
-describe('Routing', () => {
-  const setup = path => {
-    window.history.pushState({}, '', path);
-    render(<App />);
-  };
+const setup = path => {
+  window.history.pushState({}, '', path);
+  render(<App />);
+};
 
+describe('Routing', () => {
   it.each`
     path               | pageTestId           | page
     ${'/'}             | ${'home-page'}       | ${'HomePage'}
@@ -147,6 +150,19 @@ describe('Routing', () => {
     userEvent.click(user);
     // any type of query would be OK/possible here: queryByTestId or getByTestId
     const page = await screen.findByTestId('user-page');
+
+    expect(page).toBeInTheDocument();
+  });
+});
+
+describe('Login', () => {
+  it('redirects to homepage after successful login', async () => {
+    setup('/login');
+
+    userEvent.type(screen.getByLabelText('E-mail'), 'user5@mail.com');
+    userEvent.type(screen.getByLabelText('Password'), 'P4ssword');
+    userEvent.click(screen.getByRole('button'), { name: 'Login' });
+    const page = await screen.findByText('user-page');
 
     expect(page).toBeInTheDocument();
   });
