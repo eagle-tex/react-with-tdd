@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { login } from '../api/apiCalls';
 import Spinner from '../components/Spinner';
 import Alert from '../components/Alert';
+import ButtonWithProgress from '../components/ButtonWithProgress';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
@@ -58,14 +59,13 @@ const LoginPage = props => {
           />
           {failMessage && <Alert type="danger">{failMessage}</Alert>}
           <div className="text-center">
-            <button
-              className="btn btn-primary"
-              disabled={disabled || apiProgress}
+            <ButtonWithProgress
+              disabled={disabled}
+              apiProgress={apiProgress}
               onClick={submit}
             >
-              {apiProgress && <Spinner />}
               {t('login')}
-            </button>
+            </ButtonWithProgress>
           </div>
         </div>
       </form>
