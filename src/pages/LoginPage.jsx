@@ -1,7 +1,6 @@
 import Input from '../components/Input';
 import { useState, useEffect } from 'react';
 import { login } from '../api/apiCalls';
-import Spinner from '../components/Spinner';
 import Alert from '../components/Alert';
 import ButtonWithProgress from '../components/ButtonWithProgress';
 import { useTranslation } from 'react-i18next';
