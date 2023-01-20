@@ -11,12 +11,13 @@ import LanguageSelector from '../components/LanguageSelector';
 import en from '../locale/en.json';
 import fr from '../locale/fr.json';
 
-let requestBody; // undefined
+let requestBody, acceptLanguageHeader; // undefined
 let count = 0;
 const server = setupServer(
   rest.post('/api/1.0/auth', (req, res, ctx) => {
     requestBody = req.body;
     count += 1;
+    acceptLanguageHeader = req.headers.get('Accept-Language');
     return res(ctx.status(401), ctx.json({ message: 'Incorrect credentials' }));
   })
 );
@@ -213,6 +214,21 @@ describe('Login Page', () => {
       ).toBeInTheDocument();
       expect(screen.getByLabelText(en.email)).toBeInTheDocument();
       expect(screen.getByLabelText(en.password)).toBeInTheDocument();
+    });
+
+    it('sets Accept-Language header to en for outgoing request', async () => {
+      setup();
+      const emailInput = screen.getByLabelText('E-mail');
+      const passwordInput = screen.getByLabelText('Password');
+      const button = screen.queryByRole('button', { name: 'Login' });
+
+      userEvent.type(emailInput, 'user100@mail.com');
+      userEvent.type(passwordInput, 'P4ssword');
+      userEvent.click(button);
+      const spinner = screen.getByRole('status');
+      await waitForElementToBeRemoved(spinner);
+
+      expect(acceptLanguageHeader).toBe('en');
     });
   });
 });
