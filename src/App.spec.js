@@ -162,7 +162,7 @@ describe('Login', () => {
     userEvent.type(screen.getByLabelText('E-mail'), 'user5@mail.com');
     userEvent.type(screen.getByLabelText('Password'), 'P4ssword');
     userEvent.click(screen.getByRole('button'), { name: 'Login' });
-    const page = await screen.findByText('user-page');
+    const page = await screen.findByTestId('home-page');
 
     expect(page).toBeInTheDocument();
   });
