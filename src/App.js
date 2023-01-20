@@ -38,11 +38,17 @@ function App() {
       <div className="container pt-3">
         <Route exact path="/" component={HomePage} />
         <Route path="/signup" component={SignUpPage} />
-        {/* <Route path="/login" component={LoginPage} /> */}
-        {/* The following solution is WRONG */}
-        <Route path="/login">
-          <LoginPage onLoginSuccess={() => setLoggedIn(true)} />
-        </Route>
+        <Route
+          path="/login"
+          render={reactRouterProps => {
+            return (
+              <LoginPage
+                {...reactRouterProps}
+                onLoginSuccess={() => setLoggedIn(true)}
+              />
+            );
+          }}
+        />
         <Route path="/user/:id" component={UserPage} />
         <Route path="/activate/:token" component={AccountActivationPage} />
         <LanguageSelector />
