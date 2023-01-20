@@ -180,6 +180,15 @@ describe('Login', () => {
     expect(loginLink).not.toBeInTheDocument();
     expect(signUpLink).not.toBeInTheDocument();
   });
+
+  it('displays My Profile link on navbar after successful login', async () => {
+    setupLoggedIn();
+
+    await screen.findByTestId('home-page');
+    const myProfileLink = screen.queryByRole('link', { name: 'My Profile' });
+
+    expect(myProfileLink).toBeInTheDocument();
+  });
 });
 
 // console.error = () => {};
