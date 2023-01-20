@@ -173,7 +173,7 @@ describe('Login', () => {
   it('hides Login and Sign Up from navbar after successful login', async () => {
     setupLoggedIn();
 
-    await screen.fingByTestId('home-page');
+    await screen.findByTestId('home-page');
     const loginLink = screen.queryByRole('link', { name: 'Login' });
     const signUpLink = screen.queryByRole('link', { name: 'Sign Up' });
 
