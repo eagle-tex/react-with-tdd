@@ -40,8 +40,8 @@ const server = setupServer(
       })
     );
   }),
-  rest.post('/api/1.0/auth', (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json({ username: 'user5' }));
+  rest.post('/api/1.0/auth', (_req, res, ctx) => {
+    return res(ctx.status(200), ctx.json({ id: 5, username: 'user5' }));
   })
 );
 
@@ -198,6 +198,19 @@ describe('Login', () => {
     });
 
     expect(myProfileLinkAfterLogin).toBeInTheDocument();
+  });
+
+  it('displays user page with logged in user id in url after clicking My Profile link', async () => {
+    setupLoggedIn();
+    await screen.findByTestId('home-page');
+    const myProfile = screen.queryByRole('link', {
+      name: 'My Profile'
+    });
+    userEvent.click(myProfile);
+    await screen.findByTestId('user-page');
+    const username = await screen.findByText('user5');
+
+    expect(username).toBeInTheDocument();
   });
 });
 
