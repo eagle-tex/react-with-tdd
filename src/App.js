@@ -10,7 +10,10 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { useState } from 'react';
 
 function App() {
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [auth, setAuth] = useState({
+    isLoggedIn: false,
+    id: ''
+  });
   const { t } = useTranslation();
 
   return (
@@ -22,7 +25,7 @@ function App() {
             Hoaxify
           </Link>
           <ul className="navbar-nav">
-            {!isLoggedIn && (
+            {!auth.isLoggedIn && (
               <>
                 <Link className="nav-link" to="/signup" title={t('signUp')}>
                   {t('signUp')}
@@ -32,8 +35,12 @@ function App() {
                 </Link>
               </>
             )}
-            {isLoggedIn && (
-              <Link className="nav-link" to="/login" title="Login">
+            {auth.isLoggedIn && (
+              <Link
+                className="nav-link"
+                to={`/user/${auth.id}`}
+                title="My Profile"
+              >
                 My Profile
               </Link>
             )}
@@ -46,12 +53,7 @@ function App() {
         <Route
           path="/login"
           render={reactRouterProps => {
-            return (
-              <LoginPage
-                {...reactRouterProps}
-                onLoginSuccess={() => setLoggedIn(true)}
-              />
-            );
+            return <LoginPage {...reactRouterProps} onLoginSuccess={setAuth} />;
           }}
         />
         <Route path="/user/:id" component={UserPage} />
