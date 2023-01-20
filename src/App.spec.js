@@ -182,12 +182,22 @@ describe('Login', () => {
   });
 
   it('displays My Profile link on navbar after successful login', async () => {
-    setupLoggedIn();
+    setup('/login');
+    const myProfileLinkBeforeLogin = screen.queryByRole('link', {
+      name: 'My Profile'
+    });
+    expect(myProfileLinkBeforeLogin).not.toBeInTheDocument();
+
+    userEvent.type(screen.getByLabelText('E-mail'), 'user5@mail.com');
+    userEvent.type(screen.getByLabelText('Password'), 'P4ssword');
+    userEvent.click(screen.getByRole('button'), { name: 'Login' });
 
     await screen.findByTestId('home-page');
-    const myProfileLink = screen.queryByRole('link', { name: 'My Profile' });
+    const myProfileLinkAfterLogin = screen.queryByRole('link', {
+      name: 'My Profile'
+    });
 
-    expect(myProfileLink).toBeInTheDocument();
+    expect(myProfileLinkAfterLogin).toBeInTheDocument();
   });
 });
 
