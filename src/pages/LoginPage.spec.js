@@ -230,5 +230,21 @@ describe('Login Page', () => {
 
       expect(acceptLanguageHeader).toBe('en');
     });
+
+    it('sets Accept-Language header to fr for outgoing request', async () => {
+      setup();
+      const emailInput = screen.getByLabelText('E-mail');
+      const passwordInput = screen.getByLabelText('Password');
+      const button = screen.queryByRole('button', { name: 'Login' });
+
+      userEvent.type(emailInput, 'user100@mail.com');
+      userEvent.type(passwordInput, 'P4ssword');
+      userEvent.click(frenchToggle);
+      userEvent.click(button);
+      const spinner = screen.getByRole('status');
+      await waitForElementToBeRemoved(spinner);
+
+      expect(acceptLanguageHeader).toBe('fr');
+    });
   });
 });
