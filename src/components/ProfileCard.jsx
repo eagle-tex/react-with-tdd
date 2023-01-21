@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
+import { useContext } from 'react';
 import defaultProfileImage from '../assets/profile.png';
+import { AuthContext } from '../App';
 
 const ProfileCard = props => {
-  const { user, auth } = props;
+  const { user } = props;
+  const auth = useContext(AuthContext);
 
   return (
     <div className="card text-center">
