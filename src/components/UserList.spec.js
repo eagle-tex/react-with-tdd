@@ -1,12 +1,10 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '../test/setup';
 import UserList from './UserList.jsx';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 import userEvent from '@testing-library/user-event';
-import { BrowserRouter as Router } from 'react-router-dom';
 import en from '../locale/en.json';
 import fr from '../locale/fr.json';
-import LanguageSelector from './LanguageSelector.jsx';
 
 const users = [
   { id: 1, username: 'user1', email: 'user1@mail.com', image: null },
@@ -55,12 +53,7 @@ beforeEach(() => {
 afterAll(() => server.close());
 
 const setup = () => {
-  render(
-    <Router>
-      <UserList />
-      <LanguageSelector />
-    </Router>
-  );
+  render(<UserList />);
 };
 
 describe('User List', () => {
