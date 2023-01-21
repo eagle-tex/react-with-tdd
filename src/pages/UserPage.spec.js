@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '../test/setup';
 import UserPage from './UserPage.jsx';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
@@ -43,7 +43,7 @@ describe('User Page', () => {
     render(<UserPage match={match} />);
 
     await waitFor(() => {
-      expect(screen.queryByText('user1')).toBeInTheDocument();
+      expect(screen.getByText('user1')).toBeInTheDocument();
     });
   });
 
@@ -62,7 +62,7 @@ describe('User Page', () => {
     render(<UserPage match={match} />);
 
     await waitFor(() => {
-      expect(screen.queryByText('User not found')).toBeInTheDocument();
+      expect(screen.getByText('User not found')).toBeInTheDocument();
     });
   });
 });
