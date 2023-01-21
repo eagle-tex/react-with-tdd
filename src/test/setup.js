@@ -4,11 +4,15 @@ import { render } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AuthContextWrapper from '../state/AuthContextWrapper';
+import LanguageSelector from '../components/LanguageSelector';
 
 const RootWrapper = ({ children }) => {
   return (
     <Router theme="light">
-      <AuthContextWrapper>{children}</AuthContextWrapper>
+      <AuthContextWrapper>
+        {children}
+        <LanguageSelector />
+      </AuthContextWrapper>
     </Router>
   );
 };
