@@ -57,7 +57,7 @@
         "allow": ["resolve", "reject", "done", "next", "err", "error"]
       }
     ],
-    "no-undefined": 2,
+    // "no-undefined": 2,
     "no-unused-vars": [
       "warn",
       {
