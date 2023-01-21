@@ -23,7 +23,7 @@ function AuthContextWrapper(props) {
 }
 
 AuthContextWrapper.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.node
 };
 
 export default AuthContextWrapper;
