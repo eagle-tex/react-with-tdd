@@ -3,6 +3,7 @@ import App from './App';
 import userEvent from '@testing-library/user-event';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
+import AuthContextWrapper from './state/AuthContextWrapper';
 
 const server = setupServer(
   // endpoint for user activation with token
@@ -55,7 +56,11 @@ afterAll(() => server.close());
 
 const setup = path => {
   window.history.pushState({}, '', path);
-  render(<App />);
+  render(
+    <AuthContextWrapper>
+      <App />
+    </AuthContextWrapper>
+  );
 };
 
 describe('Routing', () => {
