@@ -11,16 +11,17 @@ import { useState, createContext } from 'react';
 export const AuthContext = createContext();
 
 function App() {
-  // const [auth, setAuth] = useState({
-  //   isLoggedIn: false,
-  //   id: ''
-  // });
+  const [auth, setAuth] = useState({
+    isLoggedIn: false,
+    id: ''
+  });
 
   return (
     <AuthContext.Provider
       value={{
-        isLoggedIn: true,
-        id: 7
+        isLoggedIn: auth.isLoggedIn,
+        id: auth.id,
+        onLoginSuccess: setAuth
       }}
     >
       <Router>
