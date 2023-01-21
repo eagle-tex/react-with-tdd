@@ -4,13 +4,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './locale/i18n';
 import AuthContextWrapper from './state/AuthContextWrapper';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AuthContextWrapper>
-      <App />
-    </AuthContextWrapper>
+    <Router>
+      <AuthContextWrapper>
+        <App />
+      </AuthContextWrapper>
+    </Router>
   </React.StrictMode>
 );
 
