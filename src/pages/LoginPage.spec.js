@@ -1,13 +1,8 @@
-import {
-  render,
-  screen,
-  waitForElementToBeRemoved
-} from '@testing-library/react';
+import { render, screen, waitForElementToBeRemoved } from '../test/setup';
 import LoginPage from './LoginPage';
 import userEvent from '@testing-library/user-event';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
-import LanguageSelector from '../components/LanguageSelector';
 import en from '../locale/en.json';
 import fr from '../locale/fr.json';
 
@@ -162,12 +157,7 @@ describe('Login Page', () => {
   describe('Internationalization', () => {
     let frenchToggle, englishToggle; // all undefined
     const setup = () => {
-      render(
-        <>
-          <LoginPage />
-          <LanguageSelector />
-        </>
-      );
+      render(<LoginPage />);
       frenchToggle = screen.getByTitle('French');
       englishToggle = screen.getByTitle('English');
     };
