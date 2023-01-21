@@ -3,6 +3,7 @@ import App from './App';
 import userEvent from '@testing-library/user-event';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
+import { BrowserRouter as Router } from 'react-router-dom';
 import AuthContextWrapper from './state/AuthContextWrapper';
 
 const server = setupServer(
@@ -57,9 +58,11 @@ afterAll(() => server.close());
 const setup = path => {
   window.history.pushState({}, '', path);
   render(
-    <AuthContextWrapper>
-      <App />
-    </AuthContextWrapper>
+    <Router>
+      <AuthContextWrapper>
+        <App />
+      </AuthContextWrapper>
+    </Router>
   );
 };
 
