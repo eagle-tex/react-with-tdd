@@ -1,10 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from './test/setup';
 import App from './App';
 import userEvent from '@testing-library/user-event';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
-import { BrowserRouter as Router } from 'react-router-dom';
-import AuthContextWrapper from './state/AuthContextWrapper';
 
 const server = setupServer(
   // endpoint for user activation with token
@@ -57,13 +55,7 @@ afterAll(() => server.close());
 
 const setup = path => {
   window.history.pushState({}, '', path);
-  render(
-    <Router>
-      <AuthContextWrapper>
-        <App />
-      </AuthContextWrapper>
-    </Router>
-  );
+  render(<App />);
 };
 
 describe('Routing', () => {
