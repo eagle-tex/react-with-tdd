@@ -5,11 +5,11 @@ import UserPage from './pages/UserPage.jsx';
 import AccountActivationPage from './pages/AccountActivationPage.jsx';
 import LanguageSelector from './components/LanguageSelector.jsx';
 import NavBar from './components/NavBar';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 function App() {
   return (
-    <Router>
+    <>
       <NavBar />
       <div className="container pt-3">
         <Route exact path="/" component={HomePage} />
@@ -19,7 +19,7 @@ function App() {
         <Route path="/activate/:token" component={AccountActivationPage} />
         <LanguageSelector />
       </div>
-    </Router>
+    </>
   );
 }
 
