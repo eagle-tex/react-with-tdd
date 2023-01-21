@@ -42,7 +42,7 @@ class UserPage extends Component {
           </Alert>
         );
       } else {
-        content = <ProfileCard user={user} />;
+        content = <ProfileCard user={user} auth={this.props.auth} />;
       }
     }
 
@@ -51,7 +51,8 @@ class UserPage extends Component {
 }
 
 UserPage.propTypes = {
-  match: PropTypes.object
+  match: PropTypes.object,
+  auth: PropTypes.object
 };
 
 export default UserPage;
