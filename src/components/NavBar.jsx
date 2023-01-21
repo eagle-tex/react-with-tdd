@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import logo from '../assets/hoaxify.png';
-import { AuthContext } from '../App';
+import { AuthContext } from '../state/AuthContextWrapper';
 import { useContext } from 'react';
 
 const NavBar = () => {
