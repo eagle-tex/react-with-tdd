@@ -4,11 +4,8 @@ import { getUserById } from '../api/apiCalls';
 import ProfileCard from '../components/ProfileCard.jsx';
 import Spinner from '../components/Spinner.jsx';
 import Alert from '../components/Alert.jsx';
-import { AuthContext } from '../App';
 
 class UserPage extends Component {
-  static contextType = AuthContext;
-
   state = {
     user: {},
     pendingApiCall: false,
@@ -49,12 +46,7 @@ class UserPage extends Component {
       }
     }
 
-    return (
-      <div data-testid="user-page">
-        {JSON.stringify(this.context)}
-        {content}
-      </div>
-    );
+    return <div data-testid="user-page">{content}</div>;
   }
 }
 
