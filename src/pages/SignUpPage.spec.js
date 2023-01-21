@@ -4,7 +4,7 @@ import {
   screen,
   waitFor,
   waitForElementToBeRemoved
-} from '@testing-library/react';
+} from '../test/setup';
 import userEvent from '@testing-library/user-event';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
@@ -262,12 +262,7 @@ describe('Sign Up Page', () => {
   describe('Internationalization', () => {
     let frenchToggle, englishToggle, passwordInput, passwordRepeatInput; // all undefined
     const setup = () => {
-      render(
-        <>
-          <SignUpPage />
-          <LanguageSelector />
-        </>
-      );
+      render(<SignUpPage />);
       frenchToggle = screen.getByTitle('French');
       englishToggle = screen.getByTitle('English');
       passwordInput = screen.getByLabelText('Password');
