@@ -8,6 +8,8 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
+    "plugin:testing-library/react",
+    // "plugin:jest/all",
     "plugin:prettier/recommended"
     // "prettier"
   ],
@@ -19,7 +21,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "prettier"],
+  "plugins": ["react", "react-hooks", "testing-library", "prettier"],
   "settings": {
     "react": {
       "version": "detect"
@@ -35,6 +37,7 @@
     "eqeqeq": "warn",
     // "quotes": ["error", "single", { "avoidEscape": true }],
     // "jsx-quotes": ["warn", "prefer-double"],
+    "no-console": 1,
     "no-param-reassign": [
       2,
       {
@@ -54,6 +57,7 @@
         "allow": ["resolve", "reject", "done", "next", "err", "error"]
       }
     ],
+    "no-undefined": 2,
     "no-unused-vars": [
       "warn",
       {
