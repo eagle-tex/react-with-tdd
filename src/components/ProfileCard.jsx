@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import defaultProfileImage from '../assets/profile.png';
 
 const ProfileCard = props => {
-  const { user } = props;
+  const { user, auth } = props;
 
   return (
     <div className="card text-center">
@@ -18,12 +18,14 @@ const ProfileCard = props => {
       <div className="card-body">
         <h3>{user.username}</h3>
       </div>
+      {auth && user.id === auth.id && <button>Edit</button>}
     </div>
   );
 };
 
 ProfileCard.propTypes = {
-  user: PropTypes.object
+  user: PropTypes.object,
+  auth: PropTypes.object
 };
 
 export default ProfileCard;
