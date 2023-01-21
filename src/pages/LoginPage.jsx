@@ -24,7 +24,10 @@ const LoginPage = props => {
     try {
       const response = await login({ email, password });
       props.history.push('/');
-      const auth = { isLoggedIn: true, id: response.data.id };
+      const auth = {
+        isLoggedIn: true,
+        id: response.data.id
+      };
       props.onLoginSuccess(auth);
     } catch (error) {
       setFailMessage(error.response.data.message);
