@@ -76,7 +76,7 @@ describe('User List', () => {
       setup();
       await screen.findByText('user1');
 
-      expect(screen.queryByText('next >')).toBeInTheDocument();
+      expect(screen.getByText('next >')).toBeInTheDocument();
     });
 
     it('displays next page afer clicking next', async () => {
