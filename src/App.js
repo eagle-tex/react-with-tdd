@@ -4,9 +4,8 @@ import LoginPage from './pages/LoginPage.jsx';
 import UserPage from './pages/UserPage.jsx';
 import AccountActivationPage from './pages/AccountActivationPage.jsx';
 import LanguageSelector from './components/LanguageSelector.jsx';
-import { useTranslation } from 'react-i18next';
-import logo from './assets/hoaxify.png';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import NavBar from './components/NavBar';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { useState } from 'react';
 
 function App() {
@@ -14,39 +13,10 @@ function App() {
     isLoggedIn: false,
     id: ''
   });
-  const { t } = useTranslation();
 
   return (
     <Router>
-      <nav className="navbar navbar-expand navbar-light bg-light shadow">
-        <div className="container">
-          <Link className="navbar-brand" to="/" title="Home">
-            <img src={logo} alt="Hoaxify" width="60" />
-            Hoaxify
-          </Link>
-          <ul className="navbar-nav">
-            {!auth.isLoggedIn && (
-              <>
-                <Link className="nav-link" to="/signup" title={t('signUp')}>
-                  {t('signUp')}
-                </Link>
-                <Link className="nav-link" to="/login" title="Login">
-                  Login
-                </Link>
-              </>
-            )}
-            {auth.isLoggedIn && (
-              <Link
-                className="nav-link"
-                to={`/user/${auth.id}`}
-                title="My Profile"
-              >
-                My Profile
-              </Link>
-            )}
-          </ul>
-        </div>
-      </nav>
+      <NavBar auth={auth} />
       <div className="container pt-3">
         <Route exact path="/" component={HomePage} />
         <Route path="/signup" component={SignUpPage} />
