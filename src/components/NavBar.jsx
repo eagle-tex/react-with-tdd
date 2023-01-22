@@ -3,13 +3,12 @@ import { useTranslation } from 'react-i18next';
 import logo from '../assets/hoaxify.png';
 import { AuthContext } from '../state/AuthContextWrapper';
 import { useContext } from 'react';
-import { useSelector, connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
-const NavBar = props => {
+const NavBar = () => {
   const { t } = useTranslation();
   // const auth = useContext(AuthContext);
-  // const auth = useSelector(store => store);
+  const auth = useSelector(store => store);
 
   return (
     <nav className="navbar navbar-expand navbar-light bg-light shadow">
@@ -19,7 +18,7 @@ const NavBar = props => {
           Hoaxify
         </Link>
         <ul className="navbar-nav">
-          {!props.isLoggedIn && (
+          {!auth.isLoggedIn && (
             <>
               <Link className="nav-link" to="/signup" title={t('signUp')}>
                 {t('signUp')}
@@ -29,10 +28,10 @@ const NavBar = props => {
               </Link>
             </>
           )}
-          {props.isLoggedIn && (
+          {auth.isLoggedIn && (
             <Link
               className="nav-link"
-              to={`/user/${props.id}`}
+              to={`/user/${auth.id}`}
               title="My Profile"
             >
               My Profile
@@ -44,13 +43,4 @@ const NavBar = props => {
   );
 };
 
-NavBar.propTypes = {
-  isLoggedIn: PropTypes.bool,
-  id: PropTypes.number
-};
-
-const mapStateToProps = store => {
-  return store;
-};
-
-export default connect(mapStateToProps)(NavBar);
+export default NavBar;
