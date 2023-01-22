@@ -9,11 +9,24 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 // NOTE: reducer is a function
-const reducer = () => {};
+const reducer = (state, action) => {
+  // eslint-disable-next-line
+  console.log({ state, action });
+  return state;
+};
+
+const initialState = {
+  isLoggedIn: true,
+  id: 25
+};
 
 // NOTE: store is a object required by Provider
 //   and is created by createStore(reducer)
-const store = createStore(reducer);
+const store = createStore(
+  reducer,
+  initialState,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
