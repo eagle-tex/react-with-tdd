@@ -8,7 +8,7 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:testing-library/react",
+    // "plugin:testing-library/react",
     // "plugin:jest/all",
     "plugin:prettier/recommended"
     // "prettier"
@@ -21,7 +21,12 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks", "testing-library", "prettier"],
+  "plugins": [
+    "react",
+    "react-hooks",
+    // "testing-library",
+    "prettier"
+  ],
   "settings": {
     "react": {
       "version": "detect"
