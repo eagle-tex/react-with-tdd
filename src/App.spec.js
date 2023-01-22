@@ -3,6 +3,7 @@ import App from './App';
 import userEvent from '@testing-library/user-event';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
+import storage from './state/storage';
 
 const server = setupServer(
   // endpoint for user activation with token
@@ -216,13 +217,13 @@ describe('Login', () => {
   it('stores loggedIn state in localStorage', async () => {
     setupLoggedIn();
     await screen.findByTestId('home-page');
-    const state = JSON.parse(localStorage.getItem('auth'));
+    const state = storage.getItem('auth');
 
     expect(state.isLoggedIn).toBeTruthy();
   });
 
   it('displays layout of logged in state', () => {
-    localStorage.setItem('auth', JSON.stringify({ isLoggedIn: true }));
+    storage.setItem('auth', { isLoggedIn: true });
     setup('/');
     const myProfileLink = screen.queryByRole('link', {
       name: 'My Profile'
