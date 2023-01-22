@@ -3,20 +3,26 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './locale/i18n';
-import AuthContextWrapper from './state/AuthContextWrapper';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 // NOTE: reducer is a function
 const reducer = (state, action) => {
-  // eslint-disable-next-line
-  console.log({ state, action });
+  if (action.type === 'login-success') {
+    // WARN: do a DEEP COPY of the state object if state has
+    //   nested object(s). Here, as it does not, a simple copy is OK
+    const newState = { ...state };
+    newState.id = action.payload.id;
+    newState.isLoggedIn = true;
+
+    return newState;
+  }
   return state;
 };
 
 const initialState = {
-  isLoggedIn: true,
+  isLoggedIn: false,
   id: 25
 };
 
@@ -32,11 +38,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
-      <AuthContextWrapper>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </AuthContextWrapper>
+      <Provider store={store}>
+        <App />
+      </Provider>
     </Router>
   </React.StrictMode>
 );
