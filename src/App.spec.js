@@ -212,6 +212,14 @@ describe('Login', () => {
 
     expect(username).toBeInTheDocument();
   });
+
+  it('stores loggedIn state in localStorage', async () => {
+    setupLoggedIn();
+    await screen.findByTestId('home-page');
+    const state = JSON.parse(localStorage.getItem('auth'));
+
+    expect(state.isLoggedIn).toBeTruthy();
+  });
 });
 
 // console.error = () => {};
