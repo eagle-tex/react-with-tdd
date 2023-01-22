@@ -1,13 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import logo from '../assets/hoaxify.png';
-import { AuthContext } from '../state/AuthContextWrapper';
-import { useContext } from 'react';
 import { useSelector } from 'react-redux';
 
 const NavBar = () => {
   const { t } = useTranslation();
-  // const auth = useContext(AuthContext);
   const auth = useSelector(store => store);
 
   return (
