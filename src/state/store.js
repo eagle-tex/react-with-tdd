@@ -2,10 +2,19 @@ import { createStore } from 'redux';
 import authReducer from './authReducer';
 
 const createAppStore = () => {
-  const initialState = {
+  let initialState = {
     isLoggedIn: false,
     id: ''
   };
+
+  const storedState = localStorage.getItem('auth');
+  if (storedState !== null) {
+    try {
+      initialState = JSON.parse(storedState);
+    } catch (error) {
+      // empty
+    }
+  }
 
   const store = createStore(
     authReducer,
