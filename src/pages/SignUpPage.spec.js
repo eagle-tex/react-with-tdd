@@ -10,7 +10,6 @@ import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 import en from '../locale/en.json';
 import fr from '../locale/fr.json';
-import LanguageSelector from '../components/LanguageSelector.jsx';
 
 let requestBody; // undefined
 let counter = 0;
