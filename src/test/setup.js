@@ -9,7 +9,7 @@ import createStore from '../state/store';
 
 const RootWrapper = ({ children }) => {
   return (
-    <Router theme="light">
+    <Router>
       <Provider store={createStore()}>
         {children}
         <LanguageSelector />
