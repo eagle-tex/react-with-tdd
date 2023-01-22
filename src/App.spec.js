@@ -200,7 +200,7 @@ describe('Login', () => {
     expect(myProfileLinkAfterLogin).toBeInTheDocument();
   });
 
-  fit('displays user page with logged in user id in url after clicking My Profile link', async () => {
+  it('displays user page with logged in user id in url after clicking My Profile link', async () => {
     setupLoggedIn();
     await screen.findByTestId('home-page');
     const myProfile = screen.queryByRole('link', {
@@ -213,8 +213,7 @@ describe('Login', () => {
     expect(username).toBeInTheDocument();
   });
 
-  fit('stores loggedIn state in localStorage', async () => {
-    console.log(localStorage.getItem('auth'));
+  it('stores loggedIn state in localStorage', async () => {
     setupLoggedIn();
     await screen.findByTestId('home-page');
     const state = JSON.parse(localStorage.getItem('auth'));
