@@ -13,6 +13,10 @@ const createAppStore = () => {
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );
 
+  store.subscribe(() => {
+    localStorage.setItem('auth', JSON.stringify(store.getState()));
+  });
+
   return store;
 };
 
