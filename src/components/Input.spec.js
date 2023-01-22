@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render } from '../test/setup';
 import Input from './Input.jsx';
 
 describe('Input Component', () => {
