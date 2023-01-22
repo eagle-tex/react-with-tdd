@@ -220,6 +220,16 @@ describe('Login', () => {
 
     expect(state.isLoggedIn).toBeTruthy();
   });
+
+  it('displays layout of logged in state', () => {
+    localStorage.setItem('auth', JSON.stringify({ isLoggedIn: true }));
+    setup('/');
+    const myProfileLink = screen.queryByRole('link', {
+      name: 'My Profile'
+    });
+
+    expect(myProfileLink).toBeInTheDocument();
+  });
 });
 
 // console.error = () => {};
