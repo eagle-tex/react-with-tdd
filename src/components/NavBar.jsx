@@ -3,10 +3,12 @@ import { useTranslation } from 'react-i18next';
 import logo from '../assets/hoaxify.png';
 import { AuthContext } from '../state/AuthContextWrapper';
 import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 
 const NavBar = () => {
   const { t } = useTranslation();
-  const auth = useContext(AuthContext);
+  // const auth = useContext(AuthContext);
+  const auth = useSelector(store => store);
 
   return (
     <nav className="navbar navbar-expand navbar-light bg-light shadow">
