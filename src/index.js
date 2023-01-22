@@ -5,13 +5,24 @@ import reportWebVitals from './reportWebVitals';
 import './locale/i18n';
 import AuthContextWrapper from './state/AuthContextWrapper';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+
+// NOTE: reducer is a function
+const reducer = () => {};
+
+// NOTE: store is a object required by Provider
+//   and is created by createStore(reducer)
+const store = createStore(reducer);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
       <AuthContextWrapper>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </AuthContextWrapper>
     </Router>
   </React.StrictMode>
