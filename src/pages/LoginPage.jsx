@@ -6,6 +6,7 @@ import ButtonWithProgress from '../components/ButtonWithProgress';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const LoginPage = props => {
   const [email, setEmail] = useState();
@@ -14,6 +15,8 @@ const LoginPage = props => {
   const [failMessage, setFailMessage] = useState();
 
   const dispatch = useDispatch();
+
+  const history = useHistory();
 
   const { t } = useTranslation();
 
@@ -26,7 +29,7 @@ const LoginPage = props => {
     setApiProgress(true);
     try {
       const response = await login({ email, password });
-      props.history.push('/');
+      history.push('/');
       dispatch({
         type: 'login-success',
         payload: response.data
