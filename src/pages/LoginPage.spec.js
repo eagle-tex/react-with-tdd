@@ -177,6 +177,28 @@ describe('Login Page', () => {
       expect(objectFields.includes('username')).toBeTruthy();
       expect(objectFields.includes('image')).toBeTruthy();
     });
+
+    it('stores authorization header value in storage', async () => {
+      const token = 'abcdefgh';
+      server.use(
+        rest.post('/api/1.0/auth', (req, res, ctx) => {
+          requestBody = req.body;
+          count += 1;
+          acceptLanguageHeader = req.headers.get('Accept-Language');
+          return res(
+            ctx.status(200),
+            ctx.json({ id: 5, username: 'user5', image: null, token: token })
+          );
+        })
+      );
+      setup('user5@mail.com');
+      userEvent.click(button);
+      const spinner = screen.queryByRole('status');
+      await waitForElementToBeRemoved(spinner);
+      const storedState = storage.getItem('auth');
+
+      expect(storedState.header).toBe(`Bearer ${token}`);
+    });
   });
 
   describe('Internationalization', () => {
