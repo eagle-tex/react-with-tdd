@@ -27,6 +27,17 @@ beforeEach(() => {
 
 afterAll(() => server.close());
 
+const TOKEN = 'abcdefgh';
+const loginSuccess = rest.post('/api/1.0/auth', (req, res, ctx) => {
+  requestBody = req.body;
+  count += 1;
+  acceptLanguageHeader = req.headers.get('Accept-Language');
+  return res(
+    ctx.status(200),
+    ctx.json({ id: 5, username: 'user5', image: null, token: TOKEN })
+  );
+});
+
 describe('Login Page', () => {
   describe('Layout', () => {
     it('has header', () => {
@@ -155,18 +166,9 @@ describe('Login Page', () => {
     });
 
     it('stores id, username and image in storage', async () => {
-      server.use(
-        rest.post('/api/1.0/auth', (req, res, ctx) => {
-          requestBody = req.body;
-          count += 1;
-          acceptLanguageHeader = req.headers.get('Accept-Language');
-          return res(
-            ctx.status(200),
-            ctx.json({ id: 5, username: 'user5', image: null })
-          );
-        })
-      );
+      server.use(loginSuccess);
       setup('user5@mail.com');
+
       userEvent.click(button);
       const spinner = screen.queryByRole('status');
       await waitForElementToBeRemoved(spinner);
@@ -179,25 +181,15 @@ describe('Login Page', () => {
     });
 
     it('stores authorization header value in storage', async () => {
-      const token = 'abcdefgh';
-      server.use(
-        rest.post('/api/1.0/auth', (req, res, ctx) => {
-          requestBody = req.body;
-          count += 1;
-          acceptLanguageHeader = req.headers.get('Accept-Language');
-          return res(
-            ctx.status(200),
-            ctx.json({ id: 5, username: 'user5', image: null, token: token })
-          );
-        })
-      );
+      server.use(loginSuccess);
       setup('user5@mail.com');
+
       userEvent.click(button);
       const spinner = screen.queryByRole('status');
       await waitForElementToBeRemoved(spinner);
       const storedState = storage.getItem('auth');
 
-      expect(storedState.header).toBe(`Bearer ${token}`);
+      expect(storedState.header).toBe(`Bearer ${TOKEN}`);
     });
   });
 
