@@ -31,7 +31,10 @@ const LoginPage = () => {
       history.push('/');
       dispatch({
         type: 'login-success',
-        payload: response.data
+        payload: {
+          ...response.data,
+          header: `Bearer ${response.data.token}`
+        }
       });
     } catch (error) {
       setFailMessage(error.response.data.message);
