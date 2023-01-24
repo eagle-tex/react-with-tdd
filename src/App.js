@@ -4,7 +4,7 @@ import LoginPage from './pages/LoginPage.jsx';
 import UserPage from './pages/UserPage.jsx';
 import AccountActivationPage from './pages/AccountActivationPage.jsx';
 import LanguageSelector from './components/LanguageSelector.jsx';
-import NavBar from './components/NavBar';
+import NavBar from './components/NavBar.jsx';
 import { Route } from 'react-router-dom';
 
 function App() {
