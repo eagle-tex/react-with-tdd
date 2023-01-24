@@ -76,8 +76,7 @@ describe('Login Page', () => {
     let button, emailInput, passwordInput; // undefined
 
     const setup = (email = 'user100@mail.com') => {
-      const history = { push: jest.fn() }; // mock history.push function
-      render(<LoginPage history={history} />);
+      render(<LoginPage />);
       emailInput = screen.getByLabelText('E-mail');
       passwordInput = screen.getByLabelText('Password');
       button = screen.queryByRole('button', { name: 'Login' });
