@@ -4,11 +4,10 @@ import { login } from '../api/apiCalls';
 import Alert from '../components/Alert';
 import ButtonWithProgress from '../components/ButtonWithProgress';
 import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-const LoginPage = props => {
+const LoginPage = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [apiProgress, setApiProgress] = useState(false);
@@ -80,11 +79,6 @@ const LoginPage = props => {
       </form>
     </div>
   );
-};
-
-LoginPage.propTypes = {
-  history: PropTypes.object,
-  onLoginSuccess: PropTypes.func
 };
 
 export default LoginPage;
