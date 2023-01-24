@@ -29,9 +29,7 @@ const LoginPage = props => {
       props.history.push('/');
       dispatch({
         type: 'login-success',
-        payload: {
-          id: response.data.id
-        }
+        payload: response.data
       });
     } catch (error) {
       setFailMessage(error.response.data.message);
