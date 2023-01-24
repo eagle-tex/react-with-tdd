@@ -17,6 +17,7 @@ const ProfileCard = props => {
       </div>
       <div className="card-body">
         <h3>{user.username}</h3>
+        <button>Edit</button>
       </div>
     </div>
   );
