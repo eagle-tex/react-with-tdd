@@ -31,7 +31,12 @@ const ProfileCard = props => {
             Edit
           </button>
         )}
-        {inEditMode && <Input label="Change your username" id="username" />}
+        {inEditMode && (
+          <>
+            <Input label="Change your username" id="username" />
+            <button>Save</button> <button>Cancel</button>
+          </>
+        )}
       </div>
     </div>
   );
