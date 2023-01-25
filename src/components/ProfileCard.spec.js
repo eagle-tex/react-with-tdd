@@ -41,7 +41,7 @@ describe('Profile Card', () => {
     setup();
     userEvent.click(screen.getByRole('button', { name: 'Edit' }));
 
-    expect(screen.queryByLabelText('Save')).toBeInTheDocument();
-    expect(screen.queryByLabelText('Cancel')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Save' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Cancel' })).toBeInTheDocument();
   });
 });
