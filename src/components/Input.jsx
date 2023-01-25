@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Input = props => {
-  const { id, label, onChange, help, type } = props;
+  const { id, label, onChange, help, type, initialValue } = props;
 
   let inputClass = 'form-control';
   if (help) {
@@ -18,6 +18,7 @@ const Input = props => {
         className={inputClass}
         onChange={onChange}
         type={type || 'text'}
+        defaultValue={initialValue}
       />
       {help && <span className="invalid-feedback">{help}</span>}
     </div>
@@ -29,7 +30,8 @@ Input.propTypes = {
   label: PropTypes.string,
   onChange: PropTypes.func,
   help: PropTypes.string,
-  type: PropTypes.string
+  type: PropTypes.string,
+  initialValue: PropTypes.string
 };
 
 export default Input;
