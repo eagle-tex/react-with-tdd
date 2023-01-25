@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-container */
 import { render } from '../test/setup';
 import Input from './Input.jsx';
 
