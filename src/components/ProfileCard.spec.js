@@ -1,3 +1,4 @@
+//* eslint-disable testing-library/prefer-presence-queries */
 import { render, screen } from '../test/setup';
 import ProfileCard from './ProfileCard';
 import storage from '../state/storage';
@@ -34,5 +35,13 @@ describe('Profile Card', () => {
 
     // eslint-disable-next-line
     expect(screen.queryByLabelText('Change your username')).toBeInTheDocument();
+  });
+
+  it('displays Save and Cancel buttons in edit mode', async () => {
+    setup();
+    userEvent.click(screen.getByRole('button', { name: 'Edit' }));
+
+    expect(screen.queryByLabelText('Save')).toBeInTheDocument();
+    expect(screen.queryByLabelText('Cancel')).toBeInTheDocument();
   });
 });
