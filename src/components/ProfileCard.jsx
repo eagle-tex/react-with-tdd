@@ -22,8 +22,8 @@ const ProfileCard = props => {
         />{' '}
       </div>
       <div className="card-body">
-        <h3>{user.username}</h3>
-        {user.id === id && (
+        {!inEditMode && <h3>{user.username}</h3>}
+        {user.id === id && !inEditMode && (
           <button
             className="btn btn-outline-success"
             onClick={() => setEditMode(true)}
