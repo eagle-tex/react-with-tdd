@@ -58,4 +58,15 @@ describe('Profile Card', () => {
       screen.queryByRole('heading', { name: LOGGED_IN_USER_IN_TEST.username })
     ).not.toBeInTheDocument();
   });
+
+  it('has the current username in input', () => {
+    setup();
+
+    userEvent.click(screen.getByRole('button', { name: 'Edit' }));
+    const input = screen.queryByLabelText('Change your username');
+
+    expect(input).toHaveValue(LOGGED_IN_USER_IN_TEST.username);
+    // NOTE: another way of making the same assertion
+    //   expect(input.value).toBe(LOGGED_IN_USER_IN_TEST.username)
+  });
 });
