@@ -15,7 +15,11 @@ const ProfileCard = props => {
   if (inEditMode) {
     content = (
       <>
-        <Input label="Change your username" id="username" />
+        <Input
+          label="Change your username"
+          id="username"
+          initialValue={user.username}
+        />
         <button className="btn btn-primary">Save</button>{' '}
         <button className="btn btn-outline-secondary">Cancel</button>
       </>
