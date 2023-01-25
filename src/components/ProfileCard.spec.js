@@ -1,4 +1,4 @@
-//* eslint-disable testing-library/prefer-presence-queries */
+/* eslint-disable testing-library/prefer-presence-queries */
 import { render, screen } from '../test/setup';
 import ProfileCard from './ProfileCard';
 import storage from '../state/storage';
@@ -43,5 +43,18 @@ describe('Profile Card', () => {
 
     expect(screen.getByRole('button', { name: 'Save' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Cancel' })).toBeInTheDocument();
+  });
+
+  it('hides Edit button and username heading in edit mode', () => {
+    setup();
+
+    userEvent.click(screen.getByRole('button', { name: 'Edit' }));
+
+    expect(
+      screen.queryByRole('button', { name: 'Edit' })
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('heading', { name: 'user5' })
+    ).not.toBeInTheDocument();
   });
 });
