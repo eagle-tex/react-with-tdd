@@ -1,6 +1,7 @@
 import { render, screen } from '../test/setup';
 import ProfileCard from './ProfileCard';
 import storage from '../state/storage';
+import userEvent from '@testing-library/user-event';
 
 describe('Profile Card', () => {
   const setup = (user = { id: 5, username: 'user5' }) => {
@@ -21,5 +22,17 @@ describe('Profile Card', () => {
     expect(
       screen.queryByRole('button', { name: 'Edit' })
     ).not.toBeInTheDocument();
+  });
+
+  it('displays input for username after clicking Edit button', () => {
+    setup();
+    expect(
+      screen.queryByLabelText('Change your username')
+    ).not.toBeInTheDocument();
+
+    userEvent.click(screen.getByRole('button', { name: 'Edit' }));
+
+    // eslint-disable-next-line
+    expect(screen.queryByLabelText('Change your username')).toBeInTheDocument();
   });
 });
