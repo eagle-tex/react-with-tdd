@@ -4,9 +4,10 @@ import ProfileCard from './ProfileCard';
 import storage from '../state/storage';
 import userEvent from '@testing-library/user-event';
 
+const LOGGED_IN_USER_IN_TEST = { id: 5, username: 'user5' }; // not necessarily default user
+
 describe('Profile Card', () => {
   const setup = (user = { id: 5, username: 'user5' }) => {
-    const LOGGED_IN_USER_IN_TEST = { id: 5, username: 'user5' }; // not necessarily default user
     storage.setItem('auth', LOGGED_IN_USER_IN_TEST);
     render(<ProfileCard user={user} />);
   };
@@ -54,7 +55,7 @@ describe('Profile Card', () => {
       screen.queryByRole('button', { name: 'Edit' })
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByRole('heading', { name: 'user5' })
+      screen.queryByRole('heading', { name: LOGGED_IN_USER_IN_TEST.username })
     ).not.toBeInTheDocument();
   });
 });
