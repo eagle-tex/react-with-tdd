@@ -3,12 +3,24 @@ import defaultProfileImage from '../assets/profile.png';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import Input from './Input';
+import ButtonWithProgress from './ButtonWithProgress';
+import { updateUser } from '../api/apiCalls';
 
 const ProfileCard = props => {
   const [inEditMode, setEditMode] = useState(false);
+  const [apiProgress, setApiProgress] = useState(false);
 
   const { user } = props;
   const id = useSelector(store => store.id);
+
+  const onClickSave = async () => {
+    setApiProgress(true);
+    try {
+      await updateUser(id);
+    } catch (error) {
+      setApiProgress(false);
+    }
+  };
 
   let content; // undefined
 
@@ -20,7 +32,9 @@ const ProfileCard = props => {
           id="username"
           initialValue={user.username}
         />
-        <button className="btn btn-primary">Save</button>{' '}
+        <ButtonWithProgress onClick={onClickSave} apiProgress={apiProgress}>
+          Save
+        </ButtonWithProgress>{' '}
         <button className="btn btn-outline-secondary">Cancel</button>
       </>
     );
