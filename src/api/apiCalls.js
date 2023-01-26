@@ -27,3 +27,7 @@ export const getUserById = id => {
 export const login = body => {
   return axios.post('/api/1.0/auth', body);
 };
+
+export const updateUser = id => {
+  return axios.put(`/api/1.0/users/${id}`);
+};
