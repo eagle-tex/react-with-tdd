@@ -6,8 +6,10 @@ import userEvent from '@testing-library/user-event';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 
+let counter = 0;
 const server = setupServer(
   rest.post('/api/1.0/users/:id', (_req, res, ctx) => {
+    counter += 1;
     return res(ctx.status(200));
   })
 );
@@ -15,6 +17,7 @@ const server = setupServer(
 beforeAll(() => server.listen());
 
 beforeEach(() => {
+  counter = 0;
   server.resetHandlers();
 });
 
@@ -26,6 +29,13 @@ describe('Profile Card', () => {
   const setup = (user = { id: 5, username: 'user5' }) => {
     storage.setItem('auth', LOGGED_IN_USER_IN_TEST);
     render(<ProfileCard user={user} />);
+  };
+
+  let saveButton; // undefined
+  const setupInEditMode = () => {
+    setup();
+    userEvent.click(screen.getByRole('button', { name: 'Edit' }));
+    saveButton = screen.getByRole('button', { name: 'Save' });
   };
 
   it('displays Edit button when logged in user is shown on card', () => {
@@ -87,10 +97,9 @@ describe('Profile Card', () => {
   });
 
   it('displays spinner during API call', async () => {
-    setup();
+    setupInEditMode();
 
-    userEvent.click(screen.getByRole('button', { name: 'Edit' }));
-    userEvent.click(screen.getByRole('button', { name: 'Save' }));
+    userEvent.click(saveButton);
     const spinner = screen.getByRole('status');
 
     await waitForElementToBeRemoved(spinner);
