@@ -1,8 +1,24 @@
 /* eslint-disable testing-library/prefer-presence-queries */
-import { render, screen } from '../test/setup';
+import { render, screen, waitForElementToBeRemoved } from '../test/setup';
 import ProfileCard from './ProfileCard';
 import storage from '../state/storage';
 import userEvent from '@testing-library/user-event';
+import { setupServer } from 'msw/node';
+import { rest } from 'msw';
+
+const server = setupServer(
+  rest.post('/api/1.0/users/:id', (_req, res, ctx) => {
+    return res(ctx.status(200));
+  })
+);
+
+beforeAll(() => server.listen());
+
+beforeEach(() => {
+  server.resetHandlers();
+});
+
+afterAll(() => server.close());
 
 const LOGGED_IN_USER_IN_TEST = { id: 5, username: 'user5' }; // not necessarily default user
 
@@ -68,5 +84,15 @@ describe('Profile Card', () => {
     expect(input).toHaveValue(LOGGED_IN_USER_IN_TEST.username);
     // NOTE: another way of making the same assertion
     //   expect(input.value).toBe(LOGGED_IN_USER_IN_TEST.username)
+  });
+
+  it('displays spinner during API call', async () => {
+    setup();
+
+    userEvent.click(screen.getByRole('button', { name: 'Edit' }));
+    userEvent.click(screen.getByRole('button', { name: 'Save' }));
+    const spinner = screen.getByRole('status');
+
+    await waitForElementToBeRemoved(spinner);
   });
 });
