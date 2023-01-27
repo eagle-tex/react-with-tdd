@@ -261,7 +261,8 @@ describe('Login', () => {
 });
 
 describe('Logout', () => {
-  it('displays Logout link on navbar after successful login', () => {
+  let logoutLink; // undefined
+  const setupLoggedIn = () => {
     storage.setItem('auth', {
       id: 5,
       username: 'user5',
@@ -270,9 +271,13 @@ describe('Logout', () => {
     });
 
     setup('/');
-    const logoutLink = screen.queryByRole('link', {
+    logoutLink = screen.queryByRole('link', {
       name: 'Logout'
     });
+  };
+
+  it('displays Logout link on navbar after successful login', () => {
+    setupLoggedIn();
 
     expect(logoutLink).toBeInTheDocument();
   });
