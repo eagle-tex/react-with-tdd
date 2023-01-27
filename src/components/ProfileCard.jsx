@@ -22,6 +22,7 @@ const ProfileCard = props => {
     setApiProgress(true);
     try {
       await updateUser(id, { username: newUsername }, header);
+      setEditMode(false);
     } catch (error) {
       // empty for now
     }
