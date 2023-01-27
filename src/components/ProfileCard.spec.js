@@ -231,4 +231,22 @@ describe('Profile Card', () => {
 
     expect(heading).toBeInTheDocument();
   });
+
+  it('displays last updated username after clicking Cancel on second edit', async () => {
+    setupInEditMode();
+    const editInput = screen.getByLabelText('Change your username');
+    const updatedUsername = 'new-username';
+
+    userEvent.clear(editInput);
+    userEvent.type(editInput, updatedUsername);
+    userEvent.click(saveButton);
+    const editButton = await screen.findByRole('button', { name: 'Edit' });
+    userEvent.click(editButton);
+    userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+    const heading = screen.getByRole('heading', {
+      name: updatedUsername
+    });
+
+    expect(heading).toBeInTheDocument();
+  });
 });
