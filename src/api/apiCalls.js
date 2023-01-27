@@ -1,10 +1,12 @@
 import axios from 'axios';
 import i18n from '../locale/i18n';
+import { store } from '../state/store';
 
 // NOTE: request/response interceptors are processed before
 //   req/res are sent to the target/client or component
 axios.interceptors.request.use(request => {
   request.headers['Accept-Language'] = i18n.language;
+  request.headers['Authorization'] = store.getState().header;
   return request;
 });
 
