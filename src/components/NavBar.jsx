@@ -26,13 +26,18 @@ const NavBar = () => {
             </>
           )}
           {auth.isLoggedIn && (
-            <Link
-              className="nav-link"
-              to={`/user/${auth.id}`}
-              title="My Profile"
-            >
-              My Profile
-            </Link>
+            <>
+              <Link
+                className="nav-link"
+                to={`/user/${auth.id}`}
+                title="My Profile"
+              >
+                My Profile
+              </Link>
+              <a href="/" className="nav-link">
+                Logout
+              </a>
+            </>
           )}
         </ul>
       </div>
