@@ -260,4 +260,23 @@ describe('Login', () => {
   });
 });
 
+describe('Logout', () => {
+  it('displays Logout link on navbar after successful login', () => {
+    storage.setItem('auth', {
+      id: 5,
+      username: 'user5',
+      isLoggedIn: true,
+      header: 'auth header value'
+    });
+
+    setup('/');
+    const logoutLink = screen.queryByRole('link', {
+      name: 'Logout'
+    });
+    userEvent.click(logoutLink);
+
+    expect(logoutLink).toBeInTheDocument();
+  });
+});
+
 // console.error = () => {};
