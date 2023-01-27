@@ -43,7 +43,12 @@ const ProfileCard = props => {
         <ButtonWithProgress onClick={onClickSave} apiProgress={apiProgress}>
           Save
         </ButtonWithProgress>{' '}
-        <button className="btn btn-outline-secondary">Cancel</button>
+        <button
+          className="btn btn-outline-secondary"
+          onClick={() => setEditMode(false)}
+        >
+          Cancel
+        </button>
       </>
     );
   } else {
