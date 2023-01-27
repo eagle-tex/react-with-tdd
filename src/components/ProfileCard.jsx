@@ -29,6 +29,11 @@ const ProfileCard = props => {
     setApiProgress(false);
   };
 
+  const onClickCancel = () => {
+    setEditMode(false);
+    setNewUsername(user.username);
+  };
+
   let content; // undefined
 
   if (inEditMode) {
@@ -43,10 +48,7 @@ const ProfileCard = props => {
         <ButtonWithProgress onClick={onClickSave} apiProgress={apiProgress}>
           Save
         </ButtonWithProgress>{' '}
-        <button
-          className="btn btn-outline-secondary"
-          onClick={() => setEditMode(false)}
-        >
+        <button className="btn btn-outline-secondary" onClick={onClickCancel}>
           Cancel
         </button>
       </>
