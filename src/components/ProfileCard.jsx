@@ -37,7 +37,7 @@ const ProfileCard = props => {
         <Input
           label="Change your username"
           id="username"
-          initialValue={user.username}
+          initialValue={newUsername}
           onChange={event => setNewUsername(event.target.value)}
         />
         <ButtonWithProgress onClick={onClickSave} apiProgress={apiProgress}>
