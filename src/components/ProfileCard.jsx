@@ -9,6 +9,7 @@ import { updateUser } from '../api/apiCalls';
 const ProfileCard = props => {
   const [inEditMode, setEditMode] = useState(false);
   const [apiProgress, setApiProgress] = useState(false);
+  const [newUsername, setNewUsername] = useState();
 
   const { user } = props;
   const id = useSelector(store => store.id);
@@ -16,7 +17,7 @@ const ProfileCard = props => {
   const onClickSave = async () => {
     setApiProgress(true);
     try {
-      await updateUser(id);
+      await updateUser(id, { username: newUsername });
     } catch (error) {
       // empty for now
     }
@@ -32,6 +33,7 @@ const ProfileCard = props => {
           label="Change your username"
           id="username"
           initialValue={user.username}
+          onChange={event => setNewUsername(event.target.value)}
         />
         <ButtonWithProgress onClick={onClickSave} apiProgress={apiProgress}>
           Save
