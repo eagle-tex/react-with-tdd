@@ -49,7 +49,7 @@ const ProfileCard = props => {
   } else {
     content = (
       <>
-        <h3>{user.username}</h3>
+        <h3>{newUsername}</h3>
         {user.id === id && (
           <button
             className="btn btn-outline-success"
