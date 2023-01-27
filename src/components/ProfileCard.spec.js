@@ -177,4 +177,19 @@ describe('Profile Card', () => {
 
     expect(editButton).toBeInTheDocument();
   });
+
+  it('updates username in profile card after successful update', async () => {
+    setupInEditMode();
+    const editInput = screen.getByLabelText('Change your username');
+    const updatedUsername = 'new-username';
+
+    userEvent.clear(editInput);
+    userEvent.type(editInput, updatedUsername);
+    userEvent.click(saveButton);
+    const newUsername = await screen.findByRole('heading', {
+      name: updatedUsername
+    });
+
+    expect(newUsername).toBeInTheDocument();
+  });
 });
