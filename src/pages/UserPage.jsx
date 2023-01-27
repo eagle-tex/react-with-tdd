@@ -12,7 +12,7 @@ class UserPage extends Component {
     failResponse: undefined
   };
 
-  async componentDidMount() {
+  loadUser = async () => {
     this.setState({ pendingApiCall: true });
 
     try {
@@ -23,6 +23,16 @@ class UserPage extends Component {
     }
 
     this.setState({ pendingApiCall: false });
+  };
+
+  async componentDidMount() {
+    this.loadUser();
+  }
+
+  componentDidUpdate(previousProps, _previousState) {
+    if (previousProps.match.params.id !== this.props.match.params.id) {
+      this.loadUser();
+    }
   }
 
   render() {
