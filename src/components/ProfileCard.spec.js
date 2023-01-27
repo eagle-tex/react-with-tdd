@@ -8,7 +8,7 @@ import { rest } from 'msw';
 
 let counter = 0;
 const server = setupServer(
-  rest.post('/api/1.0/users/:id', (_req, res, ctx) => {
+  rest.put('/api/1.0/users/:id', (req, res, ctx) => {
     counter += 1;
     return res(ctx.status(200));
   })
@@ -103,5 +103,17 @@ describe('Profile Card', () => {
     const spinner = screen.getByRole('status');
 
     await waitForElementToBeRemoved(spinner);
+    // expect(spinner).not.toBeInTheDocument();
+  });
+
+  it('disables the Save button during API call', async () => {
+    setupInEditMode();
+
+    userEvent.click(saveButton);
+    userEvent.click(saveButton);
+    const spinner = screen.getByRole('status');
+    await waitForElementToBeRemoved(spinner);
+
+    expect(counter).toBe(1);
   });
 });
