@@ -9,9 +9,10 @@ import { updateUser } from '../api/apiCalls';
 const ProfileCard = props => {
   const [inEditMode, setEditMode] = useState(false);
   const [apiProgress, setApiProgress] = useState(false);
-  const [newUsername, setNewUsername] = useState();
 
   const { user } = props;
+  const [newUsername, setNewUsername] = useState(user.username);
+
   const { id, header } = useSelector(store => ({
     id: store.id,
     header: store.header
