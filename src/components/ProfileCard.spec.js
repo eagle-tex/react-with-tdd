@@ -207,4 +207,13 @@ describe('Profile Card', () => {
 
     expect(editInput).toHaveValue(updatedUsername);
   });
+
+  it('hides edit layout after clicking Cancel', async () => {
+    setupInEditMode();
+
+    userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+    const editButton = await screen.findByRole('button', { name: 'Edit' });
+
+    expect(editButton).toBeInTheDocument();
+  });
 });
