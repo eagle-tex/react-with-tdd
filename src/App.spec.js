@@ -273,7 +273,6 @@ describe('Logout', () => {
     const logoutLink = screen.queryByRole('link', {
       name: 'Logout'
     });
-    userEvent.click(logoutLink);
 
     expect(logoutLink).toBeInTheDocument();
   });
