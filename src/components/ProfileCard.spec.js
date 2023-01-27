@@ -7,12 +7,13 @@ import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 
 let counter = 0;
-let id, requestBody; // undefined
+let id, requestBody, header; // undefined
 const server = setupServer(
   rest.put('/api/1.0/users/:id', (req, res, ctx) => {
     counter += 1;
     id = req.params.id;
     requestBody = req.body;
+    header = req.headers.get('Authorization');
     return res(ctx.status(200));
   })
 );
@@ -27,7 +28,11 @@ beforeEach(() => {
 
 afterAll(() => server.close());
 
-const LOGGED_IN_USER_IN_TEST = { id: 5, username: 'user5' }; // not necessarily default user
+const LOGGED_IN_USER_IN_TEST = {
+  id: 5,
+  username: 'user5',
+  header: 'auth header value'
+}; // not necessarily default user
 
 describe('Profile Card', () => {
   const setup = (user = { id: 5, username: 'user5' }) => {
@@ -142,5 +147,15 @@ describe('Profile Card', () => {
     await waitForElementToBeRemoved(spinner);
 
     expect(requestBody).toEqual({ username: 'user5-updated' });
+  });
+
+  it('sends request with Authorization header', async () => {
+    setupInEditMode();
+
+    userEvent.click(saveButton);
+    const spinner = screen.getByRole('status');
+    await waitForElementToBeRemoved(spinner);
+
+    expect(header).toBe(LOGGED_IN_USER_IN_TEST.header);
   });
 });
