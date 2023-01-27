@@ -135,6 +135,7 @@ describe('Profile Card', () => {
     setupInEditMode();
     const editInput = screen.getByLabelText('Change your username');
 
+    userEvent.clear(editInput);
     userEvent.type(editInput, 'user5-updated');
     userEvent.click(saveButton);
     const spinner = screen.getByRole('status');
