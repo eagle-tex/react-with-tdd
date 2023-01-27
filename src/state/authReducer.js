@@ -3,6 +3,11 @@ const reducer = (state, action) => {
     // WARN: do a DEEP COPY of the state object if state has
     //   nested object(s). Here, as it does not, a simple copy is OK
     return { ...state, ...action.payload, isLoggedIn: true };
+  } else if (action.type === 'user-update-success') {
+    return {
+      ...state,
+      username: action.payload.username
+    };
   }
 
   return state;
