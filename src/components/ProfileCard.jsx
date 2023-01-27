@@ -12,12 +12,15 @@ const ProfileCard = props => {
   const [newUsername, setNewUsername] = useState();
 
   const { user } = props;
-  const id = useSelector(store => store.id);
+  const { id, header } = useSelector(store => ({
+    id: store.id,
+    header: store.header
+  }));
 
   const onClickSave = async () => {
     setApiProgress(true);
     try {
-      await updateUser(id, { username: newUsername });
+      await updateUser(id, { username: newUsername }, header);
     } catch (error) {
       // empty for now
     }
