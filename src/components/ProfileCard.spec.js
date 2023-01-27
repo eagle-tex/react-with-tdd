@@ -7,9 +7,11 @@ import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 
 let counter = 0;
+let id; // undefined
 const server = setupServer(
   rest.put('/api/1.0/users/:id', (req, res, ctx) => {
     counter += 1;
+    id = req.params.id;
     return res(ctx.status(200));
   })
 );
@@ -18,6 +20,7 @@ beforeAll(() => server.listen());
 
 beforeEach(() => {
   counter = 0;
+  id = 0;
   server.resetHandlers();
 });
 
@@ -115,5 +118,15 @@ describe('Profile Card', () => {
     await waitForElementToBeRemoved(spinner);
 
     expect(counter).toBe(1);
+  });
+
+  it('sends request to the endpoint with logged in user id', async () => {
+    setupInEditMode();
+
+    userEvent.click(saveButton);
+    const spinner = screen.getByRole('status');
+    await waitForElementToBeRemoved(spinner);
+
+    expect(id).toBe(LOGGED_IN_USER_IN_TEST.id.toString()); // toBe('5')
   });
 });
