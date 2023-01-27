@@ -216,4 +216,19 @@ describe('Profile Card', () => {
 
     expect(editButton).toBeInTheDocument();
   });
+
+  it('displays the original username after username is changed in edit mode but cancelled', async () => {
+    setupInEditMode();
+    const editInput = screen.getByLabelText('Change your username');
+    const updatedUsername = 'new-username';
+
+    userEvent.clear(editInput);
+    userEvent.type(editInput, updatedUsername);
+    userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+    const heading = screen.getByRole('heading', {
+      name: LOGGED_IN_USER_IN_TEST.username
+    });
+
+    expect(heading).toBeInTheDocument();
+  });
 });
