@@ -5,6 +5,7 @@ import { rest } from 'msw';
 import userEvent from '@testing-library/user-event';
 import en from '../locale/en.json';
 import fr from '../locale/fr.json';
+import storage from '../state/storage';
 
 const users = [
   { id: 1, username: 'user1', email: 'user1@mail.com', image: null },
@@ -29,8 +30,10 @@ const getPage = (page, size) => {
   };
 };
 
+let header; // undefined
 const server = setupServer(
   rest.get('/api/1.0/users', (req, res, ctx) => {
+    header = req.headers.get('Authorization');
     let page = Number.parseInt(req.url.searchParams.get('page'));
     let size = Number.parseInt(req.url.searchParams.get('size'));
     if (Number.isNaN(page)) {
@@ -132,6 +135,18 @@ describe('User List', () => {
       await screen.findByText('user1');
 
       expect(spinner).not.toBeInTheDocument();
+    });
+
+    it('sends request with authorization header', async () => {
+      storage.setItem('auth', {
+        id: 5,
+        username: 'user5',
+        header: 'auth header value'
+      });
+      setup();
+      await screen.findByText('user1');
+
+      expect(header).toBe('auth header value');
     });
   });
 
