@@ -158,4 +158,14 @@ describe('Profile Card', () => {
 
     expect(header).toBe(LOGGED_IN_USER_IN_TEST.header);
   });
+
+  it('sends request with body having username even if user does not update it', async () => {
+    setupInEditMode();
+
+    userEvent.click(saveButton);
+    const spinner = screen.getByRole('status');
+    await waitForElementToBeRemoved(spinner);
+
+    expect(requestBody).toEqual({ username: LOGGED_IN_USER_IN_TEST.username }); // 'user5'
+  });
 });
