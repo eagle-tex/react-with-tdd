@@ -18,8 +18,9 @@ const ProfileCard = props => {
     try {
       await updateUser(id);
     } catch (error) {
-      setApiProgress(false);
+      // empty for now
     }
+    setApiProgress(false);
   };
 
   let content; // undefined
