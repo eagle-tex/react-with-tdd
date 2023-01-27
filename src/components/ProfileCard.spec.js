@@ -192,4 +192,19 @@ describe('Profile Card', () => {
 
     expect(newUsername).toBeInTheDocument();
   });
+
+  it('displays last updated name in input in edit mode after successful username update', async () => {
+    setupInEditMode();
+    let editInput = screen.getByLabelText('Change your username');
+    const updatedUsername = 'new-username';
+
+    userEvent.clear(editInput);
+    userEvent.type(editInput, updatedUsername);
+    userEvent.click(saveButton);
+    const editButton = await screen.findByRole('button', { name: 'Edit' });
+    userEvent.click(editButton);
+    editInput = screen.getByLabelText('Change your username');
+
+    expect(editInput).toHaveValue(updatedUsername);
+  });
 });
