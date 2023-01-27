@@ -168,4 +168,13 @@ describe('Profile Card', () => {
 
     expect(requestBody).toEqual({ username: LOGGED_IN_USER_IN_TEST.username }); // 'user5'
   });
+
+  it('hides edit layout after successful update', async () => {
+    setupInEditMode();
+
+    userEvent.click(saveButton);
+    const editButton = await screen.findByRole('button', { name: 'Edit' });
+
+    expect(editButton).toBeInTheDocument();
+  });
 });
