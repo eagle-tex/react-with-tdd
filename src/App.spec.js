@@ -281,6 +281,14 @@ describe('Logout', () => {
 
     expect(logoutLink).toBeInTheDocument();
   });
+
+  it('displays Login and Sign up links on navbar after clicking Logout', async () => {
+    setupLoggedIn();
+    userEvent.click(logoutLink);
+    const loginLink = await screen.findByRole('link', { name: 'Login' });
+
+    expect(loginLink).toBeInTheDocument();
+  });
 });
 
 // console.error = () => {};
