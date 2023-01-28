@@ -5,6 +5,7 @@ import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 import storage from './state/storage';
 
+let logoutCount = 0;
 const server = setupServer(
   // endpoint for user activation with token
   rest.post('/api/1.0/users/token/:token', (_req, res, ctx) => {
@@ -54,12 +55,17 @@ const server = setupServer(
   }),
   rest.post('/api/1.0/auth', (_req, res, ctx) => {
     return res(ctx.status(200), ctx.json({ id: 5, username: 'user5' }));
+  }),
+  rest.post('/api/1.0/logout', (_req, res, ctx) => {
+    logoutCount += 1;
+    return res(ctx.status(200));
   })
 );
 
 beforeAll(() => server.listen());
 
 beforeEach(() => {
+  logoutCount = 0;
   server.resetHandlers();
 });
 
@@ -288,6 +294,14 @@ describe('Logout', () => {
     const loginLink = await screen.findByRole('link', { name: 'Login' });
 
     expect(loginLink).toBeInTheDocument();
+  });
+
+  it('sends logout request to backend after clicking Logout', async () => {
+    setupLoggedIn();
+    userEvent.click(logoutLink);
+    await screen.findByRole('link', { name: 'Login' });
+
+    expect(logoutCount).toBe(1);
   });
 });
 
