@@ -2,14 +2,20 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import logo from '../assets/hoaxify.png';
 import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../api/apiCalls';
 
 const NavBar = () => {
   const { t } = useTranslation();
   const auth = useSelector(store => store);
   const dispatch = useDispatch();
 
-  const onClickLogout = event => {
+  const onClickLogout = async event => {
     event.preventDefault();
+    try {
+      await logout();
+    } catch (error) {
+      // empty for now
+    }
     dispatch({
       type: 'logout-success'
     });
