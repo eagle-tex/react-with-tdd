@@ -33,3 +33,7 @@ export const login = body => {
 export const updateUser = (id, body) => {
   return axios.put(`/api/1.0/users/${id}`, body);
 };
+
+export const logout = () => {
+  return axios.post('/api/1.0/logout');
+};
