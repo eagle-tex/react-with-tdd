@@ -6,6 +6,7 @@ import { rest } from 'msw';
 import storage from './state/storage';
 
 let logoutCount = 0;
+let header; // undefined
 const server = setupServer(
   // endpoint for user activation with token
   rest.post('/api/1.0/users/token/:token', (_req, res, ctx) => {
@@ -32,6 +33,7 @@ const server = setupServer(
   }),
   // add endpoint for getting user by id
   rest.get('/api/1.0/users/:id', (req, res, ctx) => {
+    header = req.headers.get('Authorization');
     const id = Number.parseInt(req.params.id);
     if (id === 1) {
       return res(
@@ -302,6 +304,19 @@ describe('Logout', () => {
     await screen.findByRole('link', { name: 'Login' });
 
     expect(logoutCount).toBe(1);
+  });
+
+  xit('removes authorization header from requests after user logs out', async () => {
+    setupLoggedIn();
+
+    userEvent.click(logoutLink);
+    await screen.findByRole('link', { name: 'Login' });
+    const user = screen.queryByText('user-in-list');
+    console.log({ user });
+    userEvent.click(user);
+    await screen.findByRole('heading', { name: 'user-in-list' });
+
+    expect(header).toBeFalsy();
   });
 });
 
