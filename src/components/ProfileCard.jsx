@@ -4,11 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import Input from './Input';
 import ButtonWithProgress from './ButtonWithProgress';
+import Modal from './Modal';
 import { updateUser } from '../api/apiCalls';
 
 const ProfileCard = props => {
   const [inEditMode, setEditMode] = useState(false);
   const [apiProgress, setApiProgress] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
 
   const { user } = props;
@@ -75,7 +77,12 @@ const ProfileCard = props => {
               </button>
             </div>
             <div className="pt-2">
-              <button className="btn btn-danger">Delete My Account</button>
+              <button
+                className="btn btn-danger"
+                onClick={() => setModalVisible(true)}
+              >
+                Delete My Account
+              </button>
             </div>
           </>
         )}
@@ -97,40 +104,7 @@ const ProfileCard = props => {
         </div>
         <div className="card-body">{content}</div>
       </div>
-      <div
-        className="modal show d-block bg-black bg-opacity-50"
-        tabIndex="-1"
-        data-testid="modal"
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Modal title</h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <p>Modal body text goes here.</p>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Save changes
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      {modalVisible && <Modal />}
     </>
   );
 };
