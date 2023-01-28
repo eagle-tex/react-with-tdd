@@ -306,13 +306,12 @@ describe('Logout', () => {
     expect(logoutCount).toBe(1);
   });
 
-  xit('removes authorization header from requests after user logs out', async () => {
+  it('removes authorization header from requests after user logs out', async () => {
     setupLoggedIn();
 
     userEvent.click(logoutLink);
     await screen.findByRole('link', { name: 'Login' });
-    const user = screen.queryByText('user-in-list');
-    console.log({ user });
+    const user = await screen.findByText('user-in-list');
     userEvent.click(user);
     await screen.findByRole('heading', { name: 'user-in-list' });
 
