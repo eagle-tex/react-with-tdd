@@ -269,6 +269,7 @@ describe('Profile Card', () => {
   it('displays modal after clicking Delete', () => {
     setup();
 
+    expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
     const deleteButton = screen.queryByRole('button', {
       name: 'Delete My Account'
     });
