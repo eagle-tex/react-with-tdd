@@ -257,4 +257,12 @@ describe('Profile Card', () => {
       screen.getByRole('button', { name: 'Delete My Account' })
     ).toBeInTheDocument();
   });
+
+  it('does not display Delete button for another user', () => {
+    setup({ id: 2, username: 'user2' });
+
+    expect(
+      screen.queryByRole('button', { name: 'Delete My Account' })
+    ).not.toBeInTheDocument();
+  });
 });
