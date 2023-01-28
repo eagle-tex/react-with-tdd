@@ -249,4 +249,12 @@ describe('Profile Card', () => {
 
     expect(heading).toBeInTheDocument();
   });
+
+  it('displays Delete button when logged in user is shown on card', () => {
+    setup();
+
+    expect(
+      screen.getByRole('button', { name: 'Delete My Account' })
+    ).toBeInTheDocument();
+  });
 });
