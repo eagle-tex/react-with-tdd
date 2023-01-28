@@ -265,4 +265,16 @@ describe('Profile Card', () => {
       screen.queryByRole('button', { name: 'Delete My Account' })
     ).not.toBeInTheDocument();
   });
+
+  it('displays modal after clicking Delete', () => {
+    setup();
+
+    const deleteButton = screen.queryByRole('button', {
+      name: 'Delete My Account'
+    });
+    userEvent.click(deleteButton);
+    const modal = screen.queryByTestId('modal');
+
+    expect(modal).toBeInTheDocument();
+  });
 });
