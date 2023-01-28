@@ -1,11 +1,19 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import logo from '../assets/hoaxify.png';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 const NavBar = () => {
   const { t } = useTranslation();
   const auth = useSelector(store => store);
+  const dispatch = useDispatch();
+
+  const onClickLogout = event => {
+    event.preventDefault();
+    dispatch({
+      type: 'logout-success'
+    });
+  };
 
   return (
     <nav className="navbar navbar-expand navbar-light bg-light shadow">
@@ -34,7 +42,7 @@ const NavBar = () => {
               >
                 My Profile
               </Link>
-              <a href="/" className="nav-link">
+              <a href="/" className="nav-link" onClick={onClickLogout}>
                 Logout
               </a>
             </>
