@@ -105,11 +105,7 @@ const ProfileCard = props => {
         <div className="card-body">{content}</div>
       </div>
       {modalVisible && (
-        <Modal
-          content="Are you sure you want to delete your account ?"
-          cancelButton="Cancel"
-          confirmButton="Yes"
-        />
+        <Modal content="Are you sure you want to delete your account ?" />
       )}
     </>
   );
