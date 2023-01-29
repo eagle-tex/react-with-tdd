@@ -13,7 +13,7 @@ const UserListItem = props => {
     >
       <img
         src={defaultProfileImage}
-        alt="profile image"
+        alt="profile"
         width="30"
         className="rounded-circle shadow-sm"
       />{' '}
