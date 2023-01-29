@@ -1,19 +1,21 @@
+import { AUTH } from './constants';
+
 export const loginSuccess = payload => {
   return {
-    type: 'login-success',
+    type: AUTH.LOGIN_SUCCESS,
     payload
   };
 };
 
 export const updateSuccess = payload => {
   return {
-    type: 'user-update-success',
+    type: AUTH.USER_UPDATE_SUCCESS,
     payload
   };
 };
 
 export const logoutSuccess = () => {
   return {
-    type: 'logout-success'
+    type: AUTH.LOGOUT_SUCCESS
   };
 };
