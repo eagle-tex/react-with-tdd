@@ -324,7 +324,7 @@ describe('Logout', () => {
 
 describe('Delete User', () => {
   let deleteButton; // undefined
-  const setupLoggedInUserPage = () => {
+  const setupLoggedInUserPage = async () => {
     storage.setItem('auth', {
       id: 5,
       username: 'user5',
@@ -333,13 +333,13 @@ describe('Delete User', () => {
     });
 
     setup('/user/5');
-    deleteButton = screen.queryByRole('link', {
+    deleteButton = await screen.findByRole('link', {
       name: 'Delete My Account'
     });
   };
 
   it('redirects to HomePage after deleting user', async () => {
-    setupLoggedInUserPage();
+    await setupLoggedInUserPage();
 
     userEvent.click(deleteButton);
     userEvent.click(screen.queryByRole('button', { name: 'Yes' }));
