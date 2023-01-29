@@ -61,6 +61,9 @@ const server = setupServer(
   rest.post('/api/1.0/logout', (_req, res, ctx) => {
     logoutCount += 1;
     return res(ctx.status(200));
+  }),
+  rest.delete('/api/1.0/users/:id', (_req, res, ctx) => {
+    return res(ctx.status(200));
   })
 );
 
@@ -316,6 +319,32 @@ describe('Logout', () => {
     await screen.findByRole('heading', { name: 'user-in-list' });
 
     expect(header).toBeFalsy();
+  });
+});
+
+describe('Delete User', () => {
+  let deleteButton; // undefined
+  const setupLoggedInUserPage = () => {
+    storage.setItem('auth', {
+      id: 5,
+      username: 'user5',
+      isLoggedIn: true,
+      header: 'auth header value'
+    });
+
+    setup('/user/5');
+    deleteButton = screen.queryByRole('link', {
+      name: 'Delete My Account'
+    });
+  };
+
+  it('redirects to HomePage after deleting user', async () => {
+    setupLoggedInUserPage();
+
+    userEvent.click(deleteButton);
+    userEvent.click(screen.queryByRole('button', { name: 'Yes' }));
+
+    await screen.findByTestId('home-page');
   });
 });
 
