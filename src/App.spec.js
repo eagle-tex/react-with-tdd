@@ -333,7 +333,7 @@ describe('Delete User', () => {
     });
 
     setup('/user/5');
-    deleteButton = await screen.findByRole('link', {
+    deleteButton = await screen.findByRole('button', {
       name: 'Delete My Account'
     });
   };
