@@ -1,7 +1,14 @@
+/* eslint-disable no-console */
 import PropTypes from 'prop-types';
 
 const Modal = props => {
-  const { content, confirmButton, cancelButton } = props;
+  const {
+    content,
+    confirmButton,
+    cancelButton,
+    onClickCancel,
+    onClickConfirm
+  } = props;
 
   return (
     <div
@@ -18,11 +25,15 @@ const Modal = props => {
             <button
               type="button"
               className="btn btn-secondary"
-              data-bs-dismiss="modal"
+              onClick={onClickCancel}
             >
               {cancelButton}
             </button>
-            <button type="button" className="btn btn-primary">
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={onClickConfirm}
+            >
               {confirmButton}
             </button>
           </div>
@@ -35,12 +46,16 @@ const Modal = props => {
 Modal.propTypes = {
   content: PropTypes.string,
   confirmButton: PropTypes.string,
-  cancelButton: PropTypes.string
+  cancelButton: PropTypes.string,
+  onClickCancel: PropTypes.func,
+  onClickConfirm: PropTypes.func
 };
 
 Modal.defaultProps = {
   confirmButton: 'Yes',
-  cancelButton: 'Cancel'
+  cancelButton: 'Cancel',
+  onClickCancel: () => console.log('onClickCancel is not set'),
+  onClickConfirm: () => console.log('onClickConfirm is not set')
 };
 
 export default Modal;
