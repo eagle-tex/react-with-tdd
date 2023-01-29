@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import PropTypes from 'prop-types';
+import ButtonWithProgress from './ButtonWithProgress';
 
 const Modal = props => {
   const {
@@ -7,7 +8,8 @@ const Modal = props => {
     confirmButton,
     cancelButton,
     onClickCancel,
-    onClickConfirm
+    onClickConfirm,
+    apiProgress
   } = props;
 
   return (
@@ -29,13 +31,12 @@ const Modal = props => {
             >
               {cancelButton}
             </button>
-            <button
-              type="button"
-              className="btn btn-primary"
+            <ButtonWithProgress
               onClick={onClickConfirm}
+              apiProgress={apiProgress}
             >
               {confirmButton}
-            </button>
+            </ButtonWithProgress>
           </div>
         </div>
       </div>
@@ -48,14 +49,16 @@ Modal.propTypes = {
   confirmButton: PropTypes.string,
   cancelButton: PropTypes.string,
   onClickCancel: PropTypes.func,
-  onClickConfirm: PropTypes.func
+  onClickConfirm: PropTypes.func,
+  apiProgress: PropTypes.bool
 };
 
 Modal.defaultProps = {
   confirmButton: 'Yes',
   cancelButton: 'Cancel',
   onClickCancel: () => console.log('onClickCancel is not set'),
-  onClickConfirm: () => console.log('onClickConfirm is not set')
+  onClickConfirm: () => console.log('onClickConfirm is not set'),
+  apiProgress: false
 };
 
 export default Modal;
