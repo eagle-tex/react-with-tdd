@@ -51,6 +51,9 @@ const ProfileCard = props => {
     try {
       await deleteUser(id);
       history.push('/');
+      dispatch({
+        type: 'logout-success'
+      });
     } catch (error) {
       // empty for now
     }
