@@ -346,6 +346,15 @@ describe('Delete User', () => {
 
     await screen.findByTestId('home-page');
   });
+
+  it('displays Login and Sign up links on navbar after deleting user', async () => {
+    await setupLoggedInUserPage();
+
+    userEvent.click(deleteButton);
+    userEvent.click(screen.queryByRole('button', { name: 'Yes' }));
+
+    await screen.findByRole('link', { name: 'Login' });
+  });
 });
 
 // console.error = () => {};
