@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useTranslation } from 'react-i18next';
 
 const LanguageSelector = () => {
