@@ -16,7 +16,9 @@ const server = setupServer(
     header = req.headers.get('Authorization');
     return res(ctx.status(200));
   }),
-  rest.delete('/api/1.0/users/:id', (_req, res, ctx) => {
+  rest.delete('/api/1.0/users/:id', (req, res, ctx) => {
+    id = req.params.id;
+    header = req.headers.get('Authorization');
     return res(ctx.status(200));
   })
 );
@@ -324,5 +326,20 @@ describe('Profile Card', () => {
     const spinner = screen.getByRole('status');
 
     await waitForElementToBeRemoved(spinner);
+  });
+
+  it('sends logged in user and authorization header in delete API call', async () => {
+    setup();
+
+    const deleteButton = screen.queryByRole('button', {
+      name: 'Delete My Account'
+    });
+    userEvent.click(deleteButton);
+    userEvent.click(screen.queryByRole('button', { name: 'Yes' }));
+    const spinner = screen.getByRole('status');
+    await waitForElementToBeRemoved(spinner);
+
+    expect(header).toBe(LOGGED_IN_USER_IN_TEST.header); // i.e 'auth header value'
+    expect(id).toBe(LOGGED_IN_USER_IN_TEST.id.toString()); // i.e '5'
   });
 });
