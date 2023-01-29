@@ -6,7 +6,11 @@
   // "verbose": true
   "testPathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/config/"],
   "testSequencer": "<rootDir>/test-sequencer.js",
-  "setupFilesAfterEnv": ["<rootDir>/test-setup.js"]
+  "setupFilesAfterEnv": ["<rootDir>/setupTests.js"],
+  "collectCoverage": true,
+  "collectCoverageFrom": ["src/**/*.{js,jsx}"],
+  "coverageDirectory": "coverage",
+  "testEnvironment": "jsdom"
   // "transform": {
   //   "^.+\\.[jt]sx?$": ["babel-jest", { "presets": ["@nrwl/react/babel"] }],
   //   "^.+\\.(css|scss|less)$": "jest-css-modules"
