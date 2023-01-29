@@ -38,4 +38,9 @@ Modal.propTypes = {
   cancelButton: PropTypes.string
 };
 
+Modal.defaultProps = {
+  confirmButton: 'Yes',
+  cancelButton: 'Cancel'
+};
+
 export default Modal;
