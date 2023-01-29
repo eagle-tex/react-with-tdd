@@ -15,6 +15,9 @@ const server = setupServer(
     requestBody = req.body;
     header = req.headers.get('Authorization');
     return res(ctx.status(200));
+  }),
+  rest.delete('/api/1.0/users/:id', (_req, res, ctx) => {
+    return res(ctx.status(200));
   })
 );
 
@@ -307,5 +310,19 @@ describe('Profile Card', () => {
     const modal = screen.queryByTestId('modal');
 
     expect(modal).not.toBeInTheDocument();
+  });
+
+  it('displays spinner while delete API call in progress', async () => {
+    setup();
+
+    const deleteButton = screen.queryByRole('button', {
+      name: 'Delete My Account'
+    });
+    userEvent.click(deleteButton);
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    userEvent.click(screen.queryByRole('button', { name: 'Yes' }));
+    const spinner = screen.getByRole('status');
+
+    await waitForElementToBeRemoved(spinner);
   });
 });
