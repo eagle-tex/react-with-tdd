@@ -47,7 +47,7 @@ const ProfileCard = props => {
   const onClickDelete = async () => {
     setDeleteApiProgress(true);
     try {
-      await deleteUser();
+      await deleteUser(id);
     } catch (error) {
       // empty for now
     }
