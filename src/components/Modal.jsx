@@ -1,4 +1,8 @@
-const Modal = () => {
+import PropTypes from 'prop-types';
+
+const Modal = props => {
+  const { content, confirmButton, cancelButton } = props;
+
   return (
     <div
       className="modal show d-block bg-black bg-opacity-50"
@@ -8,7 +12,7 @@ const Modal = () => {
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-body">
-            <p>Are you sure you want to delete your account ?</p>
+            <p>{content}</p>
           </div>
           <div className="modal-footer">
             <button
@@ -16,16 +20,22 @@ const Modal = () => {
               className="btn btn-secondary"
               data-bs-dismiss="modal"
             >
-              Cancel
+              {cancelButton}
             </button>
             <button type="button" className="btn btn-primary">
-              Yes
+              {confirmButton}
             </button>
           </div>
         </div>
       </div>
     </div>
   );
+};
+
+Modal.propTypes = {
+  content: PropTypes.string,
+  confirmButton: PropTypes.string,
+  cancelButton: PropTypes.string
 };
 
 export default Modal;
